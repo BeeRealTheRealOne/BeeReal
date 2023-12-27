@@ -20,7 +20,7 @@ function categoriesCardView() {
     return (
         <View>
             <Stack.Screen options={{ title: species.name }} />
-            <SpeciesCard name={species.name} scientificName={species.scientificName} description={species.description} categorie={species.categorie} imageURL={`&{process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${species.id}/${species.image}`} />
+            <SpeciesCard name={species.name} scientificName={species.scientificName} description={species.description} categorie={species.categorie} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${species.id}/${species.image}`} />
         </View>
     );
 }
