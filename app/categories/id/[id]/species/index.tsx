@@ -22,7 +22,7 @@ function categoriesCardView() {
             <Stack.Screen options={{ title: 'Species' }} />
             {species.map((item: any) => (
                 <Link href={`/species/id/${item.id}/`} key={item.id}>
-                    <SpeciesItem key={item.id} name={item.name} scientificName={item.scientificName} imageURL={`http://192.168.2.109:80/api/files/species/${item.id}/${item.image}`} />
+                    <SpeciesItem key={item.id} name={item.name} scientificName={item.scientificName} imageURL={`&{process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${item.id}/${item.image}`} />
                 </Link>
             ))}
         </View>

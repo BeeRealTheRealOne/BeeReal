@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('http://192.168.2.109');
+const pb = new PocketBase(process.env.EXPO_PUBLIC_PB_URL);
 
 export default pb;
