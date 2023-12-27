@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import pb from '../../../../../constants/pocketbase';
-import { useLocalSearchParams, Link } from 'expo-router';
+import { useLocalSearchParams, Link, Stack } from 'expo-router';
 import SpeciesItem from '../../../../../components/SpeciesItem';
+import { View } from 'react-native';
 
 function categoriesCardView() {
     const local = useLocalSearchParams();
@@ -9,18 +10,23 @@ function categoriesCardView() {
     const [species, setSpecies] = useState<any>([]);
     useEffect(() => {
         pb.collection('species')
-            .getList(1, 50, { filter: `categorie = "${id}"` })
+            .getList(1, 10, { filter: `categorie = "${id}"` })
             .then((res) => {
                 setSpecies(res.items);
             })
             .catch((err) => console.error(err));
     }, []);
 
-    return species.map((item: any) => (
-        <Link href={`/species/id/${item.id}/`} key={item.id}>
-            <SpeciesItem key={item.id} name={item.name} scientificName={item.scientificName} />
-        </Link>
-    ));
+    return (
+        <View>
+            <Stack.Screen options={{ title: 'Species' }} />
+            {species.map((item: any) => (
+                <Link href={`/species/id/${item.id}/`} key={item.id}>
+                    <SpeciesItem key={item.id} name={item.name} scientificName={item.scientificName} imageURL={`http://192.168.2.109:80/api/files/species/${item.id}/${item.image}`} />
+                </Link>
+            ))}
+        </View>
+    );
 }
 
 export default categoriesCardView;
