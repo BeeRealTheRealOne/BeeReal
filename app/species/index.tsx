@@ -11,7 +11,6 @@ function speciesList() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
 
-    console.log(`&{process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${'test'}/${'stuff'}`);
     useEffect(() => {
         pb.collection('species')
             .getList(page, 15)
