@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { router } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import { Text, TextInput, View, Button } from 'react-native';
 
 function login() {
     if (pb.authStore.isValid) {
-        router.replace('/species/');
+        router.replace('/');
     }
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -15,7 +15,7 @@ function login() {
         pb.collection('users')
             .authWithPassword(email, password)
             .then((res) => {
-                router.replace('/');
+                router.push('/');
             })
             .catch((err) => {
                 console.error(err);
@@ -25,8 +25,9 @@ function login() {
 
     return (
         <View>
+            <Stack.Screen options={{ title: 'Login' }} />
             <TextInput placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
-            <TextInput placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
+            <TextInput secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
             <Button title="Login" onPress={login} />
             {wrong && <Text>Wrong email or password</Text>}
         </View>
