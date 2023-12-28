@@ -4,6 +4,7 @@ import CategoriesItem from '../../components/CategoriesItem';
 import { FlatList } from 'react-native-gesture-handler';
 import { Link, Stack } from 'expo-router';
 import { View } from 'react-native';
+import CameraIcon from '../../components/CameraIcon';
 
 function categoriesList() {
     const [categories, setCategories] = useState<any>([]);
@@ -17,7 +18,7 @@ function categoriesList() {
     }, []);
     return (
         <View>
-            <Stack.Screen options={{ title: 'Categories' }} />
+            <Stack.Screen options={{ title: 'Categories', headerRight: CameraIcon }} />
             <FlatList
                 data={categories}
                 renderItem={({ item }) => (

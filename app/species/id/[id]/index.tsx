@@ -3,6 +3,7 @@ import pb from '../../../../constants/pocketbase';
 import { useLocalSearchParams, Link, Stack } from 'expo-router';
 import SpeciesCard from '../../../../components/SpeciesCard';
 import { View } from 'react-native';
+import CameraIcon from '../../../../components/CameraIcon';
 
 function categoriesCardView() {
     const local = useLocalSearchParams();
@@ -19,7 +20,7 @@ function categoriesCardView() {
 
     return (
         <View>
-            <Stack.Screen options={{ title: species.name }} />
+            <Stack.Screen options={{ title: species.name, headerRight: CameraIcon }} />
             <SpeciesCard name={species.name} scientificName={species.scientificName} description={species.description} categorie={species.categorie} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${species.id}/${species.image}`} />
         </View>
     );

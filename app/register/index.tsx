@@ -29,10 +29,10 @@ function login() {
         <View style={[styles.container]}>
             <Stack.Screen options={{ title: 'Login' }} />
             <View style={[styles.inputView]}>
-                <TextInput style={[styles.input]} placeholder="Enter your username..." onChangeText={(text) => setUsername(text)} />
-                <TextInput style={[styles.input]} placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
-                <TextInput style={[styles.input]} secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
-                <TextInput style={[styles.input]} secureTextEntry={true} placeholder="Confirm your password..." onChangeText={(text) => setPasswordConfirm(text)} />
+                <TextInput style={[styles.input]} keyboardAppearance="dark" placeholder="Enter your username..." onChangeText={(text) => setUsername(text)} />
+                <TextInput style={[styles.input]} keyboardAppearance="dark" placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
+                <TextInput style={[styles.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
+                <TextInput style={[styles.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Confirm your password..." onChangeText={(text) => setPasswordConfirm(text)} />
             </View>
             <Button title="Login" onPress={register} />
             {wrong && <Text>Error Registering</Text>}

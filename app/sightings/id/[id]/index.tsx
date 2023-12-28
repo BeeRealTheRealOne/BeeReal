@@ -5,6 +5,7 @@ import { useLocalSearchParams, Stack } from 'expo-router';
 import SightingCard from '../../../../components/SightingCard';
 import { Sighting } from '../../../../types/Sighting';
 import { RecordModel } from 'pocketbase';
+import CameraIcon from '../../../../components/CameraIcon';
 
 function sightingCardView() {
     const local = useLocalSearchParams();
@@ -22,7 +23,7 @@ function sightingCardView() {
 
     return (
         <>
-            <Stack.Screen options={{ title: 'Sighting' }} />
+            <Stack.Screen options={{ title: 'Sighting', headerRight: CameraIcon }} />
             {sighting ? <SightingCard sighting={sighting} /> : <Text>Loading...</Text>}
         </>
     );

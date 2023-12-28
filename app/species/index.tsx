@@ -4,6 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import SpeciesItem from '../../components/SpeciesItem';
+import CameraIcon from '../../components/CameraIcon';
 
 function speciesList() {
     const [species, setSpecies] = useState<any>([]);
@@ -33,7 +34,7 @@ function speciesList() {
     }
     return (
         <View>
-            <Stack.Screen options={{ title: 'Species' }} />
+            <Stack.Screen options={{ title: 'Species', headerRight: CameraIcon }} />
             <FlatList
                 data={species}
                 renderItem={({ item }) => (

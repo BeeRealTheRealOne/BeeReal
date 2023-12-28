@@ -1,6 +1,7 @@
 import pb from '../../constants/pocketbase';
 import { Stack, router } from 'expo-router';
 import { View, Text, StyleSheet } from 'react-native';
+import CameraIcon from '../../components/CameraIcon';
 
 function categoriesList() {
     const user = pb.authStore.model;
@@ -14,7 +15,7 @@ function categoriesList() {
             <View>
                 <Text>Email: {user.email}</Text>
                 <Text>Username: {user.username}</Text>
-                <Stack.Screen options={{ title: 'Profile' }} />
+                <Stack.Screen options={{ title: 'Profile', headerRight: CameraIcon }} />
             </View>
         </View>
     );

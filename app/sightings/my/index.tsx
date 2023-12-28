@@ -4,6 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import SightingItem from '../../../components/MySightingItem';
+import CameraIcon from '../../../components/CameraIcon';
 
 function sightingList() {
     const [sighting, setSighting] = useState<any>([]);
@@ -33,7 +34,7 @@ function sightingList() {
     }
     return (
         <View>
-            <Stack.Screen options={{ title: 'My Sightings' }} />
+            <Stack.Screen options={{ title: 'My Sightings', headerRight: CameraIcon }} />
             <FlatList
                 data={sighting}
                 renderItem={({ item }) => (
