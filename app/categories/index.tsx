@@ -21,7 +21,7 @@ function categoriesList() {
             <FlatList
                 data={species}
                 renderItem={({ item }) => (
-                    <Link href={`/categories/id/${item.id}/species/`} key={item.id}>
+                    <Link href={`/species/categorie/id/${item.id}/`} key={item.id}>
                         <CategoriesItem id={item.id} key={item.id} name={item.name} scientificName={item.scientificName} />
                     </Link>
                 )}
