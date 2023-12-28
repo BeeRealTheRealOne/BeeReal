@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import SightingItem from '../../../components/MySightingItem';
 
-function speciesList() {
+function sightingList() {
     const [sighting, setSighting] = useState<any>([]);
 
     const [page, setPage] = useState(1);
@@ -13,7 +13,7 @@ function speciesList() {
 
     useEffect(() => {
         pb.collection('insectFindings')
-            .getList(page, 10)
+            .getList(page, 10, { expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
@@ -49,4 +49,4 @@ function speciesList() {
     );
 }
 
-export default speciesList;
+export default sightingList;

@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 import pb from '../../../../constants/pocketbase';
-import { useLocalSearchParams, Link, Stack } from 'expo-router';
+import { useLocalSearchParams, Stack } from 'expo-router';
 import SightingCard from '../../../../components/SightingCard';
-import { View } from 'react-native';
+import { Sighting } from '../../../../types/Sighting';
+import { RecordModel } from 'pocketbase';
 
-function categoriesCardView() {
+function sightingCardView() {
     const local = useLocalSearchParams();
-    const id = local.id;
-    const [sighting, setSighting] = useState<any>([]);
+    const id = local.id as string;
+    const [sighting, setSighting] = useState<any | null>(null);
+
     useEffect(() => {
         pb.collection('insectFindings')
-            .getOne(id as string)
+            .getOne(id, { expand: 'species' })
             .then((res) => {
                 setSighting(res);
             })
@@ -20,12 +23,8 @@ function categoriesCardView() {
     return (
         <>
             <Stack.Screen options={{ title: 'Sighting' }} />
-            <SightingCard sighting={sighting} />
+            {sighting ? <SightingCard sighting={sighting} /> : <Text>Loading...</Text>}
         </>
     );
 }
-/*
-        <View>
-        </View>
-            */
-export default categoriesCardView;
+export default sightingCardView;

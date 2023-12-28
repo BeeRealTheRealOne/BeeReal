@@ -1,3 +1,6 @@
+import { User } from './User';
+import { Species } from './Species';
+
 export type Sighting = {
     id: string;
     longitude: number;
@@ -6,4 +9,8 @@ export type Sighting = {
     user: string;
     species: string;
     created: string;
+    expand: {
+        user: User;
+        species: Species;
+    };
 };
