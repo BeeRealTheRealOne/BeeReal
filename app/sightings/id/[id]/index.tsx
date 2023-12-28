@@ -6,6 +6,7 @@ import SightingCard from '../../../../components/SightingCard';
 import { Sighting } from '../../../../types/Sighting';
 import { RecordModel } from 'pocketbase';
 import CameraIcon from '../../../../components/CameraIcon';
+import BeeIcon from '../../../../components/BeeIcon';
 
 function sightingCardView() {
     const local = useLocalSearchParams();

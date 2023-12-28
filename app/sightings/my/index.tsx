@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import SightingItem from '../../../components/MySightingItem';
 import CameraIcon from '../../../components/CameraIcon';
+import BeeIcon from '../../../components/BeeIcon';
 
 function sightingList() {
     const [sighting, setSighting] = useState<any>([]);

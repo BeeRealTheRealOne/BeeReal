@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import SpeciesItem from '../../components/SpeciesItem';
 import CameraIcon from '../../components/CameraIcon';
+import BeeIcon from '../../components/BeeIcon';
 
 function speciesList() {
     const [species, setSpecies] = useState<any>([]);

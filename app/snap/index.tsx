@@ -4,6 +4,7 @@ import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-n
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { Stack } from 'expo-router';
+import BeeIcon from '../../components/BeeIcon';
 
 function SnapView() {
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();

@@ -4,6 +4,7 @@ import { useLocalSearchParams, Link, Stack } from 'expo-router';
 import SpeciesCard from '../../../../components/SpeciesCard';
 import { View } from 'react-native';
 import CameraIcon from '../../../../components/CameraIcon';
+import BeeIcon from '../../../../components/BeeIcon';
 
 function categoriesCardView() {
     const local = useLocalSearchParams();

@@ -2,6 +2,7 @@ import pb from '../../constants/pocketbase';
 import { Stack, router } from 'expo-router';
 import { View, Text, StyleSheet } from 'react-native';
 import CameraIcon from '../../components/CameraIcon';
+import BeeIcon from '../../components/BeeIcon';
 
 function categoriesList() {
     const user = pb.authStore.model;
