@@ -36,6 +36,7 @@ const Greeting = () => {
                     </Link>
                     <Link href="/snap/">Camera</Link>
                     <Link href="/profile/">Profile</Link>
+                    <Link href="/sightings/my/">My Sightings</Link>
                     <TouchableOpacity
                         onPress={() => {
                             pb.authStore.clear();
