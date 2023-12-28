@@ -33,7 +33,7 @@ function sightingList() {
     }
     return (
         <View>
-            <Stack.Screen options={{ title: 'Sightings' }} />
+            <Stack.Screen options={{ title: 'My Sightings' }} />
             <FlatList
                 data={sighting}
                 renderItem={({ item }) => (
