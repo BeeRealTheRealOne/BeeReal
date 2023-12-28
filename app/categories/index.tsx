@@ -6,12 +6,12 @@ import { Link, Stack } from 'expo-router';
 import { View } from 'react-native';
 
 function categoriesList() {
-    const [species, setSpecies] = useState<any>([]);
+    const [categories, setCategories] = useState<any>([]);
     useEffect(() => {
         pb.collection('categories')
-            .getList(1, 10, { name: 'asc' })
+            .getList(1, 100, { name: 'asc' })
             .then((res) => {
-                setSpecies(res.items);
+                setCategories(res.items);
             })
             .catch((err) => console.error(err));
     }, []);
@@ -19,7 +19,7 @@ function categoriesList() {
         <View>
             <Stack.Screen options={{ title: 'Categories' }} />
             <FlatList
-                data={species}
+                data={categories}
                 renderItem={({ item }) => (
                     <Link href={`/species/categorie/id/${item.id}/`} key={item.id}>
                         <CategoriesItem id={item.id} key={item.id} name={item.name} scientificName={item.scientificName} />
