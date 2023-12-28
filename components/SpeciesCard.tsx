@@ -2,6 +2,12 @@ import { Text, View, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const SpeciesCard = (props: { name: string; description: string; scientificName: string; categorie: string; imageURL: string }) => {
+    if (!props.name) return <Text>Loading...</Text>;
+    if (!props.scientificName) return <Text>Loading...</Text>;
+    if (!props.categorie) return <Text>Loading...</Text>;
+    if (!props.imageURL) return <Text>Loading...</Text>;
+    if (!props.description) return <Text>Loading...</Text>;
+
     return (
         <ScrollView style={[styles.col, styles.container]}>
             <View style={[styles.row]}>
