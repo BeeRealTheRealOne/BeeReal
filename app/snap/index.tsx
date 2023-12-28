@@ -3,6 +3,7 @@ import * as Location from 'expo-location';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
+import { Stack } from 'expo-router';
 
 function SnapView() {
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
@@ -73,23 +74,26 @@ function SnapView() {
     }
 
     return (
-        <View style={styles.container}>
-            {image ? (
-                <>
-                    <Image source={{ uri: image.uri }} style={styles.camera} />
-                    <Button title="Confirm" onPress={confirm} />
-                    <Button title="Retake" onPress={() => setImage(null)} />
-                </>
-            ) : (
-                <Camera ratio="1:1" style={styles.camera} type={CameraType.back} ref={(ref) => setCamera(ref)}>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button} onPress={onSnap}>
-                            <Text style={styles.text}>Snap</Text>
-                        </TouchableOpacity>
-                    </View>
-                </Camera>
-            )}
-        </View>
+        <>
+            <Stack.Screen options={{ title: 'Snap' }} />
+            <View style={styles.container}>
+                {image ? (
+                    <>
+                        <Image source={{ uri: image.uri }} style={styles.camera} />
+                        <Button title="Confirm" onPress={confirm} />
+                        <Button title="Retake" onPress={() => setImage(null)} />
+                    </>
+                ) : (
+                    <Camera ratio="1:1" style={styles.camera} type={CameraType.back} ref={(ref) => setCamera(ref)}>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.button} onPress={onSnap}>
+                                <Text style={styles.text}>Snap</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Camera>
+                )}
+            </View>
+        </>
     );
 }
 
