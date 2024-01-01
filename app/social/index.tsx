@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { View, StyleSheet } from 'react-native';
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, router } from 'expo-router';
 import { FlatList } from 'react-native-gesture-handler';
 import Post from '../../components/Post';
 
@@ -38,7 +38,7 @@ function Social() {
                 renderItem={({ item }) => {
                     console.log('rendering item ', item);
                     return (
-                        <Link href="/" key={item.id} style={styles.postLink}>
+                        <Link href="/insects/" key={item.id} style={styles.postLink}>
                             <Post user={item.user} title={item.title} message={item.message} imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}`} insectFindingId={item.expand.insectFinding.id} />
                         </Link>
                     );

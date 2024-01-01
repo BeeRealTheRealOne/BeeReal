@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { Stack, router } from 'expo-router';
+import { router } from 'expo-router';
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
-import BeeIcon from '../../components/BeeIcon';
 
 function login() {
     if (pb.authStore.isValid) {
-        router.replace('/');
+        router.replace('/insects/');
     }
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -17,7 +16,7 @@ function login() {
         pb.collection('users')
             .authWithPassword(email, password)
             .then((res) => {
-                router.push('/');
+                router.push('/insects/');
             })
             .catch((err) => {
                 console.error(err);

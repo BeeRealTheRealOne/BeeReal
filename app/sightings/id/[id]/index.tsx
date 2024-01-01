@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import pb from '../../../../constants/pocketbase';
-import { useLocalSearchParams, Stack } from 'expo-router';
+import { useLocalSearchParams, Stack, router } from 'expo-router';
 import SightingCard from '../../../../components/SightingCard';
 import { Sighting } from '../../../../types/Sighting';
 import { RecordModel } from 'pocketbase';

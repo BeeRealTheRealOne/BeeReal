@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import CategoriesItem from '../../components/CategoriesItem';
 import { FlatList } from 'react-native-gesture-handler';
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, router } from 'expo-router';
 import { View, Text } from 'react-native';
 import CameraIcon from '../../components/CameraIcon';
 

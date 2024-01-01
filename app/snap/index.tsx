@@ -3,7 +3,7 @@ import * as Location from 'expo-location';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import BeeIcon from '../../components/BeeIcon';
 
 function SnapView() {

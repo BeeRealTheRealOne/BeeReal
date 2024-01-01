@@ -1,135 +1,47 @@
-import { Link, Stack } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import pb from '../constants/pocketbase';
+import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../constants/colors';
-import CameraIcon from '../components/CameraIcon';
-import { Ionicons } from '@expo/vector-icons';
-import BeeIcon from '../components/BeeIcon';
 
-function HomeNotLoggedIn() {
+function Home() {
     return (
         <View style={[styles.container]}>
-            <View style={[styles.infoContainer]}>
-                <Text style={[styles.text, styles.heading]}>
-                    Welcome to <Text style={[styles.highlight, styles.heading]}>Bee</Text>
-                    Real<Text style={[styles.highlight, styles.heading]}>!</Text>
-                </Text>
-                <Text style={[styles.text]}>Please login or register to continue.</Text>
-            </View>
-            <View style={[styles.LoginContainer]}>
-                <Link href="/register/">
-                    <View style={[styles.IconWithText]}>
-                        <Ionicons name="person-add" size={80} color={Colors.baseText} />
-                        <Text style={[styles.text, styles.center]}>Register</Text>
-                    </View>
-                </Link>
-                <Link href="/login/">
-                    <View style={[styles.IconWithText]}>
-                        <Ionicons name="log-in" size={80} color={Colors.baseText} />
-                        <Text style={[styles.text, styles.center]}>Login</Text>
-                    </View>
-                </Link>
-            </View>
-            <View style={[styles.bumper]} />
+            <Text style={[styles.text, styles.heading]}>
+                Welcome To <Text style={[styles.highlight]}>Bee</Text>Real<Text style={[styles.highlight, styles.heading]}>!</Text>
+            </Text>
         </View>
     );
 }
 
-function Home() {
-    const [name, setName] = useState<string | undefined>();
-
-    useEffect(() => {
-        if (pb?.authStore?.model?.username !== undefined) {
-            setName(pb.authStore.model.username);
-        }
-    });
-
-    return (
-        <>
-            {name === undefined && <HomeNotLoggedIn />}
-            {name !== undefined && (
-                <View style={[styles.grid]}>
-                    <View style={[styles.row]}>
-                        <Link style={[styles.text, styles.col]} href="/species/">
-                            Species
-                        </Link>
-                        <Link style={[styles.text, styles.col]} href="/categories/">
-                            Categories
-                        </Link>
-                    </View>
-                    <View style={[styles.row]}>
-                        <Link style={[styles.text, styles.col]} href="/snap/">
-                            Camera
-                        </Link>
-                        <Link style={[styles.text, styles.col]} href="/social/">
-                            Social
-                        </Link>
-                    </View>
-                    <View style={[styles.row]}>
-                        <Link style={[styles.text, styles.col]} href="/profile/">
-                            Profile
-                        </Link>
-                        <Link style={[styles.text, styles.col]} href="/sightings/my/">
-                            My Sightings
-                        </Link>
-                    </View>
-                    <TouchableOpacity
-                        style={[styles.row]}
-                        onPress={() => {
-                            pb.authStore.clear();
-                            setName(undefined);
-                        }}
-                    >
-                        <Text style={[styles.text]}>Logout</Text>
-                    </TouchableOpacity>
-                </View>
-            )}
-        </>
-    );
-}
-
 const styles = StyleSheet.create({
-    grid: {
-        flex: 2,
-        margin: 20,
-    },
-    row: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignContent: 'center',
-    },
-    col: {
-        flex: 1,
-    },
     container: {
         flex: 1,
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        color: Colors.baseText,
+        margin: 20,
     },
     infoContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    bumper: {
-        flex: 1,
-    },
-    LoginContainer: {
+    loginContainer: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-        gap: 40,
-    },
-    IconWithText: {
         justifyContent: 'center',
-        textAlign: 'center',
+        gap: 20,
     },
-    heading: {
-        fontSize: 30,
+    inputContainer: {
+        gap: 10,
+    },
+    input: {
+        backgroundColor: Colors.base,
+        color: Colors.baseText,
+        paddingHorizontal: 5,
+        borderRadius: 2,
+        width: 250,
+    },
+    button: {
+        backgroundColor: Colors.primary,
+        color: Colors.base,
     },
     text: {
         color: Colors.baseText,
@@ -137,8 +49,11 @@ const styles = StyleSheet.create({
     highlight: {
         color: Colors.primary,
     },
-    center: {
-        textAlign: 'center',
+    heading: {
+        fontSize: 30,
+    },
+    bumper: {
+        flex: 1,
     },
 });
 
