@@ -18,7 +18,7 @@ const Post = (props: {
         source={{ uri: props.imageUrl }}
         resizeMode="contain"
       />
-      <Text style={styles.message}>{props.message} shlsejlfkjsekfjsesfesfee</Text>
+      <Text style={styles.message}>{props.message}</Text>
       <View style={styles.interactionView}>
         <EmptyHeartIcon />
         <AlertIcon />
