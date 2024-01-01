@@ -44,7 +44,7 @@ function Social() {
                 user={item.user}
                 title={item.title}
                 message={item.message}
-                imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}?thumb=100x100`}
+                imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}`}
                 insectFindingId={item.expand.insectFinding.id}
               />
             </Link>

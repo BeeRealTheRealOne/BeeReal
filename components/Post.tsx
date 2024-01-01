@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Image } from "react-native";
 import EmptyHeartIcon from "./HeartEmptyIcon";
 import AlertIcon from "./AlertIcon";
+import Colors from "../constants/colors";
 
 const Post = (props: {
   title: string;
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
     padding: 5,
+    borderRadius: 20,
   },
   title: {
     color: "white",
@@ -45,18 +47,20 @@ const styles = StyleSheet.create({
     color: "white",
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 280,
+    height: 280,
     marginBottom: 10,
+    borderRadius: 10,
   },
   interactionView: {
-    marginTop: 10,
+    marginVertical: 10,
     flexDirection: "row",
     padding: 5,
-    backgroundColor: "#181D29",
+    backgroundColor: Colors.baseLight,
     width: 330,
     height: 50,
     justifyContent: "center",
+    borderRadius: 20,
   },
 });
 
