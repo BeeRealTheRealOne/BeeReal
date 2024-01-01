@@ -1,4 +1,4 @@
-const style = {
+const Style = {
     marginPage: 20,
     marginComponent: 10,
     borderRadius: 5,
@@ -6,3 +6,5 @@ const style = {
     h2FontSize: 20,
     testFontSize: 16,
 };
+
+export default Style;
