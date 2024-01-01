@@ -16,7 +16,6 @@ function categoriesList() {
             <View>
                 <Text>Email: {user.email}</Text>
                 <Text>Username: {user.username}</Text>
-                <Stack.Screen options={{ title: 'Profile', headerRight: CameraIcon }} />
             </View>
         </View>
     );

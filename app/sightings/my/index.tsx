@@ -35,7 +35,6 @@ function sightingList() {
     }
     return (
         <View>
-            <Stack.Screen options={{ title: 'My Sightings', headerRight: CameraIcon }} />
             <FlatList
                 data={sighting}
                 renderItem={({ item }) => (

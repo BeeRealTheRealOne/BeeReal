@@ -1,7 +1,8 @@
 const Colors = {
-    base: '#131620',
-    baseLight: '#171b27',
-    baseText: '#fffddf',
+    base: '#ffffff',
+    baseLight: '#ffffff',
+    baseText: '#000000',
+    //baseText: '#fffddf',
     primary: '#f6af1a',
     primaryText: '#171b27',
 };

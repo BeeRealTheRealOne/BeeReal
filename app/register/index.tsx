@@ -29,7 +29,6 @@ function login() {
 
     return (
         <View style={[styles.container]}>
-            <Stack.Screen options={{ title: 'Login', headerRight: BeeIcon }} />
             <View style={[styles.infoContainer]}>
                 <Text style={[styles.text, styles.heading]}>
                     <Text style={[styles.highlight]}>Bee</Text> part of our community<Text style={[styles.highlight, styles.heading]}>!</Text>
@@ -72,8 +71,8 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     input: {
-        backgroundColor: Colors.baseText,
-        color: Colors.base,
+        backgroundColor: Colors.base,
+        color: Colors.baseText,
         paddingHorizontal: 5,
         borderRadius: 2,
         width: 250,

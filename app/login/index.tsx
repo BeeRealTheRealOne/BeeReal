@@ -27,7 +27,6 @@ function login() {
 
     return (
         <View style={[styles.container]}>
-            <Stack.Screen options={{ title: 'Login', headerRight: BeeIcon }} />
             <View style={[styles.infoContainer]}>
                 <Text style={[styles.text, styles.heading]}>
                     Welcome <Text style={[styles.highlight]}>Bee</Text>ck<Text style={[styles.highlight, styles.heading]}>!</Text>
@@ -35,8 +34,8 @@ function login() {
             </View>
             <View style={[styles.loginContainer]}>
                 <View style={[styles.inputContainer]}>
-                    <TextInput style={[styles.input]} keyboardAppearance="dark" placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
-                    <TextInput style={[styles.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
+                    <TextInput style={[styles.input]} placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
+                    <TextInput style={[styles.input]} secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
                 </View>
                 <Button color={Colors.primary} title="Login" onPress={login} />
                 {wrong && <Text>Wrong email or password</Text>}
@@ -68,8 +67,8 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     input: {
-        backgroundColor: Colors.baseText,
-        color: Colors.base,
+        backgroundColor: Colors.base,
+        color: Colors.baseText,
         paddingHorizontal: 5,
         borderRadius: 2,
         width: 250,

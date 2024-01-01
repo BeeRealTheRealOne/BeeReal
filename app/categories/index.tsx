@@ -19,7 +19,6 @@ function categoriesList() {
     if (!categories) return <Text>Loading</Text>;
     return (
         <View>
-            <Stack.Screen options={{ title: 'Categories', headerRight: CameraIcon }} />
             <FlatList
                 data={categories}
                 renderItem={({ item }) => (

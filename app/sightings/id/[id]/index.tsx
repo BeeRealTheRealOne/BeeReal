@@ -22,11 +22,6 @@ function sightingCardView() {
             .catch((err) => console.error(err));
     }, []);
 
-    return (
-        <>
-            <Stack.Screen options={{ title: 'Sighting', headerRight: CameraIcon }} />
-            {sighting ? <SightingCard sighting={sighting} /> : <Text>Loading...</Text>}
-        </>
-    );
+    return <>{sighting ? <SightingCard sighting={sighting} /> : <Text>Loading...</Text>}</>;
 }
 export default sightingCardView;

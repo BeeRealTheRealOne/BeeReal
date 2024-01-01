@@ -76,7 +76,6 @@ function SnapView() {
 
     return (
         <>
-            <Stack.Screen options={{ title: 'Snap' }} />
             <View style={styles.container}>
                 {image ? (
                     <>
