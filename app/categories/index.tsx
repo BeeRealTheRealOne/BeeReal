@@ -3,7 +3,7 @@ import pb from '../../constants/pocketbase';
 import CategoriesItem from '../../components/CategoriesItem';
 import { FlatList } from 'react-native-gesture-handler';
 import { Link, Stack } from 'expo-router';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import CameraIcon from '../../components/CameraIcon';
 
 function categoriesList() {
@@ -16,6 +16,7 @@ function categoriesList() {
             })
             .catch((err) => console.error(err));
     }, []);
+    if (!categories) return <Text>Loading</Text>;
     return (
         <View>
             <Stack.Screen options={{ title: 'Categories', headerRight: CameraIcon }} />
