@@ -3,8 +3,7 @@ import * as Location from 'expo-location';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { Stack, router } from 'expo-router';
-import BeeIcon from '../../components/BeeIcon';
+import StyleLib from '../../constants/style';
 
 function SnapView() {
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
@@ -75,7 +74,7 @@ function SnapView() {
     }
 
     return (
-        <>
+        <View style={StyleLib.page}>
             <View style={styles.container}>
                 {image ? (
                     <>
@@ -93,7 +92,7 @@ function SnapView() {
                     </Camera>
                 )}
             </View>
-        </>
+        </View>
     );
 }
 

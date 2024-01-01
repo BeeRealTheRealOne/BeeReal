@@ -1,9 +1,9 @@
 import { Text, View, Image, StyleSheet } from 'react-native';
 
 const SpeciesItem = (props: { name: string; scientificName: string; imageURL: string }) => {
-    if (!props.name) return <Text>Loading...</Text>;
-    if (!props.scientificName) return <Text>Loading...</Text>;
-    if (!props.imageURL) return <Text>Loading...</Text>;
+    if (!props.name) return <></>;
+    if (!props.scientificName) return <></>;
+    if (!props.imageURL) return <></>;
 
     return (
         <View style={[styles.row]}>

@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native';
+import StyleLib from '../constants/style';
 
 const CategoriesItem = (props: { name: string; scientificName: string; id: string }) => {
     if (!props.name) return <Text>Loading...</Text>;
@@ -6,7 +7,7 @@ const CategoriesItem = (props: { name: string; scientificName: string; id: strin
     if (!props.id) return <Text>Loading...</Text>;
 
     return (
-        <View style={[styles.row]}>
+        <View style={[styles.row, StyleLib.card]}>
             <Text>{props.name}</Text>
             <Text>{`[${props.scientificName}]`}</Text>
         </View>

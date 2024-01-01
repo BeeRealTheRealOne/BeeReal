@@ -1,9 +1,8 @@
 import pb from '../../constants/pocketbase';
 import { Stack, router } from 'expo-router';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import CameraIcon from '../../components/CameraIcon';
-import BeeIcon from '../../components/BeeIcon';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import Colors from '../../constants/colors';
+import StyleLib from '../../constants/style';
 
 function categoriesList() {
     const user = pb.authStore.model;
@@ -13,19 +12,22 @@ function categoriesList() {
         return;
     }
     return (
-        <View style={[styles.container]}>
-            <View>
-                <Text>Email: {user.email}</Text>
-                <Text>Username: {user.username}</Text>
+        <View style={[StyleLib.page]}>
+            <View style={[styles.container]}>
+                <View>
+                    <Text style={[StyleLib.text]}>Email: {user.email}</Text>
+                    <Text style={[StyleLib.text]}>Username: {user.username}</Text>
+                </View>
+                <View style={[StyleLib.spacer]} />
+                <Button
+                    color={Colors.primary}
+                    title="Logout"
+                    onPress={() => {
+                        pb.authStore.clear();
+                        router.push('/');
+                    }}
+                />
             </View>
-            <TouchableOpacity
-                onPress={() => {
-                    pb.authStore.clear();
-                    router.push('/');
-                }}
-            >
-                <Text style={[styles.text]}>Logout</Text>
-            </TouchableOpacity>
         </View>
     );
 }

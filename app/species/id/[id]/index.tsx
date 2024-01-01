@@ -3,8 +3,7 @@ import pb from '../../../../constants/pocketbase';
 import { useLocalSearchParams, Link, Stack } from 'expo-router';
 import SpeciesCard from '../../../../components/SpeciesCard';
 import { View } from 'react-native';
-import CameraIcon from '../../../../components/CameraIcon';
-import BeeIcon from '../../../../components/BeeIcon';
+import StyleLib from '../../../../constants/style';
 
 function categoriesCardView() {
     const local = useLocalSearchParams();
@@ -17,10 +16,10 @@ function categoriesCardView() {
                 setSpecies(res);
             })
             .catch((err) => console.error(err));
-    }, []);
+    }, [id]);
 
     return (
-        <View>
+        <View style={[StyleLib.page]}>
             <SpeciesCard name={species.name} scientificName={species.scientificName} description={species.description} categorie={species.categorie} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${species.id}/${species.image}`} />
         </View>
     );

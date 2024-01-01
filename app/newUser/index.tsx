@@ -2,16 +2,17 @@ import { Link } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
+import StyleLib from '../../constants/style';
 
 function Home() {
     return (
         <View style={[styles.container]}>
             <View style={[styles.infoContainer]}>
-                <Text style={[styles.text, styles.heading]}>
-                    Welcome to <Text style={[styles.highlight, styles.heading]}>Bee</Text>
-                    Real<Text style={[styles.highlight, styles.heading]}>!</Text>
+                <Text style={[StyleLib.h1]}>
+                    Welcome to <Text style={[styles.highlight]}>Bee</Text>
+                    Real<Text style={[styles.highlight]}>!</Text>
                 </Text>
-                <Text style={[styles.text]}>Please login or register to continue.</Text>
+                <Text style={[StyleLib.text]}>Please login or register to continue.</Text>
             </View>
             <View style={[styles.LoginContainer]}>
                 <Link href="/register/">

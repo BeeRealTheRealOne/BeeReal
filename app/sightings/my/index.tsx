@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import pb from '../../../constants/pocketbase';
 import { FlatList } from 'react-native-gesture-handler';
-import { View } from 'react-native';
-import { Link, Stack, router } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
+import { Link } from 'expo-router';
 import SightingItem from '../../../components/MySightingItem';
-import CameraIcon from '../../../components/CameraIcon';
-import BeeIcon from '../../../components/BeeIcon';
+import StyleLib from '../../../constants/style';
 
 function sightingList() {
     const [sighting, setSighting] = useState<any>([]);
@@ -26,19 +25,22 @@ function sightingList() {
     function loadMoreSightings() {
         if (page > maxPage) return;
         pb.collection('insectFindings')
-            .getList(page + 1, 15)
+            .getList(page + 1, 10, { expand: 'species', sort: '-created' })
             .then((res) => {
+                console.log(res.items);
                 setPage(page + 1);
                 setSighting([...sighting, ...res.items]);
             })
             .catch((err) => console.error(err));
     }
     return (
-        <View>
+        <View style={[StyleLib.page]}>
             <FlatList
                 data={sighting}
+                numColumns={1}
+                ItemSeparatorComponent={() => <View style={styles.gap}></View>}
                 renderItem={({ item }) => (
-                    <Link href={`/sightings/id/${item.id}/`} key={item.id}>
+                    <Link style={[styles.width]} href={`/sightings/id/${item.id}/`} key={item.id}>
                         <SightingItem sighting={item} />
                     </Link>
                 )}
@@ -49,5 +51,14 @@ function sightingList() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    gap: {
+        height: 10,
+    },
+    width: {
+        flex: 1,
+    },
+});
 
 export default sightingList;

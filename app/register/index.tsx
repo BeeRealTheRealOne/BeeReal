@@ -3,6 +3,7 @@ import pb from '../../constants/pocketbase';
 import { router } from 'expo-router';
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
+import StyleLib from '../../constants/style';
 
 function login() {
     if (pb.authStore.isValid) {
@@ -15,6 +16,7 @@ function login() {
     const [wrong, setWrong] = useState<boolean>(false);
 
     const register = () => {
+        //TODO: Add validation and error handling
         pb.collection('users')
             .create({ username, email, password, passwordConfirm })
             .then((res) => {
@@ -29,17 +31,17 @@ function login() {
     return (
         <View style={[styles.container]}>
             <View style={[styles.infoContainer]}>
-                <Text style={[styles.text, styles.heading]}>
-                    <Text style={[styles.highlight]}>Bee</Text> part of our community<Text style={[styles.highlight, styles.heading]}>!</Text>
+                <Text style={[StyleLib.h1]}>
+                    <Text style={[styles.highlight]}>Bee</Text> part of our community<Text style={[styles.highlight]}>!</Text>
                 </Text>
             </View>
             <View style={[styles.loginContainer]}>
                 <View style={[styles.inputContainer]}>
-                    <TextInput style={[styles.input]} keyboardAppearance="dark" placeholder="Enter your username..." onChangeText={(text) => setUsername(text)} />
-                    <TextInput style={[styles.input]} keyboardAppearance="dark" placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
+                    <TextInput style={[StyleLib.input]} keyboardAppearance="dark" placeholder="Enter your username..." onChangeText={(text) => setUsername(text)} />
+                    <TextInput style={[StyleLib.input]} keyboardAppearance="dark" placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
                     <View style={[styles.space]} />
-                    <TextInput style={[styles.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
-                    <TextInput style={[styles.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Confirm your password..." onChangeText={(text) => setPasswordConfirm(text)} />
+                    <TextInput style={[StyleLib.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
+                    <TextInput style={[StyleLib.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Confirm your password..." onChangeText={(text) => setPasswordConfirm(text)} />
                 </View>
                 <Button color={Colors.primary} title="Register" onPress={register} />
             </View>

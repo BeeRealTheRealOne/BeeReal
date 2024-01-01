@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import CategoriesItem from '../../components/CategoriesItem';
 import { FlatList } from 'react-native-gesture-handler';
-import { Link, Stack, router } from 'expo-router';
-import { View, Text } from 'react-native';
-import CameraIcon from '../../components/CameraIcon';
+import { Link } from 'expo-router';
+import { View, Text, StyleSheet } from 'react-native';
+import StyleLib from '../../constants/style';
 
 function categoriesList() {
     const [categories, setCategories] = useState<any>([]);
     useEffect(() => {
         pb.collection('categories')
-            .getList(1, 100, { name: 'asc' })
+            .getList(1, 100, { sort: 'name' })
             .then((res) => {
                 setCategories(res.items);
             })
@@ -18,8 +18,10 @@ function categoriesList() {
     }, []);
     if (!categories) return <Text>Loading</Text>;
     return (
-        <View>
+        <View style={StyleLib.page}>
             <FlatList
+                ItemSeparatorComponent={() => <View style={styles.gap}></View>}
+                numColumns={1}
                 data={categories}
                 renderItem={({ item }) => (
                     <Link href={`/species/categorie/id/${item.id}/`} key={item.id}>
@@ -31,5 +33,11 @@ function categoriesList() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    gap: {
+        height: 10,
+    },
+});
 
 export default categoriesList;

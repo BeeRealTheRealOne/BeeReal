@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import pb from '../../../../constants/pocketbase';
 import { useLocalSearchParams, Stack, router } from 'expo-router';
 import SightingCard from '../../../../components/SightingCard';
-import { Sighting } from '../../../../types/Sighting';
-import { RecordModel } from 'pocketbase';
-import CameraIcon from '../../../../components/CameraIcon';
-import BeeIcon from '../../../../components/BeeIcon';
+import StyleLib from '../../../../constants/style';
 
 function sightingCardView() {
     const local = useLocalSearchParams();
@@ -20,8 +17,8 @@ function sightingCardView() {
                 setSighting(res);
             })
             .catch((err) => console.error(err));
-    }, []);
+    }, [id]);
 
-    return <>{sighting ? <SightingCard sighting={sighting} /> : <Text>Loading...</Text>}</>;
+    return <View style={[StyleLib.page]}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={[StyleLib.text]}>Loading...</Text>}</View>;
 }
 export default sightingCardView;
