@@ -2,27 +2,46 @@ import { Text, View, StyleSheet, Image } from 'react-native';
 import EmptyHeartIcon from './HeartEmptyIcon';
 import AlertIcon from './AlertIcon';
 import Colors from '../constants/colors';
+import StyleLib from '../constants/style';
 
 const Post = (props: { title: string; message: string; user: string; imageUrl: string; insectFindingId: string }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{props.title}</Text>
-            <Image style={styles.image} source={{ uri: props.imageUrl }} resizeMode="contain" />
-            <Text style={styles.message}>{props.message}</Text>
-            <View style={styles.interactionView}>
+        <View style={[StyleLib.card]}>
+            <Text style={[StyleLib.h2]}>{props.title}</Text>
+            <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
+            <View style={{ flex: 1, maxWidth: 250 }}>
+                <Text style={[StyleLib.text]}>{props.message}</Text>
+            </View>
+            <View style={[styles.interactionView, StyleLib.rounded]}>
                 <EmptyHeartIcon />
                 <AlertIcon />
             </View>
         </View>
     );
+
+    /*
+        <View style={[StyleLib.card]}>
+            <Text style={[StyleLib.h2, styles.flex]}>{props.title}</Text>
+            <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
+            <View style={[styles.flex, styles.row]}>
+                <Text style={[StyleLib.text, styles.flex]}>{props.message}</Text>
+            </View>
+    </View>*/
 };
 const styles = StyleSheet.create({
+    flex: {
+        flex: 1,
+    },
+    row: {
+        flexDirection: 'row',
+    },
+    col: {
+        flexDirection: 'column',
+    },
     container: {
-        backgroundColor: '#1e2334',
-        width: 350,
+        flex: 1,
         alignItems: 'center',
         padding: 5,
-        borderRadius: 20,
     },
     title: {
         color: 'white',
@@ -30,26 +49,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 5,
     },
-    message: {
-        flex: 1,
-        flexWrap: 'wrap',
-        color: 'white',
-    },
     image: {
         width: 280,
         height: 280,
         marginBottom: 10,
-        borderRadius: 10,
     },
     interactionView: {
+        flex: 1,
         marginVertical: 10,
         flexDirection: 'row',
         padding: 5,
-        backgroundColor: Colors.baseLight,
-        width: 330,
-        height: 50,
+        backgroundColor: Colors.base,
         justifyContent: 'center',
-        borderRadius: 20,
     },
 });
 

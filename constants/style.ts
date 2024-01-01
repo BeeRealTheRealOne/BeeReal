@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colors from './colors';
 
 const StyleValues = {
     marginPage: 20,
@@ -10,14 +11,6 @@ const StyleValues = {
     h2FontSize: 24,
     testFontSize: 14,
     cardPadding: 10,
-};
-
-const Colors = {
-    base: '#f3f3f3',
-    baseLight: '#ffffff',
-    baseText: '#000000',
-    primary: '#f6af1a',
-    primaryText: '#171b27',
 };
 
 const StyleLib = StyleSheet.create({
@@ -38,6 +31,7 @@ const StyleLib = StyleSheet.create({
         margin: StyleValues.marginComponent,
     },
     card: {
+        flex: 1,
         backgroundColor: Colors.baseLight,
         borderRadius: StyleValues.borderRadius,
         padding: StyleValues.cardPadding,

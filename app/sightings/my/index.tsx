@@ -27,7 +27,6 @@ function sightingList() {
         pb.collection('insectFindings')
             .getList(page + 1, 10, { expand: 'species', sort: '-created' })
             .then((res) => {
-                console.log(res.items);
                 setPage(page + 1);
                 setSighting([...sighting, ...res.items]);
             })

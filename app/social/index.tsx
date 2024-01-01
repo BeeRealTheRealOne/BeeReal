@@ -15,7 +15,6 @@ function Social() {
         pb.collection('posts')
             .getList(page, 10, { expand: 'insectFinding' })
             .then((res) => {
-                console.log(res);
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
             })
@@ -37,11 +36,11 @@ function Social() {
             <View style={styles.container}>
                 <FlatList
                     data={posts}
+                    style={styles.flex}
                     ItemSeparatorComponent={() => <View style={styles.gap}></View>}
                     renderItem={({ item }) => {
-                        console.log('rendering item ', item);
                         return (
-                            <Link href="/insects/" key={item.id} style={styles.postLink}>
+                            <Link href="/insects/" key={item.id} style={[styles.flex]}>
                                 <Post user={item.user} title={item.title} message={item.message} imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}`} insectFindingId={item.expand.insectFinding.id} />
                             </Link>
                         );
@@ -58,6 +57,7 @@ export default Social;
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: 'center',
     },
     postLink: {
@@ -65,5 +65,8 @@ const styles = StyleSheet.create({
     },
     gap: {
         height: 10,
+    },
+    flex: {
+        flex: 1,
     },
 });

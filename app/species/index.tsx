@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { FlatList } from 'react-native-gesture-handler';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Link, Stack, router } from 'expo-router';
 import SpeciesItem from '../../components/SpeciesItem';
 import StyleLib from '../../constants/style';
@@ -36,6 +36,7 @@ function speciesList() {
         <View style={[StyleLib.page]}>
             <FlatList
                 data={species}
+                ItemSeparatorComponent={() => <View style={styles.gap}></View>}
                 numColumns={1}
                 renderItem={({ item }) => (
                     <Link href={`/species/id/${item.id}/`} key={item.id}>
@@ -50,4 +51,9 @@ function speciesList() {
     );
 }
 
+const styles = StyleSheet.create({
+    gap: {
+        height: 10,
+    },
+});
 export default speciesList;
