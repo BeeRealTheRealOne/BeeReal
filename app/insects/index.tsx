@@ -1,38 +1,37 @@
 import { Link, Stack, router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import pb from '../../constants/pocketbase';
-import Colors from '../../constants/colors';
+import StyleLib from '../../constants/style';
 
 function Home() {
     return (
-        <>
-            <View style={[styles.grid]}>
-                <View style={[styles.row]}>
-                    <Link style={[styles.text, styles.col]} href="/species/">
-                        Species
-                    </Link>
-                    <Link style={[styles.text, styles.col]} href="/categories/">
-                        Categories
+        <View style={[styles.grid, StyleLib.page]}>
+            <View style={[styles.row]}>
+                <View style={[styles.center]}>
+                    <Link style={[StyleLib.text, styles.col]} href="/species/">
+                        All Species
                     </Link>
                 </View>
-                <View style={[styles.row]}>
-                    <Link style={[styles.text, styles.col]} href="/profile/">
-                        Profile
+                <View style={[styles.center]}>
+                    <Link style={[StyleLib.text, styles.col]} href="/categories/">
+                        Categories of Species
                     </Link>
-                    <Link style={[styles.text, styles.col]} href="/sightings/my/">
+                </View>
+            </View>
+            <View style={[styles.row]}>
+                <View style={[styles.center]}>
+                    <Link style={[StyleLib.text, styles.col]} href="/sightings/my/">
                         My Sightings
                     </Link>
                 </View>
             </View>
-        </>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     grid: {
         flex: 2,
-        margin: 20,
     },
     row: {
         flex: 1,
@@ -42,43 +41,13 @@ const styles = StyleSheet.create({
     },
     col: {
         flex: 1,
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        color: Colors.baseText,
-    },
-    infoContainer: {
-        flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
-    },
-    bumper: {
-        flex: 1,
-    },
-    LoginContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-        gap: 40,
-    },
-    IconWithText: {
-        justifyContent: 'center',
-        textAlign: 'center',
-    },
-    heading: {
-        fontSize: 30,
-    },
-    text: {
-        color: Colors.baseText,
-    },
-    highlight: {
-        color: Colors.primary,
+        alignContent: 'center',
     },
     center: {
-        textAlign: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
     },
 });
 
