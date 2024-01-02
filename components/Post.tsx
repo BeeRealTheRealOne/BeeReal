@@ -1,81 +1,86 @@
-import { Text, View, StyleSheet, Image } from "react-native";
-import EmptyHeartIcon from "./HeartEmptyIcon";
-import Colors from "../constants/colors";
-import StyleLib from "../constants/style";
-import { useState } from "react";
-import FilledHeartIcon from "./FilledHeartIcon";
+import { Text, View, StyleSheet, Image } from 'react-native';
+import EmptyHeartIcon from './HeartEmptyIcon';
+import StyleLib from '../constants/style';
+import { useState } from 'react';
+import FilledHeartIcon from './FilledHeartIcon';
+import pb from '../constants/pocketbase';
 
-const Post = (props: {
-  title: string;
-  message: string;
-  user: string;
-  imageUrl: string;
-  insectFindingId: string;
-  isLikedByUser: boolean;
-}) => {
-  const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-  };
+const Post = (props: { postId: string; title: string; message: string; user: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean }) => {
+    const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
+    const handleLike = () => {
+        if (!pb.authStore.isValid) {
+            return;
+        }
+        if (!isLiked) {
+            pb.collection('posts')
+                .update(props.postId, { 'likes+': pb.authStore?.model?.id })
+                .then((res) => {
+                    setIsLiked(true);
+                })
+                .catch((err) => console.error(err));
+        } else {
+            pb.collection('posts')
+                .update(props.postId, { 'likes-': pb.authStore?.model?.id })
+                .then((res) => {
+                    setIsLiked(false);
+                })
+                .catch((err) => console.error(err));
+        }
+    };
 
-  return (
-    <View style={[StyleLib.card]}>
-      <View style={styles.header}>
-        <Text style={[StyleLib.h2]}>{props.title}</Text>
-        <Text style={styles.author}>{props.user}</Text>
-      </View>
-      <Image
-        style={[styles.image, StyleLib.rounded]}
-        source={{ uri: props.imageUrl }}
-        resizeMode="contain"
-      />
-      <View style={styles.heartContainer} onTouchEnd={handleLike}>
-        {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
-      </View>
-      <View style={styles.bottom}>
-        <Text style={[StyleLib.text]}>{props.message}</Text>
-      </View>
-    </View>
-  );
+    return (
+        <View style={[StyleLib.card]}>
+            <View style={styles.header}>
+                <Text style={[StyleLib.h2]}>{props.title}</Text>
+                <Text style={styles.author}>{props.user}</Text>
+            </View>
+            <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
+            <View style={styles.heartContainer} onTouchEnd={handleLike}>
+                {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
+            </View>
+            <View style={styles.bottom}>
+                <Text style={[StyleLib.text]}>{props.message}</Text>
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 5,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  author: {
-    marginLeft: 10,
-    textDecorationLine: "underline",
-    marginBottom: -5,
-  },
-  title: {
-    color: "white",
-    fontSize: 25,
-    textAlign: "center",
-    marginBottom: 5,
-  },
-  image: {
-    width: 280,
-    height: 280,
-    marginBottom: 10,
-    position: "relative",
-  },
-  heartContainer: {
-    position: "absolute",
-    bottom: 50,
-    right: 30,
-  },
-  bottom: {
-    flex: 1,
-  },
-  message: {
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 5,
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    author: {
+        marginLeft: 10,
+        textDecorationLine: 'underline',
+        marginBottom: -5,
+    },
+    title: {
+        color: 'white',
+        fontSize: 25,
+        textAlign: 'center',
+        marginBottom: 5,
+    },
+    image: {
+        width: 280,
+        height: 280,
+        marginBottom: 10,
+        position: 'relative',
+    },
+    heartContainer: {
+        position: 'absolute',
+        bottom: 50,
+        right: 30,
+    },
+    bottom: {
+        flex: 1,
+    },
+    message: {},
 });
 
 export default Post;
