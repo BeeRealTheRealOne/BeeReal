@@ -5,7 +5,7 @@ export default function EmptyHeartIcon() {
   return (
     <MaterialCommunityIcons
       name="heart-outline"
-      size={35}
+      size={40}
       color={Colors.primary}
     />
   );
