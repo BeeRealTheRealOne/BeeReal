@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { FlatList } from 'react-native-gesture-handler';
 import { StyleSheet, View } from 'react-native';
-import { Link, Stack, router } from 'expo-router';
+import { Link } from 'expo-router';
 import SpeciesItem from '../../components/SpeciesItem';
 import StyleLib from '../../constants/style';
 
