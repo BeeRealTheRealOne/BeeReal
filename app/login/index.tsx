@@ -17,7 +17,9 @@ function login() {
         pb.collection('users')
             .authWithPassword(email, password)
             .then((res) => {
-                router.push('/');
+                if (res.token) {
+                    router.push('/');
+                }
             })
             .catch((err) => {
                 console.error(err);
