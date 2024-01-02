@@ -17,7 +17,7 @@ function speciesList() {
 
     useEffect(() => {
         pb.collection('species')
-            .getList(page, 15)
+            .getList(1, 15)
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
@@ -39,7 +39,7 @@ function speciesList() {
     function onRefresh() {
         setRefreshing(true);
         pb.collection('species')
-            .getList(page, 15)
+            .getList(1, 15)
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
