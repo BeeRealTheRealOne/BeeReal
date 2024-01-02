@@ -1,12 +1,13 @@
 import { Camera, CameraCapturedPicture, CameraType } from 'expo-camera';
 import * as Location from 'expo-location';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Pressable } from 'react-native';
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 import { router } from 'expo-router';
+import { Audio } from 'expo-av';
 
 function SnapView() {
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
@@ -48,6 +49,9 @@ function SnapView() {
             camera
                 .takePictureAsync({ base64: true })
                 .then((result) => {
+                    Audio.Sound.createAsync(require('../../assets/sounds/camera.mp3'), { shouldPlay: true }).then((result) => {
+                        result.sound.playAsync();
+                    });
                     Location.getCurrentPositionAsync({}).then((locationTemp) => {
                         setLocation(locationTemp);
                         setImage(result);
@@ -111,11 +115,11 @@ function SnapView() {
                         <View style={[styles.camera, StyleLib.rounded]}>
                             <Camera ratio="1:1" style={[styles.camera]} type={CameraType.back} ref={(ref) => setCamera(ref)}></Camera>
                         </View>
-                        <TouchableOpacity style={[styles.container]} onPress={onSnap}>
+                        <Pressable android_disableSound={false} style={[styles.container]} onPress={onSnap}>
                             <View style={[styles.snapButton]}>
                                 <Ionicons name="camera" size={40} color="black" />
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
                 )}
             </View>
