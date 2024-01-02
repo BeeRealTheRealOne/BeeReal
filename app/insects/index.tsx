@@ -1,7 +1,5 @@
-import { Link, Stack, router } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import pb from '../../constants/pocketbase';
+import { router } from 'expo-router';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Colors from '../../constants/colors';
 
 function Home() {
