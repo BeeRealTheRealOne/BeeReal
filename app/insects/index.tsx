@@ -1,85 +1,121 @@
-import { Link, Stack, router } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import pb from '../../constants/pocketbase';
-import Colors from '../../constants/colors';
+import { Link, Stack, router } from "expo-router";
+import { useEffect, useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import pb from "../../constants/pocketbase";
+import Colors from "../../constants/colors";
 
 function Home() {
-    return (
-        <>
-            <View style={[styles.grid]}>
-                <View style={[styles.row]}>
-                    <Link style={[styles.text, styles.col]} href="/species/">
-                        Species
-                    </Link>
-                    <Link style={[styles.text, styles.col]} href="/categories/">
-                        Categories
-                    </Link>
-                </View>
-                <View style={[styles.row]}>
-                    <Link style={[styles.text, styles.col]} href="/profile/">
-                        Profile
-                    </Link>
-                    <Link style={[styles.text, styles.col]} href="/sightings/my/">
-                        My Sightings
-                    </Link>
-                </View>
-            </View>
-        </>
-    );
+  return (
+    <>
+      <View style={styles.container}>
+        <View style={styles.header}></View>
+        <View style={styles.firstRow}>
+          <View style={styles.banner}>
+            <Image
+              source={require("../../assets/images/speciesBanner.png")}
+              style={styles.bannerImage}
+            ></Image>
+            <Text style={styles.bannerText}>Species</Text>
+          </View>
+          <View style={styles.banner}>
+            <Image
+              source={require("../../assets/images/categoriesBanner.png")}
+              style={styles.bannerImage2}
+            ></Image>
+            <Text style={styles.bannerText}>Categories</Text>
+          </View>
+        </View>
+        <View style={styles.secondRow}>
+          <View style={styles.mainBanner}>
+            <Image
+              source={require("../../assets/images/findingsBanner.png")}
+              style={styles.mainBannerImage}
+            ></Image>
+            <Text style={styles.bannerText}>My Findings</Text>
+          </View>
+        </View>
+      </View>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
-    grid: {
-        flex: 2,
-        margin: 20,
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
+  header: {
+    marginBottom: 50,
+  },
+  firstRow: {
+    width: "100%",
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+    marginTop: 40,
+  },
+  secondRow: {
+    alignItems: "center",
+    width: "100%",
+  },
+  banner: {
+    width: "47%",
+    position: "relative",
+    overflow: "hidden",
+    borderRadius: 30,
+    backgroundColor: "white", // Consider setting a background color for better shadow effect
+    // Shadow properties
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5, // Adjust for vertical offset
     },
-    row: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignContent: 'center',
+    shadowOpacity: 0.5, // Adjust opacity
+    shadowRadius: 5, // Blur radius
+    elevation: 10,
+  },
+  mainBanner: {
+    width: "98%",
+    position: "relative",
+    overflow: "hidden",
+    borderRadius: 30,
+    backgroundColor: "white", // Consider setting a background color for better shadow effect
+    // Shadow properties
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5, // Adjust for vertical offset
     },
-    col: {
-        flex: 1,
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        color: Colors.baseText,
-    },
-    infoContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    bumper: {
-        flex: 1,
-    },
-    LoginContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-        gap: 40,
-    },
-    IconWithText: {
-        justifyContent: 'center',
-        textAlign: 'center',
-    },
-    heading: {
-        fontSize: 30,
-    },
-    text: {
-        color: Colors.baseText,
-    },
-    highlight: {
-        color: Colors.primary,
-    },
-    center: {
-        textAlign: 'center',
-    },
+    shadowOpacity: 0.5, // Adjust opacity
+    shadowRadius: 5, // Blur radius
+    elevation: 10,
+    marginTop: 10,
+  },
+  bannerImage: {
+    width: "100%",
+    height: 200,
+    transform: [{ scale: 1.5 }, { translateX: -30 }],
+  },
+  bannerImage2: {
+    width: "100%",
+    height: 200,
+    transform: [{ scale: 1.7 }, { translateX: -30 }],
+  },
+  mainBannerImage: {
+    width: "100%",
+    height: 300,
+    transform: [{ scale: 1.7 }, { translateX: -30 }],
+  },
+  bannerText: {
+    position: "absolute",
+    fontSize: 25,
+    color: "black",
+    fontWeight: "bold",
+    bottom: 20,
+    left: 20,
+    backgroundColor: "#a2de8eda",
+    paddingHorizontal: 10,
+    borderRadius: 30,
+  },
 });
 
 export default Home;
