@@ -6,9 +6,6 @@ import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 
 function login() {
-    if (pb.authStore.isValid) {
-        router.replace('/');
-    }
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [wrong, setWrong] = useState<boolean>(false);
