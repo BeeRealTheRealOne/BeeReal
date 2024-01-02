@@ -129,9 +129,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         borderRadius: 50,
         padding: 5,
+        opacity: 0.8,
         zIndex: 20,
     },
-    accountIcon: {},
+    accountIcon: {
+        opacity: 1,
+    },
     accountText: {
         fontSize: 20,
         fontWeight: 'bold',
