@@ -74,7 +74,7 @@ function SnapView() {
                 .create(formdata)
                 .then((result) => {
                     if (result.id != null) {
-                        router.push('/sightings/id/' + result.id);
+                        router.push(`/sightings/id/${result.id}/`);
                     }
                 })
                 .catch((error) => {
