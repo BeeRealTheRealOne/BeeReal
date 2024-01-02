@@ -7,6 +7,8 @@ const Colors = {
     background: '#fcfaf5',
     secondary: '#a2de8e',
     accent: '#93d671',
+    confirm: '#93d671',
+    cancel: '#e74c3c',
 };
 
 export default Colors;

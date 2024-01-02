@@ -6,6 +6,7 @@ import pb from '../../constants/pocketbase';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
+import { router } from 'expo-router';
 
 function SnapView() {
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
@@ -22,7 +23,7 @@ function SnapView() {
             }
             setPermissionLoc(true);
         })();
-    }, []);
+    }, [permissionLoc, permissionCam]);
 
     if (!permissionCam || !permissionLoc) {
         // Camera permissions are still loading
@@ -69,7 +70,16 @@ function SnapView() {
             formdata.append('latitude', location.coords.latitude.toString());
             formdata.append('user', pb?.authStore?.model?.id);
             formdata.append('species', 'iegoy1qo50ufs8n');
-            pb.collection('insectFindings').create(formdata);
+            pb.collection('insectFindings')
+                .create(formdata)
+                .then((result) => {
+                    if (result.id != null) {
+                        router.push('/sightings/id/' + result.id);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
         setLocation(null);
         setImage(null);
@@ -79,11 +89,14 @@ function SnapView() {
         <>
             <View style={styles.container}>
                 {image ? (
-                    <>
+                    <View style={[styles.container, styles.flex]}>
+                        <View style={[styles.flex]} />
                         <Image source={{ uri: image.uri }} style={styles.camera} />
-                        <Button title="Confirm" onPress={confirm} />
-                        <Button title="Retake" onPress={() => setImage(null)} />
-                    </>
+                        <View style={[styles.containerRow]}>
+                            <Button title="Confirm" color={Colors.accent} onPress={confirm} />
+                            <Button title="Retake" color={Colors.cancel} onPress={() => setImage(null)} />
+                        </View>
+                    </View>
                 ) : (
                     <View style={[styles.container, styles.flex]}>
                         <View style={[styles.flex]} />
@@ -109,9 +122,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
+    containerRow: {
+        flex: 1,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
     camera: {
         aspectRatio: 1,
-        flex: 4,
+        width: '100%',
     },
     snapButton: {
         width: 70,
