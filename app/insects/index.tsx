@@ -5,19 +5,29 @@ import pb from "../../constants/pocketbase";
 import Colors from "../../constants/colors";
 
 function Home() {
+  const handleNavigation = (dest: any) => {
+    router.push(dest);
+  };
+
   return (
     <>
       <View style={styles.container}>
         <View style={styles.header}></View>
         <View style={styles.firstRow}>
-          <View style={styles.banner}>
+          <View
+            style={styles.banner}
+            onTouchEnd={() => handleNavigation("/species/")}
+          >
             <Image
               source={require("../../assets/images/speciesBanner.png")}
               style={styles.bannerImage}
             ></Image>
             <Text style={styles.bannerText}>Species</Text>
           </View>
-          <View style={styles.banner}>
+          <View
+            style={styles.banner}
+            onTouchEnd={() => handleNavigation("/categories/")}
+          >
             <Image
               source={require("../../assets/images/categoriesBanner.png")}
               style={styles.bannerImage2}
@@ -26,7 +36,10 @@ function Home() {
           </View>
         </View>
         <View style={styles.secondRow}>
-          <View style={styles.mainBanner}>
+          <View
+            style={styles.mainBanner}
+            onTouchEnd={() => handleNavigation("/sightings/my/")}
+          >
             <Image
               source={require("../../assets/images/findingsBanner.png")}
               style={styles.mainBannerImage}
