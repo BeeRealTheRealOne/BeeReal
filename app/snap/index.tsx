@@ -93,8 +93,16 @@ function SnapView() {
                         <View style={[styles.flex]} />
                         <Image source={{ uri: image.uri }} style={styles.camera} />
                         <View style={[styles.containerRow]}>
-                            <Button title="Confirm" color={Colors.accent} onPress={confirm} />
-                            <Button title="Retake" color={Colors.cancel} onPress={() => setImage(null)} />
+                            <TouchableOpacity style={[styles.container]} onPress={confirm}>
+                                <View style={[styles.snapButton, { backgroundColor: Colors.accent }]}>
+                                    <Ionicons name="checkmark" size={40} color="black" />
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.container]} onPress={() => setImage(null)}>
+                                <View style={[styles.snapButton, { backgroundColor: Colors.cancel }]}>
+                                    <Ionicons name="close" size={40} color="black" />
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 ) : (
