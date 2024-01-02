@@ -29,7 +29,7 @@ const Post = (props: { postId: string; title: string; message: string; user: str
     };
 
     return (
-        <View style={[StyleLib.card]}>
+        <View style={[StyleLib.card, styles.margin, styles.center]}>
             <View style={styles.header}>
                 <Text style={[StyleLib.h2]}>{props.title}</Text>
                 <Text style={styles.author}>{props.user}</Text>
@@ -82,7 +82,13 @@ const styles = StyleSheet.create({
     bottom: {
         flex: 1,
     },
-    message: {},
+    margin: {
+        marginHorizontal: 20,
+        marginVertical: 10,
+    },
+    center: {
+        alignItems: 'center',
+    },
 });
 
 export default Post;

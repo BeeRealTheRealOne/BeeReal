@@ -9,33 +9,31 @@ function Home() {
     };
 
     return (
-        <>
-            <View style={styles.container}>
-                <View style={styles.header}></View>
-                <View style={styles.firstRow}>
-                    <View style={styles.banner} onTouchEnd={() => handleNavigation('/species/')}>
-                        <Image source={require('../../assets/images/speciesBanner.png')} style={styles.bannerImage}></Image>
-                        <View style={styles.bannerText}>
-                            <Text style={[StyleLib.h2]}>Species</Text>
-                        </View>
-                    </View>
-                    <View style={styles.banner} onTouchEnd={() => handleNavigation('/categories/')}>
-                        <Image source={require('../../assets/images/categoriesBanner.png')} style={styles.bannerImage2}></Image>
-                        <View style={styles.bannerText}>
-                            <Text style={[StyleLib.h2]}>Categories</Text>
-                        </View>
+        <View style={StyleLib.page}>
+            <View style={styles.firstRow}>
+                <View style={[styles.banner, StyleLib.rounded]} onTouchEnd={() => handleNavigation('/species/')}>
+                    <Image source={require('../../assets/images/speciesBanner.png')} style={styles.bannerImage}></Image>
+                    <View style={styles.bannerText}>
+                        <Text style={[StyleLib.h2]}>Species</Text>
                     </View>
                 </View>
-                <View style={styles.secondRow}>
-                    <View style={styles.mainBanner} onTouchEnd={() => handleNavigation('/sightings/my/')}>
-                        <Image source={require('../../assets/images/findingsBanner.png')} style={styles.mainBannerImage}></Image>
-                        <View style={styles.bannerText}>
-                            <Text style={[StyleLib.h2]}>My Sightings</Text>
-                        </View>
+                <View style={[styles.spacer]}></View>
+                <View style={[styles.banner, StyleLib.rounded]} onTouchEnd={() => handleNavigation('/categories/')}>
+                    <Image source={require('../../assets/images/categoriesBanner.png')} style={styles.bannerImage2}></Image>
+                    <View style={styles.bannerText}>
+                        <Text style={[StyleLib.h2]}>Categories</Text>
                     </View>
                 </View>
             </View>
-        </>
+            <View style={styles.secondRow}>
+                <View style={[styles.mainBanner, StyleLib.rounded]} onTouchEnd={() => handleNavigation('/sightings/my/')}>
+                    <Image source={require('../../assets/images/findingsBanner.png')} style={styles.mainBannerImage}></Image>
+                    <View style={styles.bannerText}>
+                        <Text style={[StyleLib.h2]}>My Sightings</Text>
+                    </View>
+                </View>
+            </View>
+        </View>
     );
 }
 
@@ -45,25 +43,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.background,
     },
-    header: {
-        marginBottom: 50,
-    },
     firstRow: {
         width: '100%',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         flexDirection: 'row',
-        marginTop: 40,
+        marginTop: 60,
     },
     secondRow: {
-        alignItems: 'center',
         width: '100%',
     },
     banner: {
-        width: '47%',
+        flex: 1,
         position: 'relative',
         overflow: 'hidden',
-        borderRadius: 30,
-        backgroundColor: 'white', // Consider setting a background color for better shadow effect
         // Shadow properties
         shadowColor: '#000',
         shadowOffset: {
@@ -75,11 +67,9 @@ const styles = StyleSheet.create({
         elevation: 10,
     },
     mainBanner: {
-        width: '98%',
+        width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        borderRadius: 30,
-        backgroundColor: 'white', // Consider setting a background color for better shadow effect
         // Shadow properties
         shadowColor: '#000',
         shadowOffset: {
@@ -116,6 +106,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#a2de8eda',
         paddingHorizontal: 10,
         borderRadius: 30,
+    },
+    spacer: {
+        width: 10,
     },
 });
 

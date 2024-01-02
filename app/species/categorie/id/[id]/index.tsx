@@ -1,11 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import pb from '../../../../../constants/pocketbase';
 import { useLocalSearchParams, Link } from 'expo-router';
 import SpeciesItem from '../../../../../components/SpeciesItem';
 import { FlatList, StyleSheet, View } from 'react-native';
 import StyleLib from '../../../../../constants/style';
+import { RefreshControl } from 'react-native-gesture-handler';
+import Colors from '../../../../../constants/colors';
 
 function categoriesCardView() {
+    const flatListRef = useRef<FlatList>();
+    const [refreshing, setRefreshing] = useState(false);
+
     const local = useLocalSearchParams();
     const id = local.id;
     const [species, setSpecies] = useState<any>([]);
@@ -34,17 +39,32 @@ function categoriesCardView() {
             .catch((err) => console.error(err));
     }
 
+    function onRefresh() {
+        setRefreshing(true);
+        pb.collection('species')
+            .getList(1, 10, { filter: `categorie = "${id}"` })
+            .then((res) => {
+                setSpecies(res.items);
+                setMaxPage(res.totalPages);
+                setRefreshing(false);
+                flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
+            })
+            .catch((err) => console.error(err));
+    }
+
     return (
-        <View style={[StyleLib.page]}>
+        <View style={[StyleLib.pageMarginTop]}>
             <FlatList
+                ref={flatListRef as any}
                 data={species}
                 numColumns={1}
                 ItemSeparatorComponent={() => <View style={styles.gap}></View>}
-                renderItem={({ item }) => (
-                    <Link href={`/species/id/${item.id}/`} key={item.id}>
-                        <SpeciesItem key={item.id} name={item.name} scientificName={item.scientificName} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${item.id}/${item.image}`} />
-                    </Link>
-                )}
+                renderItem={({ item }) => {
+                    return <SpeciesItem key={item.id} id={item.id} name={item.name} scientificName={item.scientificName} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${item.id}/${item.image}`}></SpeciesItem>;
+                }}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}
+                onRefresh={onRefresh}
+                refreshing={refreshing}
                 keyExtractor={(item) => item.id}
                 onEndReached={loadMoreSpecies}
                 onEndReachedThreshold={0.5}

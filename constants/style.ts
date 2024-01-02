@@ -9,6 +9,7 @@ const StyleValues = {
     borderRadius: 5,
     h1FontSize: 32,
     h2FontSize: 24,
+    h3FontSize: 18,
     testFontSize: 14,
     cardPadding: 10,
 };
@@ -23,6 +24,9 @@ const StyleLib = StyleSheet.create({
     },
     h2: {
         fontSize: StyleValues.h2FontSize,
+    },
+    h3: {
+        fontSize: StyleValues.h3FontSize,
     },
     input: {
         backgroundColor: Colors.baseLight,
@@ -51,6 +55,12 @@ const StyleLib = StyleSheet.create({
         padding: StyleValues.marginPage,
         paddingTop: StyleValues.marginPage * 2,
         paddingBottom: 0,
+    },
+    pageMarginTop: {
+        marginTop: StyleValues.marginPage * 2,
+    },
+    pageMarginBottom: {
+        marginBottom: StyleValues.marginPage * 2,
     },
     spacer: {
         margin: StyleValues.marginSpacer,

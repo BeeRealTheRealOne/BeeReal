@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { FlatList } from 'react-native-gesture-handler';
-import { StyleSheet, View } from 'react-native';
-import { Link } from 'expo-router';
+import { FlatList, RefreshControl } from 'react-native-gesture-handler';
+import { View } from 'react-native';
 import SpeciesItem from '../../components/SpeciesItem';
 import StyleLib from '../../constants/style';
+import Colors from '../../constants/colors';
 
 function speciesList() {
-    const [species, setSpecies] = useState<any>([]);
+    const flatListRef = useRef<FlatList>();
+    const [refreshing, setRefreshing] = useState(false);
+
+    const [species, setSpecies] = useState<any>();
 
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
@@ -32,28 +35,39 @@ function speciesList() {
             })
             .catch((err) => console.error(err));
     }
+
+    function onRefresh() {
+        setRefreshing(true);
+        pb.collection('species')
+            .getList(page, 15)
+            .then((res) => {
+                setSpecies(res.items);
+                setMaxPage(res.totalPages);
+                setRefreshing(false);
+                flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
+            })
+            .catch((err) => console.error(err));
+    }
+
     return (
-        <View style={[StyleLib.page]}>
+        <View style={StyleLib.pageMarginTop}>
             <FlatList
+                ref={flatListRef as any}
                 data={species}
-                ItemSeparatorComponent={() => <View style={styles.gap}></View>}
-                numColumns={1}
-                renderItem={({ item }) => (
-                    <Link href={`/species/id/${item.id}/`} key={item.id}>
-                        <SpeciesItem key={item.id} name={item.name} scientificName={item.scientificName} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${item.id}/${item.image}`}></SpeciesItem>
-                    </Link>
-                )}
+                horizontal={false}
+                renderItem={({ item }) => {
+                    return <SpeciesItem key={item.id} id={item.id} name={item.name} scientificName={item.scientificName} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${item.id}/${item.image}`}></SpeciesItem>;
+                }}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}
+                onRefresh={onRefresh}
+                refreshing={refreshing}
                 keyExtractor={(item) => item.id}
                 onEndReached={loadMoreSpecies}
                 onEndReachedThreshold={0.5}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    gap: {
-        height: 10,
-    },
-});
 export default speciesList;

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
     },
     spacer10: {
-        margin: 10,
+        width: 10,
     },
 });
 
