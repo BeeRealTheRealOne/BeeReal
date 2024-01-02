@@ -14,9 +14,8 @@ function Social() {
 
   useEffect(() => {
     pb.collection("posts")
-      .getList(page, 10, { expand: "insectFinding" })
+      .getList(page, 10, { expand: "insectFinding.user" })
       .then((res) => {
-        console.log(res);
         setPosts(res.items);
         setMaxPage(res.totalPages);
       })
@@ -25,8 +24,8 @@ function Social() {
 
   function loadMorePosts() {
     if (page >= maxPage) return;
-    pb.collection("insectFindings")
-      .getList(page + 1, 15)
+    pb.collection("posts")
+      .getList(page + 1, 15, {expand: "insectFinding.user"})
       .then((res) => {
         setPage(page + 1);
         setPosts([...posts, ...res.items]);
@@ -43,7 +42,7 @@ function Social() {
           renderItem={({ item }) => {
             return (
               <Post
-                user={item.user}
+                user={item.expand.insectFinding.expand.user.username}
                 title={item.title}
                 message={item.message}
                 imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}`}
@@ -74,6 +73,7 @@ const styles = StyleSheet.create({
   },
   gap: {
     height: 10,
+    
   },
   flex: {
     flex: 1,
