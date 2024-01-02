@@ -1,5 +1,6 @@
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import StyleLib from '../constants/style';
 
 const SpeciesCard = (props: { name: string; description: string; scientificName: string; categorie: string; imageURL: string }) => {
     if (!props.name) return <Text>Loading...</Text>;
@@ -9,34 +10,33 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
     if (!props.description) return <Text>Loading...</Text>;
 
     return (
-        <ScrollView style={[styles.col, styles.container]}>
-            <View style={[styles.row]}>
-                <View style={[styles.nameBox]}>
-                    <Text style={[styles.name]}>{props.name}</Text>
-                    <Text style={[styles.scientificName]}>{`[${props.scientificName}]`}</Text>
+        <View style={StyleLib.page}>
+            <ScrollView style={[styles.col]}>
+                <View style={[styles.row]}>
+                    <View style={[styles.nameBox]}>
+                        <Text style={[StyleLib.h2]}>{props.name}</Text>
+                        <Text style={[StyleLib.text]}>{`[${props.scientificName}]`}</Text>
+                    </View>
+                    <Image style={[styles.image]} source={{ uri: props.imageURL }} resizeMode="contain" />
                 </View>
-                <Image style={[styles.image]} source={{ uri: props.imageURL }} resizeMode="contain" />
-            </View>
-            <View style={[styles.spacer10]} />
-            <Text style={[styles.description]}>{props.description}</Text>
-        </ScrollView>
+                <View style={[styles.spacer10]} />
+                <Text style={[StyleLib.text]}>{props.description}</Text>
+            </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-    },
     image: {
         width: 130,
         height: 130,
-        flex: 1,
     },
     row: {
         flexDirection: 'row',
     },
     col: {
         flexDirection: 'column',
+        backgroundColor: 'red',
     },
     nameBox: {
         flex: 1,

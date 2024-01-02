@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Colors from '../../constants/colors';
+import StyleLib from '../../constants/style';
 
 function Home() {
     const handleNavigation = (dest: any) => {
@@ -14,17 +15,23 @@ function Home() {
                 <View style={styles.firstRow}>
                     <View style={styles.banner} onTouchEnd={() => handleNavigation('/species/')}>
                         <Image source={require('../../assets/images/speciesBanner.png')} style={styles.bannerImage}></Image>
-                        <Text style={styles.bannerText}>Species</Text>
+                        <View style={styles.bannerText}>
+                            <Text style={[StyleLib.h2]}>Species</Text>
+                        </View>
                     </View>
                     <View style={styles.banner} onTouchEnd={() => handleNavigation('/categories/')}>
                         <Image source={require('../../assets/images/categoriesBanner.png')} style={styles.bannerImage2}></Image>
-                        <Text style={styles.bannerText}>Categories</Text>
+                        <View style={styles.bannerText}>
+                            <Text style={[StyleLib.h2]}>Categories</Text>
+                        </View>
                     </View>
                 </View>
                 <View style={styles.secondRow}>
                     <View style={styles.mainBanner} onTouchEnd={() => handleNavigation('/sightings/my/')}>
                         <Image source={require('../../assets/images/findingsBanner.png')} style={styles.mainBannerImage}></Image>
-                        <Text style={styles.bannerText}>My Sightings</Text>
+                        <View style={styles.bannerText}>
+                            <Text style={[StyleLib.h2]}>My Sightings</Text>
+                        </View>
                     </View>
                 </View>
             </View>
