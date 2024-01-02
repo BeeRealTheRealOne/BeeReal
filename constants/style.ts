@@ -35,6 +35,15 @@ const StyleLib = StyleSheet.create({
         backgroundColor: Colors.baseLight,
         borderRadius: StyleValues.borderRadius,
         padding: StyleValues.cardPadding,
+        // Shadow properties
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 5, // Adjust for vertical offset
+        },
+        shadowOpacity: 0.5, // Adjust opacity
+        shadowRadius: 5, // Blur radius
+        elevation: 10,
     },
     page: {
         flex: 1,
