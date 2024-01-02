@@ -41,6 +41,7 @@ const StyleLib = StyleSheet.create({
         backgroundColor: Colors.base,
         padding: StyleValues.marginPage,
         paddingTop: StyleValues.marginPage * 2,
+        paddingBottom: 0,
     },
     spacer: {
         margin: StyleValues.marginSpacer,
