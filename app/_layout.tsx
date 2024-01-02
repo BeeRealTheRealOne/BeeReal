@@ -1,5 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Tabs, router } from "expo-router";
+import { Link, Tabs, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
@@ -93,13 +93,13 @@ function AppLayout() {
   }
   return (
     <>
-      <View style={styles.profileWrapper}>
+      <Link href="/profile/" style={styles.profileWrapper}>
         <MaterialCommunityIcons
           name={"account"}
           size={40}
           style={styles.accountIcon}
         />
-      </View>
+      </Link>
       <StatusBar style="dark" />
       <Tabs>
         <Tabs.Screen
