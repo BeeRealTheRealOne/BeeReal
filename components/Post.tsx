@@ -34,9 +34,11 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                 <Text style={[StyleLib.h2]}>{props.title}</Text>
                 <Text style={styles.author}>{props.user}</Text>
             </View>
-            <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
-            <View style={styles.heartContainer} onTouchEnd={handleLike}>
-                {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
+            <View style={[styles.image, StyleLib.rounded]}>
+                <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
+                <View style={styles.heartContainer} onTouchEnd={handleLike}>
+                    {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
+                </View>
             </View>
             <View style={styles.bottom}>
                 <Text style={[StyleLib.text]}>{props.message}</Text>
@@ -74,8 +76,8 @@ const styles = StyleSheet.create({
     },
     heartContainer: {
         position: 'absolute',
-        bottom: 50,
-        right: 30,
+        bottom: 10,
+        right: 10,
     },
     bottom: {
         flex: 1,
