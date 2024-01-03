@@ -8,6 +8,7 @@ import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 import { router } from 'expo-router';
 import { Audio } from 'expo-av';
+import Toast from 'react-native-root-toast';
 
 function SnapView() {
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
@@ -104,6 +105,15 @@ function SnapView() {
                 .create(formdata)
                 .then((result) => {
                     if (result.id != null) {
+                        Toast.show('Nice Catch! Thx for helping with the insect population!', {
+                            duration: Toast.durations.LONG,
+                            position: Toast.positions.BOTTOM,
+                            shadow: true,
+                            animation: true,
+                            backgroundColor: Colors.primary,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
                         router.push(`/sightings/id/${result.id}/`);
                     }
                 })
