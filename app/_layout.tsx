@@ -50,6 +50,7 @@ function AppLayout() {
                     <Tabs.Screen name="species/categorie/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="species/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="newUser/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
+                    <Tabs.Screen name="achivements/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 </Tabs>
             </>
@@ -110,6 +111,7 @@ function AppLayout() {
                 <Tabs.Screen name="species/categorie/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="species/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="newUser/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
+                <Tabs.Screen name="achivements/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
             </Tabs>
         </>

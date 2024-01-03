@@ -1,8 +1,9 @@
 import pb from '../../constants/pocketbase';
-import { Stack, router } from 'expo-router';
-import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { Link, router } from 'expo-router';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
+import { Ionicons } from '@expo/vector-icons';
 
 function categoriesList() {
     const user = pb.authStore.model;
@@ -17,6 +18,13 @@ function categoriesList() {
                 <View>
                     <Text style={[StyleLib.text]}>Email: {user.email}</Text>
                     <Text style={[StyleLib.text]}>Username: {user.username}</Text>
+                </View>
+                <View style={[StyleLib.spacer]} />
+                <View>
+                    <Link style={[styles.col]} href="/achivements/" asChild>
+                        <Ionicons name="trophy" size={45} color="black" />
+                        <Text>Achivements</Text>
+                    </Link>
                 </View>
                 <View style={[StyleLib.spacer]} />
                 <Button
@@ -40,6 +48,9 @@ const styles = StyleSheet.create({
     },
     text: {
         color: Colors.baseText,
+    },
+    col: {
+        flexDirection: 'column',
     },
 });
 
