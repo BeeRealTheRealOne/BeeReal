@@ -4,10 +4,10 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function profileView() {
     const user = pb.authStore.model;
-
     if (user === undefined || user === null) {
         router.push('/newUser/');
         return;
@@ -21,7 +21,7 @@ function profileView() {
                 </View>
                 <View style={[StyleLib.spacer]} />
                 <View>
-                    <Link style={[styles.col]} href="/achivements/" asChild>
+                    <Link style={[styles.col]} href="/achivements/">
                         <Ionicons name="trophy" size={45} color="black" />
                         <Text>Achivements</Text>
                     </Link>
@@ -32,6 +32,7 @@ function profileView() {
                     title="Logout"
                     onPress={() => {
                         pb.authStore.clear();
+                        AsyncStorage.clear();
                         router.push('/');
                     }}
                 />
