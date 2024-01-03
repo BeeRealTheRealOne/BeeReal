@@ -21,7 +21,6 @@ function AppLayout() {
         const reloadSession = async () => {
             const cookie = await AsyncStorage.getItem('sessionCookie');
             if (cookie) {
-                console.log(cookie);
                 pb.authStore.loadFromCookie(cookie);
                 router.push('/');
             }
