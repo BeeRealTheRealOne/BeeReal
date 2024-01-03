@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         fontSize: 25,
         color: 'black',
-        fontWeight: 'bold',
+        fontWeight: '500',
         bottom: 20,
         left: 20,
         backgroundColor: '#a2de8eda',

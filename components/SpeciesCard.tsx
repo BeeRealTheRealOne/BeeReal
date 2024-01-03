@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '500',
     },
     scientificName: {
         fontSize: 15,
