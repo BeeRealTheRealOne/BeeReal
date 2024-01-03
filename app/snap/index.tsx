@@ -98,7 +98,6 @@ function SnapView() {
             };
 
             const species: any = await pb.collection('species').getList(1, 1, { filter: `scientificName = '${resultSpeciesApi.result.classification.suggestions[0].name}'` });
-            console.log(species);
             formdata.append('species', species.items[0].id);
 
             pb.collection('insectFindings')
