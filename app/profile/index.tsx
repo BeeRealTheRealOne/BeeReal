@@ -5,7 +5,7 @@ import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 import { Ionicons } from '@expo/vector-icons';
 
-function categoriesList() {
+function profileView() {
     const user = pb.authStore.model;
 
     if (user === undefined || user === null) {
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default categoriesList;
+export default profileView;

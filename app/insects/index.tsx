@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 
-function Home() {
+function insectsView() {
     const handleNavigation = (dest: any) => {
         router.push(dest);
     };
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default insectsView;

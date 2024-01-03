@@ -4,7 +4,7 @@ import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import StyleLib from '../../constants/style';
 
-function Home() {
+function newUser() {
     return (
         <View style={[styles.container]}>
             <View style={[styles.infoContainer]}>
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default newUser;

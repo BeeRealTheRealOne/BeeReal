@@ -7,7 +7,7 @@ import StyleLib from '../../../../../constants/style';
 import { RefreshControl } from 'react-native-gesture-handler';
 import Colors from '../../../../../constants/colors';
 
-function categoriesCardView() {
+function speciesCategoriesCardView() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default categoriesCardView;
+export default speciesCategoriesCardView;

@@ -5,7 +5,7 @@ import SpeciesCard from '../../../../components/SpeciesCard';
 import { View } from 'react-native';
 import StyleLib from '../../../../constants/style';
 
-function categoriesCardView() {
+function speciesCardView() {
     const local = useLocalSearchParams();
     const id = local.id;
     const [species, setSpecies] = useState<any>([]);
@@ -25,4 +25,4 @@ function categoriesCardView() {
     );
 }
 
-export default categoriesCardView;
+export default speciesCardView;

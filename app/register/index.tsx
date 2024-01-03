@@ -5,7 +5,7 @@ import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 
-function login() {
+function register() {
     if (pb.authStore.isValid) {
         router.replace('/insects/');
     }
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default login;
+export default register;

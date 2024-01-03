@@ -1,16 +1,8 @@
-import pb from '../../constants/pocketbase';
-import { router } from 'expo-router';
 import { View, Text, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 
-function categoriesList() {
-    const user = pb.authStore.model;
-
-    if (user === undefined || user === null) {
-        router.push('/newUser/');
-        return;
-    }
+function achivementsView() {
     return (
         <View style={[StyleLib.page]}>
             <Text>Achivements</Text>
@@ -29,4 +21,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default categoriesList;
+export default achivementsView;
