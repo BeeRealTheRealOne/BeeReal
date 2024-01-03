@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { Stack, router } from 'expo-router';
+import { Link, Stack, router } from 'expo-router';
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
@@ -48,6 +48,9 @@ function login() {
                     <TextInput style={[StyleLib.input]} secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
                 </View>
                 <Button color={Colors.primary} title="Login" onPress={login} />
+                <Link href="/imprint/">
+                    <Text style={[StyleLib.text]}>Imprint</Text>
+                </Link>
             </View>
             <View style={[styles.bumper]} />
         </View>
