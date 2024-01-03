@@ -94,9 +94,12 @@ function SnapView() {
       formdata.append("latitude", location.coords.latitude.toString());
       formdata.append("user", pb?.authStore?.model?.id);
       formdata.append("species", "iegoy1qo50ufs8n");
-      console.log(image.base64);
-      const result = await sendImageToApi(image.base64);
-      console.log(result);
+      const result: any = await sendImageToApi(image.base64);
+      console.log(result.result);
+      formdata.append(
+        "latin_name",
+        result.result.classification.suggestions[0].name,
+      );
       pb.collection("insectFindings")
         .create(formdata)
         .then((result) => {
@@ -112,7 +115,7 @@ function SnapView() {
     setImage(null);
   }
 
-  const sendImageToApi = async (base64Image: any) => {
+  const sendImageToApi = async (base64Image: any): Promise<string> => {
     var myHeaders = new Headers();
     myHeaders.append(
       "Api-Key",
@@ -121,9 +124,7 @@ function SnapView() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      images: [
-        "data:image/jpeg;base64," + base64Image,
-      ],
+      images: ["data:image/jpeg;base64," + base64Image],
       latitude: 49.207,
       longitude: 16.608,
       similar_images: true,
@@ -136,15 +137,19 @@ function SnapView() {
       redirect: "follow",
     };
 
-    fetch(
-      "https://insect.kindwise.com/api/v1/identification?details=common_names,url,description,image",
-      requestOptions,
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  };
+    try {
+      const response = await fetch(
+        "https://insect.kindwise.com/api/v1/identification?details=common_names,url,description,image",
+        requestOptions,
+      );
 
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.log("error", error);
+      throw error;
+    }
+  };
   return (
     <>
       <View style={styles.container}>
