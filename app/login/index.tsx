@@ -27,6 +27,7 @@ function login() {
                     position: Toast.positions.BOTTOM,
                     shadow: true,
                     animation: true,
+                    backgroundColor: Colors.cancel,
                     hideOnPress: true,
                     delay: 0,
                 });
