@@ -7,6 +7,7 @@ export type Sighting = {
     latitude: number;
     image: string;
     user: string;
+    latin_name: string;
     species: string;
     created: string;
     expand: {
