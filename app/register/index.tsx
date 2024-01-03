@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
+import Toast from 'react-native-root-toast';
 
 function register() {
     if (pb.authStore.isValid) {
@@ -16,6 +17,62 @@ function register() {
     const [wrong, setWrong] = useState<boolean>(false);
 
     const register = () => {
+        if (!password || !passwordConfirm || !username || !email) {
+            Toast.show('Please fill in all fields', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+        if (password !== passwordConfirm) {
+            Toast.show('Passwords do not match', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+        if (password.length < 8) {
+            Toast.show('Password must be at least 8 characters long', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+        if (username.length < 5) {
+            Toast.show('Username must be at least 3 characters long', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+        if (!email.includes('@')) {
+            Toast.show('Email must be valid', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+
         //TODO: Add validation and error handling
         pb.collection('users')
             .create({ username, email, password, passwordConfirm })
@@ -23,7 +80,14 @@ function register() {
                 router.push('/insects/');
             })
             .catch((err) => {
-                console.error(err);
+                Toast.show('Username/Email taken', {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                });
                 setWrong(true);
             });
     };
@@ -55,7 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        margin: 20,
+        margin: 5,
     },
     infoContainer: {
         flex: 1,
@@ -66,10 +130,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 20,
+        gap: 5,
     },
     inputContainer: {
-        gap: 10,
+        gap: 5,
     },
     input: {
         backgroundColor: Colors.base,
