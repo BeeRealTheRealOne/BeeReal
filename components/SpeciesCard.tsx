@@ -10,18 +10,16 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
     if (!props.description) return <Text>Loading...</Text>;
 
     return (
-        <View style={StyleLib.page}>
-            <ScrollView style={[styles.col]}>
-                <View style={[styles.row]}>
-                    <View style={[styles.nameBox]}>
-                        <Text style={[StyleLib.h2]}>{props.name}</Text>
-                        <Text style={[StyleLib.text]}>{`[${props.scientificName}]`}</Text>
-                    </View>
-                    <Image style={[styles.image]} source={{ uri: props.imageURL }} resizeMode="contain" />
+        <View style={[StyleLib.card, styles.col, styles.flexNo]}>
+            <View style={[styles.row]}>
+                <View style={[styles.nameBox]}>
+                    <Text style={[StyleLib.h2]}>{props.name}</Text>
+                    <Text style={[StyleLib.text]}>{`[${props.scientificName}]`}</Text>
                 </View>
-                <View style={[styles.spacer10]} />
-                <Text style={[StyleLib.text]}>{props.description}</Text>
-            </ScrollView>
+                <Image style={[styles.image]} source={{ uri: props.imageURL }} resizeMode="contain" />
+            </View>
+            <View style={[styles.spacer10]} />
+            <Text style={[StyleLib.text]}>{props.description}</Text>
         </View>
     );
 };
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
     },
     col: {
         flexDirection: 'column',
-        backgroundColor: 'red',
     },
     nameBox: {
         flex: 1,
@@ -56,6 +53,12 @@ const styles = StyleSheet.create({
     },
     spacer10: {
         width: 10,
+    },
+    flex: {
+        flex: 1,
+    },
+    flexNo: {
+        flex: 0,
     },
 });
 
