@@ -23,9 +23,13 @@ function profileView() {
                 <View>
                     <Link style={[styles.col]} href="/achivements/">
                         <Ionicons name="trophy" size={45} color="black" />
-                        <Text>Achivements</Text>
+                        <Text style={[StyleLib.text]}>Achivements</Text>
                     </Link>
                 </View>
+                <View style={[StyleLib.spacer]} />
+                <Link style={[styles.col]} href="/imprint/">
+                    <Text style={[StyleLib.text]}>Imprint</Text>
+                </Link>
                 <View style={[StyleLib.spacer]} />
                 <Button
                     color={Colors.primary}
