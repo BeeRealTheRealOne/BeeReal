@@ -21,7 +21,7 @@ function categoriesList() {
                 </View>
                 <View style={[StyleLib.spacer]} />
                 <View>
-                    <Link style={[styles.col]} href="/achivements/" asChild>
+                    <Link style={[styles.col]} href="/achivements/" >
                         <Ionicons name="trophy" size={45} color="black" />
                         <Text>Achivements</Text>
                     </Link>
