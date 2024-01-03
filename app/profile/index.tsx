@@ -34,7 +34,7 @@ function profileView() {
                             </TouchableOpacity>
                         </Link>
                     </View>
-                    <View style={[StyleLib.card]}>
+                    <View style={[StyleLib.card, styles.centerSpaced]}>
                         <Link style={[styles.col]} href="/imprint/">
                             <Text style={[StyleLib.text]}>Imprint</Text>
                         </Link>
@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
     center: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    centerSpaced: {
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
     },
     spacer: {
         height: 50,
