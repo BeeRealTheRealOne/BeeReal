@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         fontWeight: '500',
         top: 20,
-        right: 20,
         left: 20,
         backgroundColor: '#a2de8eda',
         paddingHorizontal: 10,

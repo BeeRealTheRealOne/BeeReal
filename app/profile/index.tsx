@@ -35,6 +35,9 @@ function profileView() {
                         </Link>
                     </View>
                     <View style={[StyleLib.card]}>
+                        <Link style={[styles.col]} href="/imprint/">
+                            <Text style={[StyleLib.text]}>Imprint</Text>
+                        </Link>
                         <Button
                             color={Colors.primary}
                             title="Logout"

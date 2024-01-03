@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
@@ -114,6 +114,9 @@ function register() {
                     <TextInput style={[StyleLib.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Confirm your password..." onChangeText={(text) => setPasswordConfirm(text)} />
                 </View>
                 <Button color={Colors.primary} title="Register" onPress={register} />
+                <Link href="/imprint/">
+                    <Text style={[StyleLib.text]}>Imprint</Text>
+                </Link>
             </View>
             <View style={[styles.bumper]} />
         </View>
