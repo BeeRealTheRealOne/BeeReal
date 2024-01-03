@@ -6,6 +6,7 @@ import { Text, StyleSheet, View } from 'react-native';
 import pb from '../constants/pocketbase';
 import Colors from '../constants/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 function AppLayout() {
     const [validUser, setValidUser] = React.useState<boolean>(false);
@@ -30,7 +31,7 @@ function AppLayout() {
 
     if (!validUser) {
         return (
-            <>
+            <RootSiblingParent>
                 <StatusBar style="dark" />
                 <Tabs>
                     <Tabs.Screen
@@ -65,11 +66,11 @@ function AppLayout() {
                     <Tabs.Screen name="achivements/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 </Tabs>
-            </>
+            </RootSiblingParent>
         );
     }
     return (
-        <>
+        <RootSiblingParent>
             <Link href="/profile/" style={styles.profileWrapper}>
                 <MaterialCommunityIcons name={'account'} size={40} style={styles.accountIcon} />
             </Link>
@@ -126,7 +127,7 @@ function AppLayout() {
                 <Tabs.Screen name="achivements/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
             </Tabs>
-        </>
+        </RootSiblingParent>
     );
 }
 const styles = StyleSheet.create({
