@@ -5,7 +5,7 @@ import { useState } from 'react';
 import FilledHeartIcon from './FilledHeartIcon';
 import pb from '../constants/pocketbase';
 
-const Post = (props: { postId: string; title: string; message: string; user: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean }) => {
+const Post = (props: { postId: string; title: string; message: string; user: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number }) => {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
     const handleLike = () => {
         if (!pb.authStore.isValid) {
@@ -38,6 +38,7 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                 <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
                 <View style={styles.heartContainer} onTouchEnd={handleLike}>
                     {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
+                    <Text style={[StyleLib.h2]}>{props.likes}</Text>
                 </View>
             </View>
             <View style={styles.bottom}>
@@ -75,6 +76,8 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     heartContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         position: 'absolute',
         bottom: 10,
         right: 10,

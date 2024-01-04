@@ -56,7 +56,18 @@ function Social() {
                 data={posts}
                 horizontal={false}
                 renderItem={({ item }) => {
-                    return <Post postId={item.id} user={item.expand.insectFinding.expand.user.username} title={item.title} message={item.message} imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}`} insectFindingId={item.expand.insectFinding.id} isLikedByUser={item.likes.includes(pb.authStore?.model?.id)} />;
+                    return (
+                        <Post
+                            postId={item.id}
+                            user={item.expand.insectFinding.expand.user.username}
+                            title={item.title}
+                            message={item.message}
+                            imageUrl={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${item.expand.insectFinding.id}/${item.expand.insectFinding.image}`}
+                            insectFindingId={item.expand.insectFinding.id}
+                            isLikedByUser={item.likes.includes(pb.authStore?.model?.id)}
+                            likes={item.likes.length}
+                        />
+                    );
                 }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}
                 onRefresh={onRefresh}
