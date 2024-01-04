@@ -34,6 +34,12 @@ const StyleLib = StyleSheet.create({
         padding: StyleValues.paddingInput,
         margin: StyleValues.marginComponent,
     },
+    inputDark: {
+        backgroundColor: Colors.base,
+        borderRadius: StyleValues.borderRadius,
+        padding: StyleValues.paddingInput,
+        margin: StyleValues.marginComponent,
+    },
     card: {
         flex: 1,
         backgroundColor: Colors.baseLight,

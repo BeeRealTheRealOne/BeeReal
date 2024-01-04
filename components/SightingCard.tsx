@@ -7,10 +7,131 @@ import Colors from '../constants/colors';
 import { useState } from 'react';
 import pb from '../constants/pocketbase';
 import { router } from 'expo-router';
+import { TextInput } from 'react-native-gesture-handler';
+import Toast from 'react-native-root-toast';
 
 //Wir verwenden hier eine Webview mit IFrame, da die Google Maps API einen API Key benötigt, den wir nicht haben. Und für OpenStreetAPI haben wir keinen React-Native Wrapper gefunden.
 function SightingCard(props: { sighting: Sighting }) {
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [postModalVisible, setPostModalVisible] = useState(false);
+
+    const [title, setTitle] = useState('');
+    const [message, setMessage] = useState('');
+
+    function post() {
+        if (!pb.authStore.isValid) return;
+
+        if (!title) {
+            Toast.show('Please enter a title!', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                backgroundColor: Colors.primary,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+
+        if (title.length < 3) {
+            Toast.show('Title too short!', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                backgroundColor: Colors.primary,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+
+        pb.collection('posts')
+            .create({
+                title: title,
+                message: message,
+                insectFinding: props.sighting.id,
+                user: pb.authStore?.model?.id,
+            })
+            .then((res) => {
+                Toast.show('Posted!', {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    backgroundColor: Colors.primary,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+                setPostModalVisible(false);
+            })
+            .catch((err) => {
+                console.error(err);
+                Toast.show('Error posting, maybe log in again!', {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    backgroundColor: Colors.cancel,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+            });
+    }
+
+    if (postModalVisible) {
+        return (
+            <View style={[styles.centerAll, { height: '100%' }]}>
+                <View style={[StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 5 }]}>
+                    <Text>Post your findings for all to see!</Text>
+                    <View style={[styles.row]}>
+                        <TextInput
+                            onChangeText={(text) => {
+                                setTitle(text);
+                            }}
+                            maxLength={20}
+                            style={[StyleLib.inputDark, { flex: 1 }]}
+                            placeholder="Title"
+                        />
+                    </View>
+                    <Image
+                        style={[styles.image, StyleLib.rounded]}
+                        source={{
+                            uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}`,
+                        }}
+                    />
+                    <View style={[styles.row]}>
+                        <TextInput
+                            onChangeText={(text) => {
+                                setMessage(text);
+                            }}
+                            multiline={true}
+                            maxLength={150}
+                            style={[StyleLib.inputDark, { flex: 1 }]}
+                            placeholder="Message"
+                        />
+                    </View>
+                    <View style={[styles.row]}>
+                        <Button
+                            title="post"
+                            color={Colors.accent}
+                            onPress={() => {
+                                post();
+                            }}
+                        />
+                        <Button
+                            title="cancel"
+                            color={Colors.cancel}
+                            onPress={() => {
+                                setPostModalVisible(false);
+                            }}
+                        />
+                    </View>
+                </View>
+            </View>
+        );
+    }
 
     if (deleteModalVisible) {
         return (
@@ -76,7 +197,7 @@ function SightingCard(props: { sighting: Sighting }) {
             </View>
             <View style={[styles.between, styles.row]}>
                 <Button color={Colors.cancel} title="Delete" onPress={() => setDeleteModalVisible(true)} />
-                <Button color={Colors.primary} title="Post" />
+                <Button color={Colors.primary} title="Post" onPress={() => setPostModalVisible(true)} />
             </View>
         </View>
     );
