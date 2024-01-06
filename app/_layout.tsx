@@ -34,7 +34,7 @@ function AppLayout() {
         return (
             <RootSiblingParent>
                 <StatusBar style="dark" />
-                <Tabs>
+                <Tabs backBehavior="history">
                     <Tabs.Screen
                         name="login/index"
                         options={{
@@ -78,7 +78,7 @@ function AppLayout() {
                 <MaterialCommunityIcons name={'account'} size={40} style={styles.accountIcon} />
             </Link>
             <StatusBar style="dark" />
-            <Tabs>
+            <Tabs backBehavior="history">
                 <Tabs.Screen
                     name="insects/index"
                     options={{
