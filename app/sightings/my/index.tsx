@@ -26,7 +26,7 @@ function sightingList() {
             setRefreshing(true);
             await pb
                 .collection('insectFindings')
-                .getList(1, 15, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${localSearchTerm}' || species.scientificName ~ '${localSearchTerm}')`, expand: 'species', sort: '-created' })
+                .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${localSearchTerm}' || species.scientificName ~ '${localSearchTerm}')`, expand: 'species', sort: '-created' })
                 .then((res) => {
                     setSighting(res.items);
                     setMaxPage(res.totalPages);
@@ -39,7 +39,7 @@ function sightingList() {
 
     useEffect(() => {
         pb.collection('insectFindings')
-            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
+            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}')`, expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
@@ -66,7 +66,7 @@ function sightingList() {
         setRefreshing(true);
         setSearchTerm('');
         pb.collection('insectFindings')
-            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
+            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}')`, expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
