@@ -26,7 +26,7 @@ function sightingList() {
             setRefreshing(true);
             await pb
                 .collection('insectFindings')
-                .getList(1, 15, { filter: `species.name ~ '${localSearchTerm}' || species.scientificName ~ '${localSearchTerm}'`, expand: 'species', sort: '-created' })
+                .getList(1, 15, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${localSearchTerm}' || species.scientificName ~ '${localSearchTerm}')`, expand: 'species', sort: '-created' })
                 .then((res) => {
                     setSighting(res.items);
                     setMaxPage(res.totalPages);
@@ -39,7 +39,7 @@ function sightingList() {
 
     useEffect(() => {
         pb.collection('insectFindings')
-            .getList(1, 10, { expand: 'species', sort: '-created' })
+            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
@@ -54,7 +54,7 @@ function sightingList() {
     function loadMoreSightings() {
         if (page > maxPage) return;
         pb.collection('insectFindings')
-            .getList(page + 1, 10, { filter: `species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}'`, expand: 'species', sort: '-created' })
+            .getList(page + 1, 10, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}')`, expand: 'species', sort: '-created' })
             .then((res) => {
                 setPage(page + 1);
                 setSighting([...sighting, ...res.items]);
@@ -64,8 +64,9 @@ function sightingList() {
 
     function onRefresh() {
         setRefreshing(true);
+        setSearchTerm('');
         pb.collection('insectFindings')
-            .getList(1, 10, { filter: `species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}'`, expand: 'species', sort: '-created' })
+            .getList(1, 10, { expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
@@ -79,7 +80,7 @@ function sightingList() {
         <View style={[StyleLib.pageMarginTop]}>
             <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
                 <TouchableOpacity onPress={() => setSearching(!isSearching)}>
-                    <Ionicons name="search" size={24} color={Colors.primaryText} />
+                    <Ionicons name="search" size={30} color={Colors.primaryText} />
                 </TouchableOpacity>
             </View>
             {isSearching && (
