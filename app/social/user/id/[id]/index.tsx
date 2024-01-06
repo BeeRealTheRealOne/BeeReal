@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import pb from '../../../../../constants/pocketbase';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { FlatList, RefreshControl } from 'react-native-gesture-handler';
 import Post from '../../../../../components/Post';
 import StyleLib from '../../../../../constants/style';
 import Colors from '../../../../../constants/colors';
 import { useLocalSearchParams } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 function Social() {
     const local = useLocalSearchParams();
@@ -62,7 +63,11 @@ function Social() {
 
     return (
         <View style={StyleLib.pageMarginTop}>
-            <Text style={[StyleLib.h2, { marginLeft: 20, marginRight: 'auto', marginBottom: 5, backgroundColor: Colors.accent, paddingHorizontal: 10 }, StyleLib.rounded]}>{username}</Text>
+            <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
+                <TouchableOpacity onPress={onRefresh}>
+                    <Ionicons name="refresh" size={24} color={Colors.primaryText} />
+                </TouchableOpacity>
+            </View>
             <FlatList
                 ref={flatListRef as any}
                 data={posts}
