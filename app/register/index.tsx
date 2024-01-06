@@ -78,11 +78,17 @@ function register() {
             return;
         }
 
-        //TODO: Add validation and error handling
         pb.collection('users')
             .create({ username, email, password, passwordConfirm, newUser: true })
             .then((res) => {
-                router.push('/insects/');
+                pb.collection('users')
+                    .authWithPassword(email, password)
+                    .then((res) => {
+                        router.replace('/tutorial/');
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             })
             .catch((err) => {
                 Toast.show('Username/Email taken', {
