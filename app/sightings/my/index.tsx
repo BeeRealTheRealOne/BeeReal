@@ -66,7 +66,7 @@ function sightingList() {
         setRefreshing(true);
         setSearchTerm('');
         pb.collection('insectFindings')
-            .getList(1, 10, { expand: 'species', sort: '-created' })
+            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
