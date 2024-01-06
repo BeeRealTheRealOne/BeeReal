@@ -80,7 +80,7 @@ function register() {
 
         //TODO: Add validation and error handling
         pb.collection('users')
-            .create({ username, email, password, passwordConfirm })
+            .create({ username, email, password, passwordConfirm, newUser: true })
             .then((res) => {
                 router.push('/insects/');
             })

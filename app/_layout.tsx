@@ -10,6 +10,7 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 
 function AppLayout() {
     const [validUser, setValidUser] = React.useState<boolean>(false);
+
     React.useEffect(() => {
         setValidUser(pb.authStore.isValid);
     }, []);

@@ -1,7 +1,44 @@
 import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../constants/colors';
+import { useEffect, useState } from 'react';
+import pb from '../constants/pocketbase';
+import { router, useRootNavigation } from 'expo-router';
 
 function Home() {
+    //This checks if the root navigation window is ready to be used, only then push to tutorial page
+    const [isNavigationReady, setNavigationReady] = useState(false);
+    useEffect(() => {
+        const unsubscribe = useRootNavigation()?.addListener('state', (event) => {
+            setNavigationReady(true);
+        });
+        return function cleanup() {
+            if (unsubscribe) {
+                unsubscribe();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isNavigationReady) {
+            return;
+        } else {
+            if (pb.authStore.model?.newUser) {
+                pb.collection('users')
+                    .update(pb.authStore.model.id, { newUser: false })
+                    .then(() => {
+                        pb.collection('users')
+                            .authRefresh()
+                            .then(() => {
+                                router.push('/tutorial/');
+                            });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        }
+    });
+
     return (
         <View style={[styles.container]}>
             <Text style={[styles.text, styles.heading]}>

@@ -16,7 +16,7 @@ function tutorialView() {
                 color={Colors.primary}
                 onPress={() => {
                     if (index == images.length - 1) {
-                        router.push('/');
+                        router.push('/snap/');
                         return;
                     }
                     setIndex(index + 1);
