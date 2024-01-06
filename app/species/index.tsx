@@ -68,8 +68,9 @@ function speciesList() {
     //refresh the list when the user pulls down
     async function onRefresh() {
         setRefreshing(true);
+        setSearchTerm('');
         pb.collection('species')
-            .getList(1, 15, { filter: `name ~ '${searchTerm}'` })
+            .getList(1, 15, { filter: `name ~ '${''}'` })
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
@@ -94,7 +95,6 @@ function speciesList() {
                         value={searchTerm}
                         style={[{ color: Colors.primaryText }]}
                         onChangeText={(text) => {
-                            console.log(text);
                             setSearchTerm(text);
                         }}
                     />
