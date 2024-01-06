@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { FlatList, RefreshControl, TextInput } from 'react-native-gesture-handler';
-import { Button, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import SpeciesItem from '../../components/SpeciesItem';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
@@ -20,6 +20,7 @@ function speciesList() {
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearching, setSearching] = useState(false);
 
+    //search function is a debouce function that waits 500ms after the last keypress before searching
     const search = useCallback(
         debounce(async (localSearchTerm: string) => {
             setRefreshing(true);
@@ -27,7 +28,6 @@ function speciesList() {
                 .collection('species')
                 .getList(1, 15, { filter: `name ~ '${localSearchTerm}'` })
                 .then((res) => {
-                    console.log(searchTerm);
                     setSpecies(res.items);
                     setMaxPage(res.totalPages);
                     setRefreshing(false);
@@ -37,10 +37,23 @@ function speciesList() {
         []
     );
 
+    //load the first page of species when the page loads
+    useEffect(() => {
+        pb.collection('species')
+            .getList(1, 15)
+            .then((res) => {
+                setSpecies(res.items);
+                setMaxPage(res.totalPages);
+            })
+            .catch((err) => console.error(err));
+    }, []);
+
+    //search whenever the search term changes
     useEffect(() => {
         search(searchTerm);
     }, [searchTerm, search]);
 
+    //load more species when the user scrolls to the bottom of the list
     function loadMoreSpecies() {
         if (page > maxPage) return;
         pb.collection('species')
@@ -52,6 +65,7 @@ function speciesList() {
             .catch((err) => console.error(err));
     }
 
+    //refresh the list when the user pulls down
     async function onRefresh() {
         setRefreshing(true);
         pb.collection('species')
