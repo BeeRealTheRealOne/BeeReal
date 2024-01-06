@@ -99,21 +99,36 @@ function SnapView() {
             };
 
             const species: any = await pb.collection('species').getList(1, 1, { filter: `scientificName = '${resultSpeciesApi.result.classification.suggestions[0].name}'` });
+
+            const isNew = await pb.collection('insectFindings').getList(1, 1, { filter: `user = '${pb.authStore.model?.id}' && species = '${species.items[0].id}'` });
+
             formdata.append('species', species.items[0].id);
 
             pb.collection('insectFindings')
                 .create(formdata)
                 .then((result) => {
                     if (result.id != null) {
-                        Toast.show('Nice Catch! Thx for helping with the insect population!', {
-                            duration: Toast.durations.LONG,
-                            position: Toast.positions.BOTTOM,
-                            shadow: true,
-                            animation: true,
-                            backgroundColor: Colors.primary,
-                            hideOnPress: true,
-                            delay: 0,
-                        });
+                        if (isNew.items.length === 0) {
+                            Toast.show('First time you found this species! Thx for helping with the insect population!', {
+                                duration: Toast.durations.LONG,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                backgroundColor: Colors.primary,
+                                hideOnPress: true,
+                                delay: 0,
+                            });
+                        } else {
+                            Toast.show('Nice Catch! Thx for helping with the insect population!', {
+                                duration: Toast.durations.LONG,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                backgroundColor: Colors.primary,
+                                hideOnPress: true,
+                                delay: 0,
+                            });
+                        }
                         router.push(`/sightings/id/${result.id}/`);
                     }
                 })
