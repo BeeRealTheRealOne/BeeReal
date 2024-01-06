@@ -34,10 +34,21 @@ function profileView() {
                             </TouchableOpacity>
                         </Link>
                     </View>
+                </View>
+                <View style={[styles.row]}>
+                    <View style={[StyleLib.card, styles.centerSpaced]}>
+                        <Link style={[styles.col]} href="/tutorial/">
+                            <Text style={[StyleLib.text]}>tutorial</Text>
+                        </Link>
+                    </View>
                     <View style={[StyleLib.card, styles.centerSpaced]}>
                         <Link style={[styles.col]} href="/imprint/">
                             <Text style={[StyleLib.text]}>Imprint</Text>
                         </Link>
+                    </View>
+                </View>
+                <View style={[styles.row]}>
+                    <View style={[StyleLib.card, styles.centerSpaced]}>
                         <Button
                             color={Colors.primary}
                             title="Logout"
