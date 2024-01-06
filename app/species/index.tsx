@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import pb from '../../constants/pocketbase';
-import { FlatList, RefreshControl } from 'react-native-gesture-handler';
-import { View } from 'react-native';
+import { FlatList, RefreshControl, TextInput } from 'react-native-gesture-handler';
+import { Button, TouchableOpacity, View } from 'react-native';
 import SpeciesItem from '../../components/SpeciesItem';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
+import { Ionicons } from '@expo/vector-icons';
+import debounce from 'debounce';
 
 function speciesList() {
     const flatListRef = useRef<FlatList>();
@@ -15,20 +17,34 @@ function speciesList() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [isSearching, setSearching] = useState(false);
+
+    const search = useCallback(
+        debounce(async (localSearchTerm: string) => {
+            setRefreshing(true);
+            await pb
+                .collection('species')
+                .getList(1, 15, { filter: `name ~ '${localSearchTerm}'` })
+                .then((res) => {
+                    console.log(searchTerm);
+                    setSpecies(res.items);
+                    setMaxPage(res.totalPages);
+                    setRefreshing(false);
+                })
+                .catch((err) => console.error(err));
+        }, 500),
+        []
+    );
+
     useEffect(() => {
-        pb.collection('species')
-            .getList(1, 15)
-            .then((res) => {
-                setSpecies(res.items);
-                setMaxPage(res.totalPages);
-            })
-            .catch((err) => console.error(err));
-    }, []);
+        search(searchTerm);
+    }, [searchTerm, search]);
 
     function loadMoreSpecies() {
         if (page > maxPage) return;
         pb.collection('species')
-            .getList(page + 1, 15)
+            .getList(page + 1, 15, { filter: `name ~ '${searchTerm}'` })
             .then((res) => {
                 setPage(page + 1);
                 setSpecies([...species, ...res.items]);
@@ -36,10 +52,10 @@ function speciesList() {
             .catch((err) => console.error(err));
     }
 
-    function onRefresh() {
+    async function onRefresh() {
         setRefreshing(true);
         pb.collection('species')
-            .getList(1, 15)
+            .getList(1, 15, { filter: `name ~ '${searchTerm}'` })
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
@@ -51,8 +67,28 @@ function speciesList() {
 
     return (
         <View style={StyleLib.pageMarginTop}>
+            <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
+                <TouchableOpacity onPress={() => setSearching(!isSearching)}>
+                    <Ionicons name="search" size={24} color={Colors.primaryText} />
+                </TouchableOpacity>
+            </View>
+            {isSearching && (
+                <View style={[{ position: 'absolute', bottom: 10, right: 60, width: 200, zIndex: 20, backgroundColor: Colors.primary, padding: 5, opacity: 0.8 }, StyleLib.rounded]}>
+                    <TextInput
+                        placeholder="Search"
+                        placeholderTextColor={Colors.primaryText}
+                        value={searchTerm}
+                        style={[{ color: Colors.primaryText }]}
+                        onChangeText={(text) => {
+                            console.log(text);
+                            setSearchTerm(text);
+                        }}
+                    />
+                </View>
+            )}
             <FlatList
                 ref={flatListRef as any}
+                style={[{ height: '100%', width: '100%' }]}
                 data={species}
                 horizontal={false}
                 renderItem={({ item }) => {
@@ -60,6 +96,7 @@ function speciesList() {
                 }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}
                 onRefresh={onRefresh}
+                onGestureEvent={() => setSearching(false)}
                 refreshing={refreshing}
                 keyExtractor={(item) => item.id}
                 onEndReached={loadMoreSpecies}
