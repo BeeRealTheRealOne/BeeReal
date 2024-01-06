@@ -26,7 +26,7 @@ function speciesList() {
             setRefreshing(true);
             await pb
                 .collection('species')
-                .getList(1, 15, { filter: `name ~ '${localSearchTerm}'` })
+                .getList(1, 15, { filter: `name ~ '${localSearchTerm}' || scientificName ~ '${localSearchTerm}'` })
                 .then((res) => {
                     setSpecies(res.items);
                     setMaxPage(res.totalPages);
@@ -57,7 +57,7 @@ function speciesList() {
     function loadMoreSpecies() {
         if (page > maxPage) return;
         pb.collection('species')
-            .getList(page + 1, 15, { filter: `name ~ '${searchTerm}'` })
+            .getList(page + 1, 15, { filter: `name ~ '${searchTerm}' || scientificName ~ '${searchTerm}'` })
             .then((res) => {
                 setPage(page + 1);
                 setSpecies([...species, ...res.items]);
@@ -70,7 +70,7 @@ function speciesList() {
         setRefreshing(true);
         setSearchTerm('');
         pb.collection('species')
-            .getList(1, 15, { filter: `name ~ '${''}'` })
+            .getList(1, 15)
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
