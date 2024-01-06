@@ -8,6 +8,7 @@ import Colors from '../../../constants/colors';
 import debounce from 'debounce';
 import { Ionicons } from '@expo/vector-icons';
 
+// This page displays a list of all sightings that the user has made
 function sightingList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
@@ -37,6 +38,7 @@ function sightingList() {
         []
     );
 
+    // load the first page of sightings when the page loads
     useEffect(() => {
         pb.collection('insectFindings')
             .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}')`, expand: 'species', sort: '-created' })
@@ -47,10 +49,12 @@ function sightingList() {
             .catch((err) => console.error(err));
     }, []);
 
+    // refresh the sightings list when the search term changes and then stays constant for longer than 500ms
     useEffect(() => {
         search(searchTerm);
     }, [searchTerm, search]);
 
+    // load the next page of sightings when the user scrolls to the bottom of the list
     function loadMoreSightings() {
         if (page > maxPage) return;
         pb.collection('insectFindings')
@@ -62,6 +66,7 @@ function sightingList() {
             .catch((err) => console.error(err));
     }
 
+    // refresh the sightings list when the user pulls down on the list and scroll to top
     function onRefresh() {
         setRefreshing(true);
         setSearchTerm('');

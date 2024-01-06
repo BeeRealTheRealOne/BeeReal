@@ -3,7 +3,9 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 
+// this page is used to navigate to the different pages that are related to insects, like categories, species and sightings
 function insectsView() {
+    //this function pushes a site to the router
     const handleNavigation = (dest: any) => {
         router.push(dest);
     };

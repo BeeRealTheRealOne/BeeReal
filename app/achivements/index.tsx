@@ -4,11 +4,18 @@ import { View, StyleSheet, Text } from 'react-native';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
 
+// This is the achivements page, it shows the achivements of the user and can be accessed from the profile page
 function achivementsView() {
+    //this achivement shows the number of pictures a user has uploaded
     const [numSightingsAchivements, setNumSightingsAchivements] = useState<number | null>();
+
+    //this achivement shows the number of species a user has sighted
     const [numSpeciesAchivements, setNumSpeciesAchivements] = useState<number | null>();
+
+    //this achivement shows the most common species a user has sighted
     const [mostCommonSpeciesAchievment, setMostCommonSpeciesAchievment] = useState<string | null>();
 
+    //load functions for the achivements
     useEffect(() => {
         pb.collection('numSightingsAchivements')
             .getOne(pb.authStore?.model?.id)

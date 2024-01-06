@@ -10,13 +10,16 @@ import { router } from 'expo-router';
 import { Audio } from 'expo-av';
 import Toast from 'react-native-root-toast';
 
+// this page lets the user take photos of insects and send them to the api
 function SnapView() {
+    // get the camera permissions
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
     const [permissionLoc, setPermissionLoc] = useState<boolean>(false);
     const [camera, setCamera] = useState<Camera | null>(null);
     const [image, setImage] = useState<CameraCapturedPicture | null>(null);
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
 
+    // ask for location permissions
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -27,9 +30,14 @@ function SnapView() {
         })();
     }, [permissionLoc, permissionCam]);
 
+    // check if permissions are granted
     if (!permissionCam || !permissionLoc) {
         // Camera permissions are still loading
-        return <View />;
+        return (
+            <View>
+                <Text>Seems like you declined the permissions. Pls grant permission to the camera and your location in the settings of your device.</Text>
+            </View>
+        );
     }
 
     if (!permissionCam.granted) {
@@ -42,6 +50,7 @@ function SnapView() {
         );
     }
 
+    // take a picture and save it to the state
     function onSnap() {
         if (!pb.authStore.isValid) {
             return;
@@ -66,26 +75,30 @@ function SnapView() {
         }
     }
 
+    // when the user confirmes the picture, send it to the api
     async function confirm() {
         if (!pb.authStore.isValid) {
             return;
         }
         if (location != null && image != null) {
             const formdata = new FormData();
+
+            // add the image, location and user to the formdata
             formdata.append('image', JSON.parse(JSON.stringify({ uri: image.uri, type: 'image/jpeg', name: 'image' })));
             formdata.append('longitude', location.coords.longitude.toString());
             formdata.append('latitude', location.coords.latitude.toString());
             formdata.append('user', pb?.authStore?.model?.id);
 
             /*
-            This would be the real API call
+            This would be the real API call to the insect categorization api. For testing purposes we use Mocks. But this was tested and worked if the Backend Dataset matches the one from the API.
             const resultSpeciesApi = await sendImageToApi(image.base64, location);
             resultSpeciesApi.result.classification.suggestions[0].name
             */
 
-            //mock this by getting one random species
+            //mock the insect categorization api by getting one random species
             const possibleName = await pb.collection('species').getList(1, 1, { sort: '@random' });
 
+            //mock the insect categorization api by returning the result in the same format as the real api
             const resultSpeciesApi = {
                 result: {
                     classification: {
@@ -98,10 +111,13 @@ function SnapView() {
                 },
             };
 
+            //get the species from the database
             const species: any = await pb.collection('species').getList(1, 1, { filter: `scientificName = '${resultSpeciesApi.result.classification.suggestions[0].name}'` });
 
+            //check if the user already found this species
             const isNew = await pb.collection('insectFindings').getList(1, 1, { filter: `user = '${pb.authStore.model?.id}' && species = '${species.items[0].id}'` });
 
+            //create the sighting
             formdata.append('species', species.items[0].id);
 
             pb.collection('insectFindings')
@@ -109,6 +125,7 @@ function SnapView() {
                 .then((result) => {
                     if (result.id != null) {
                         if (isNew.items.length === 0) {
+                            // if the user found this species for the first time, show this toast
                             Toast.show('First time you found this species! Thx for helping with the insect population!', {
                                 duration: Toast.durations.LONG,
                                 position: Toast.positions.BOTTOM,
@@ -119,6 +136,7 @@ function SnapView() {
                                 delay: 0,
                             });
                         } else {
+                            // if the user found this species before, show this Toast
                             Toast.show('Nice Catch! Thx for helping with the insect population!', {
                                 duration: Toast.durations.LONG,
                                 position: Toast.positions.BOTTOM,
@@ -129,6 +147,7 @@ function SnapView() {
                                 delay: 0,
                             });
                         }
+                        // redirect to the sighting
                         router.push(`/sightings/id/${result.id}/`);
                     }
                 })
@@ -140,6 +159,7 @@ function SnapView() {
         setImage(null);
     }
 
+    // send the image to the insect categorization api
     const sendImageToApi = async (base64Image: any, location: any): Promise<string> => {
         var myHeaders = new Headers();
         myHeaders.append('Api-Key', 'bwlG9913H5DrnjKF4StojZrFF6lbLZ9dFHlzuXeQcg1PDmwsNa');

@@ -8,6 +8,7 @@ import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import debounce from 'debounce';
 
+// this page displays a list of all species
 function speciesList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);

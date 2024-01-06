@@ -8,7 +8,9 @@ import Colors from '../../../../../constants/colors';
 import { useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-function Social() {
+// this page displays a list of all posts that the user has made
+function UserSocial() {
+    // get the id of the user from the url
     const local = useLocalSearchParams();
     const id = local.id as string;
 
@@ -21,6 +23,7 @@ function Social() {
     const [maxPage, setMaxPage] = useState(1);
     const [username, setUsername] = useState<string>();
 
+    // load the first page of posts when the page loads
     useEffect(() => {
         pb.collection('users')
             .getOne(id)
@@ -37,6 +40,7 @@ function Social() {
             .catch((err) => console.error(err));
     }, [id]);
 
+    // load the next page of posts when the user scrolls to the bottom of the list
     function loadMorePosts() {
         if (page >= maxPage) return;
         pb.collection('posts')
@@ -48,6 +52,7 @@ function Social() {
             .catch((err) => console.error(err));
     }
 
+    // refresh the posts list when the user pulls down on the list, or presses the refresh button and then scroll to the top
     function onRefresh() {
         setRefreshing(true);
         pb.collection('posts')
@@ -98,4 +103,4 @@ function Social() {
         </View>
     );
 }
-export default Social;
+export default UserSocial;

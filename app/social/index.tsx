@@ -7,6 +7,7 @@ import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 
+// this page displays a list of all posts made
 function Social() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
@@ -16,6 +17,7 @@ function Social() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
 
+    // load the first page of posts when the page loads
     useEffect(() => {
         pb.collection('posts')
             .getList(page, 10, { expand: 'insectFinding.user', sort: '-created' })
@@ -26,6 +28,7 @@ function Social() {
             .catch((err) => console.error(err));
     }, []);
 
+    // load the next page of posts when the user scrolls to the bottom of the list
     function loadMorePosts() {
         if (page >= maxPage) return;
         pb.collection('posts')
@@ -37,6 +40,7 @@ function Social() {
             .catch((err) => console.error(err));
     }
 
+    // refresh the posts list when the user pulls down on the list, or presses the refresh button and then scroll to the top
     function onRefresh() {
         setRefreshing(true);
         pb.collection('posts')

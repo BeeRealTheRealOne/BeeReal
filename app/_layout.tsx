@@ -1,7 +1,7 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Link, Tabs, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import pb from '../constants/pocketbase';
 import Colors from '../constants/colors';
@@ -9,16 +9,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootSiblingParent } from 'react-native-root-siblings';
 
 function AppLayout() {
-    const [validUser, setValidUser] = React.useState<boolean>(false);
+    const [validUser, setValidUser] = useState<boolean>(false);
 
-    React.useEffect(() => {
+    // check if the user is logged in
+    useEffect(() => {
         setValidUser(pb.authStore.isValid);
     }, []);
 
+    // when ever the authState changes, set the layout state
     pb.authStore.onChange(() => {
         setValidUser(pb.authStore.isValid);
     });
 
+    // if the user is logged in, load the session cookie and redirect to the home page
     useEffect(() => {
         const reloadSession = async () => {
             const cookie = await AsyncStorage.getItem('sessionCookie');
@@ -30,6 +33,7 @@ function AppLayout() {
         reloadSession();
     }, []);
 
+    // if the user is not logged in, show the login and register tabs
     if (!validUser) {
         return (
             <RootSiblingParent>
@@ -73,6 +77,7 @@ function AppLayout() {
             </RootSiblingParent>
         );
     }
+    // if the user is logged in, show the home page with tabs
     return (
         <RootSiblingParent>
             <Link href="/profile/" style={styles.profileWrapper}>

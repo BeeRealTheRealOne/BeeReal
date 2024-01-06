@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react';
 import pb from '../constants/pocketbase';
 import { router, useRootNavigation } from 'expo-router';
 
+// this is the home page
 function Home() {
     //This checks if the root navigation window is ready to be used, only then push to tutorial page
     const [isNavigationReady, setNavigationReady] = useState(false);
+
+    // This is a listener for the root navigation window, it sets the navigation ready state to true when the window is ready
     useEffect(() => {
         const unsubscribe = useRootNavigation()?.addListener('state', (event) => {
             setNavigationReady(true);
@@ -18,6 +21,7 @@ function Home() {
         };
     }, []);
 
+    // when the window is ready, check if the user is a new user, if so, push to tutorial page
     useEffect(() => {
         if (!isNavigationReady) {
             return;

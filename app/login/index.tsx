@@ -7,10 +7,12 @@ import StyleLib from '../../constants/style';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-root-toast';
 
+// this is the login page
 function login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    // send login request to pocketbase
     const login = async () => {
         pb.collection('users')
             .authWithPassword(email, password)
@@ -22,6 +24,7 @@ function login() {
                 }
             })
             .catch((err) => {
+                // show error message on fail
                 Toast.show('Wrong email or password', {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.BOTTOM,

@@ -7,6 +7,7 @@ import StyleLib from '../../../../../constants/style';
 import { RefreshControl } from 'react-native-gesture-handler';
 import Colors from '../../../../../constants/colors';
 
+// this page displays a list of all species in a categorie
 function speciesCategoriesCardView() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
@@ -18,6 +19,7 @@ function speciesCategoriesCardView() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
 
+    // load the first page of species when the page loads
     useEffect(() => {
         pb.collection('species')
             .getList(1, 10, { filter: `categorie = "${id}"` })
@@ -28,6 +30,7 @@ function speciesCategoriesCardView() {
             .catch((err) => console.error(err));
     }, [id]);
 
+    // load the next page of species when the user scrolls to the bottom of the list
     function loadMoreSpecies() {
         if (page > maxPage) return;
         pb.collection('insectFindings')
@@ -39,6 +42,7 @@ function speciesCategoriesCardView() {
             .catch((err) => console.error(err));
     }
 
+    // refresh the species list when the user pulls down on the list, or presses the refresh button and then scroll to the top
     function onRefresh() {
         setRefreshing(true);
         pb.collection('species')

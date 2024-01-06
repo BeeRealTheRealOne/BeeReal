@@ -6,6 +6,7 @@ import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 import Toast from 'react-native-root-toast';
 
+// this is the register page
 function register() {
     if (pb.authStore.isValid) {
         router.replace('/insects/');
@@ -16,7 +17,9 @@ function register() {
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
     const [wrong, setWrong] = useState<boolean>(false);
 
+    // send register request to pocketbase, all the checks also run in the backend for validation, it is just to give the user a better experience
     const register = () => {
+        // check if all fields are filled
         if (!password || !passwordConfirm || !username || !email) {
             Toast.show('Please fill in all fields', {
                 duration: Toast.durations.LONG,
@@ -29,6 +32,7 @@ function register() {
             });
             return;
         }
+        // check if passwords match
         if (password !== passwordConfirm) {
             Toast.show('Passwords do not match', {
                 duration: Toast.durations.LONG,
@@ -41,6 +45,7 @@ function register() {
             });
             return;
         }
+        // check if password is long enough
         if (password.length < 8) {
             Toast.show('Password must be at least 8 characters long', {
                 duration: Toast.durations.LONG,
@@ -53,6 +58,7 @@ function register() {
             });
             return;
         }
+        // check if username is long enough
         if (username.length < 5) {
             Toast.show('Username must be at least 3 characters long', {
                 duration: Toast.durations.LONG,
@@ -65,6 +71,7 @@ function register() {
             });
             return;
         }
+        // check if email is valid
         if (!email.includes('@')) {
             Toast.show('Email must be valid', {
                 duration: Toast.durations.LONG,

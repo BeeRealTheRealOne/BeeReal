@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import StyleLib from '../../constants/style';
 
+// This is the imprint page
 function imprintView() {
     return (
         <View style={StyleLib.page}>
