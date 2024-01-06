@@ -4,8 +4,9 @@ import StyleLib from '../constants/style';
 import { useState } from 'react';
 import FilledHeartIcon from './FilledHeartIcon';
 import pb from '../constants/pocketbase';
+import { Link } from 'expo-router';
 
-const Post = (props: { postId: string; title: string; message: string; user: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number }) => {
+const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number }) => {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
     const handleLike = () => {
         if (!pb.authStore.isValid) {
@@ -32,7 +33,9 @@ const Post = (props: { postId: string; title: string; message: string; user: str
         <View style={[StyleLib.card, styles.margin, styles.center]}>
             <View style={styles.header}>
                 <Text style={[StyleLib.h2]}>{props.title}</Text>
-                <Text style={styles.author}>{props.user}</Text>
+                <Link style={[{ marginLeft: 10 }]} href={`/social/user/id/${props.userId}/`}>
+                    <Text style={styles.author}>{props.user}</Text>
+                </Link>
             </View>
             <View style={[styles.image, StyleLib.rounded]}>
                 <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
+        width: '100%',
     },
     author: {
         marginLeft: 10,

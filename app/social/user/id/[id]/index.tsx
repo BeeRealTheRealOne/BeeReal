@@ -1,12 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
-import pb from '../../constants/pocketbase';
-import { View } from 'react-native';
+import pb from '../../../../../constants/pocketbase';
+import { View, Text } from 'react-native';
 import { FlatList, RefreshControl } from 'react-native-gesture-handler';
-import Post from '../../components/Post';
-import StyleLib from '../../constants/style';
-import Colors from '../../constants/colors';
+import Post from '../../../../../components/Post';
+import StyleLib from '../../../../../constants/style';
+import Colors from '../../../../../constants/colors';
+import { useLocalSearchParams } from 'expo-router';
 
 function Social() {
+    const local = useLocalSearchParams();
+    const id = local.id as string;
+
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -14,21 +18,28 @@ function Social() {
 
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
+    const [username, setUsername] = useState<string>();
 
     useEffect(() => {
+        pb.collection('users')
+            .getOne(id)
+            .then((res) => {
+                setUsername(res.username);
+            })
+            .catch((err) => console.error(err));
         pb.collection('posts')
-            .getList(page, 10, { expand: 'insectFinding.user', sort: '-created' })
+            .getList(page, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
             .then((res) => {
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
             })
             .catch((err) => console.error(err));
-    }, []);
+    }, [id]);
 
     function loadMorePosts() {
         if (page >= maxPage) return;
         pb.collection('posts')
-            .getList(page + 1, 15, { expand: 'insectFinding.user', sort: '-created' })
+            .getList(page + 1, 15, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
             .then((res) => {
                 setPage(page + 1);
                 setPosts([...posts, ...res.items]);
@@ -39,7 +50,7 @@ function Social() {
     function onRefresh() {
         setRefreshing(true);
         pb.collection('posts')
-            .getList(1, 10, { expand: 'insectFinding.user', sort: '-created' })
+            .getList(1, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
             .then((res) => {
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
@@ -51,6 +62,7 @@ function Social() {
 
     return (
         <View style={StyleLib.pageMarginTop}>
+            <Text style={[StyleLib.h2, { marginLeft: 20, marginRight: 'auto', marginBottom: 5, backgroundColor: Colors.accent, paddingHorizontal: 10 }, StyleLib.rounded]}>{username}</Text>
             <FlatList
                 ref={flatListRef as any}
                 data={posts}

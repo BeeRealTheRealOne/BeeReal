@@ -39,7 +39,7 @@ function sightingList() {
     function onRefresh() {
         setRefreshing(true);
         pb.collection('insectFindings')
-            .getList(page, 10, { expand: 'species', sort: '-created' })
+            .getList(1, 10, { expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
