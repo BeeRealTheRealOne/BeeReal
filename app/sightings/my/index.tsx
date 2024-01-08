@@ -26,7 +26,6 @@ function sightingList() {
 
     // load the first page of sightings when the page loads
     useEffect(() => {
-        console.log(pb.authStore.model?.id);
         pb.collection('insectFindings')
             .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
             .then((res) => {

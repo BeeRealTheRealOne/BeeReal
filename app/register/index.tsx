@@ -106,7 +106,7 @@ function register() {
                     .catch((err) => {
                         setLoading(false);
                         if (err.status != 0) {
-                            console.log(err);
+                            console.error(err);
                         }
                     });
             })

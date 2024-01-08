@@ -24,7 +24,6 @@ const Post = (props: { postId: string; title: string; message: string; user: str
             pb.collection('posts')
                 .update(props.postId, { 'likes+': pb.authStore?.model?.id })
                 .then((res) => {
-                    console.log(res);
                     setIsLiked(true);
                     setLikeLoading(false);
                     setLikes(res.likes.length);

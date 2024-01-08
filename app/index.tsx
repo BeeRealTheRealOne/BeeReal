@@ -37,7 +37,9 @@ function Home() {
                             });
                     })
                     .catch((err) => {
-                        console.log(err);
+                        if (err.code != 0) {
+                            console.error(err);
+                        }
                     });
             }
         }
