@@ -18,6 +18,26 @@ function SightingCard(props: { sighting: Sighting }) {
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
 
+    const [deleting, setDeleting] = useState(false);
+
+    function deleteSighting() {
+        if (deleting) return;
+        setDeleting(true);
+        pb.collection('insectFindings')
+            .delete(props.sighting.id)
+            .then((res) => {
+                router.push('/sightings/my/');
+            })
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            })
+            .finally(() => {
+                setDeleting(false);
+            });
+    }
+
     function post() {
         if (!pb.authStore.isValid) return;
 
@@ -115,13 +135,7 @@ function SightingCard(props: { sighting: Sighting }) {
                         />
                     </View>
                     <View style={[styles.row]}>
-                        <Button
-                            title="post"
-                            color={Colors.accent}
-                            onPress={() => {
-                                post();
-                            }}
-                        />
+                        <Button title="post" color={Colors.accent} onPress={post} />
                         <Button
                             title="cancel"
                             color={Colors.cancel}
@@ -147,24 +161,9 @@ function SightingCard(props: { sighting: Sighting }) {
                             onPress={() => {
                                 setDeleteModalVisible(false);
                             }}
+                            disabled={deleting}
                         />
-                        <Button
-                            title="delete"
-                            color={Colors.cancel}
-                            onPress={() => {
-                                pb.collection('insectFindings')
-                                    .delete(props.sighting.id)
-                                    .then((res) => {
-                                        router.push('/sightings/my/');
-                                        setDeleteModalVisible(false);
-                                    })
-                                    .catch((err) => {
-                                        if (err.status != 0) {
-                                            console.error(err);
-                                        }
-                                    });
-                            }}
-                        />
+                        <Button title="delete" color={Colors.cancel} onPress={deleteSighting} disabled={deleting} />
                     </View>
                 </View>
             </View>

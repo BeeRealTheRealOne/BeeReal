@@ -1,6 +1,6 @@
 import { Camera, CameraCapturedPicture, CameraType } from 'expo-camera';
 import * as Location from 'expo-location';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Pressable } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Pressable, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,6 +18,8 @@ function SnapView() {
     const [camera, setCamera] = useState<Camera | null>(null);
     const [image, setImage] = useState<CameraCapturedPicture | null>(null);
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
+
+    const [sending, setSending] = useState<boolean>(false);
 
     // ask for location permissions
     useEffect(() => {
@@ -83,6 +85,7 @@ function SnapView() {
             return;
         }
         if (location != null && image != null) {
+            setSending(true);
             const formdata = new FormData();
 
             // add the image, location and user to the formdata
@@ -149,6 +152,7 @@ function SnapView() {
                                 delay: 0,
                             });
                         }
+                        setSending(false);
                         // redirect to the sighting
                         router.push(`/sightings/id/${result.id}/`);
                     }
@@ -166,7 +170,7 @@ function SnapView() {
     // send the image to the insect categorization api
     const sendImageToApi = async (base64Image: any, location: any): Promise<string> => {
         var myHeaders = new Headers();
-        myHeaders.append('Api-Key', 'bwlG9913H5DrnjKF4StojZrFF6lbLZ9dFHlzuXeQcg1PDmwsNa');
+        myHeaders.append('Api-Key', process.env.EXPO_PUBLIC_API_KEY as string);
         myHeaders.append('Content-Type', 'application/json');
 
         var raw = JSON.stringify({
@@ -207,16 +211,21 @@ function SnapView() {
                         <View style={[styles.flex]} />
                         <Image source={{ uri: image.uri }} style={styles.camera} />
                         <View style={[styles.containerRow]}>
-                            <TouchableOpacity style={[styles.container]} onPress={confirm}>
-                                <View style={[styles.snapButton, { backgroundColor: Colors.accent }]}>
-                                    <Ionicons name="checkmark" size={40} color="black" />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={[styles.container]} onPress={() => setImage(null)}>
-                                <View style={[styles.snapButton, { backgroundColor: Colors.cancel }]}>
-                                    <Ionicons name="close" size={40} color="black" />
-                                </View>
-                            </TouchableOpacity>
+                            {sending ? (
+                                <>
+                                    <Text>Classifing your insect...</Text>
+                                    <ActivityIndicator size="large" color={Colors.primary} />
+                                </>
+                            ) : (
+                                <>
+                                    <TouchableOpacity style={[styles.container]} onPress={confirm} disabled={sending}>
+                                        <View style={[styles.snapButton, { backgroundColor: Colors.accent }]}>{sending ? <ActivityIndicator size="large" color="black" /> : <Ionicons name="checkmark" size={40} color="black" />}</View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={[styles.container]} onPress={() => setImage(null)} disabled={sending}>
+                                        <View style={[styles.snapButton, { backgroundColor: Colors.cancel }]}>{sending ? <ActivityIndicator size="large" color="black" /> : <Ionicons name="close" size={40} color="black" />}</View>
+                                    </TouchableOpacity>
+                                </>
+                            )}
                         </View>
                     </View>
                 ) : (
