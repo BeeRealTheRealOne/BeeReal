@@ -5,9 +5,13 @@ import { useState } from 'react';
 import FilledHeartIcon from './FilledHeartIcon';
 import pb from '../constants/pocketbase';
 import { Link } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import Colors from '../constants/colors';
 
 const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; created: string }) => {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
+    const [likes, setLikes] = useState(props.likes || 0);
+    const [likeLoading, setLikeLoading] = useState(false);
 
     const date = new Date(props.created);
     const dateStr = date.toLocaleString();
@@ -15,27 +19,35 @@ const Post = (props: { postId: string; title: string; message: string; user: str
         if (!pb.authStore.isValid) {
             return;
         }
+        setLikeLoading(true);
         if (!isLiked) {
             pb.collection('posts')
                 .update(props.postId, { 'likes+': pb.authStore?.model?.id })
                 .then((res) => {
+                    console.log(res);
                     setIsLiked(true);
+                    setLikeLoading(false);
+                    setLikes(res.likes.length);
                 })
                 .catch((err) => {
                     if (err.status != 0) {
                         console.error(err);
                     }
+                    setLikeLoading(false);
                 });
         } else {
             pb.collection('posts')
                 .update(props.postId, { 'likes-': pb.authStore?.model?.id })
                 .then((res) => {
                     setIsLiked(false);
+                    setLikeLoading(false);
+                    setLikes(res.likes.length);
                 })
                 .catch((err) => {
                     if (err.status != 0) {
                         console.error(err);
                     }
+                    setLikeLoading(false);
                 });
         }
     };
@@ -50,10 +62,16 @@ const Post = (props: { postId: string; title: string; message: string; user: str
             </View>
             <View style={[styles.image, StyleLib.rounded]}>
                 <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
-                <View style={styles.heartContainer} onTouchEnd={handleLike}>
-                    {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
-                    <Text style={[StyleLib.h2]}>{props.likes}</Text>
-                </View>
+                {likeLoading ? (
+                    <View style={styles.heartContainer}>
+                        <Ionicons name="refresh" size={40} color={Colors.primary} />
+                    </View>
+                ) : (
+                    <View style={styles.heartContainer} onTouchEnd={handleLike}>
+                        {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
+                        <Text style={[StyleLib.h2]}>{likes}</Text>
+                    </View>
+                )}
             </View>
             <View style={styles.flex}>
                 <Text style={[StyleLib.text]}>{dateStr}</Text>
