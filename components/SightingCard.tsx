@@ -6,8 +6,8 @@ import StyleLib from '../constants/style';
 import Colors from '../constants/colors';
 import { useState } from 'react';
 import pb from '../constants/pocketbase';
-import { router } from 'expo-router';
-import { TextInput } from 'react-native-gesture-handler';
+import { Link, router } from 'expo-router';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-root-toast';
 
 //Wir verwenden hier eine Webview mit IFrame, da die Google Maps API einen API Key benötigt, den wir nicht haben. Und für OpenStreetAPI haben wir keinen React-Native Wrapper gefunden.
@@ -173,37 +173,42 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (!props.sighting) return <Text>Loading...</Text>;
     return (
-        <View style={[StyleLib.card, styles.flexNo, styles.gap, styles.center]}>
-            <View style={[styles.gap]}>
-                <View style={[styles.col]}>
-                    <Text style={[StyleLib.h2]}>{props.sighting.expand.species.name}</Text>
-                    <View style={[styles.row, styles.gap]}>
-                        <Text style={[StyleLib.text]}>{props.sighting.expand.species.scientificName}</Text>
-                        <Text style={[StyleLib.text]}>{timeToString(props.sighting.created)}</Text>
+        <ScrollView style={{ height: '100%', width: '100%' }}>
+            <View style={[StyleLib.card, styles.flexNo, styles.gap, styles.center]}>
+                <View style={[styles.gap]}>
+                    <View style={[styles.col]}>
+                        <Text style={[StyleLib.h2]}>{props.sighting.expand.species.name}</Text>
+                        <View style={[styles.row, { gap: 10 }]}>
+                            <Text style={[StyleLib.text]}>{props.sighting.expand.species.scientificName}</Text>
+                            <Link style={[StyleLib.text]} href={`/species/id/${props.sighting.expand.species.id}/`}>
+                                Learn more...
+                            </Link>
+                        </View>
                     </View>
+                    <Image
+                        style={[styles.image, StyleLib.rounded, styles.centerSelf]}
+                        source={{
+                            uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}`,
+                        }}
+                    />
+                    <Text style={[StyleLib.text, styles.centerSelf]}>{timeToString(props.sighting.created)}</Text>
                 </View>
-                <Image
-                    style={[styles.image, StyleLib.rounded]}
-                    source={{
-                        uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}`,
-                    }}
-                />
+                <View style={[{ width: 300, height: 200, marginBottom: -5 }]}>
+                    <WebView
+                        style={{ width: 300, height: 200 }}
+                        originWhitelist={['*']}
+                        scrollEnabled={false}
+                        source={{
+                            html: `<div style="width: 100%" scrolling="false"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=${props.sighting.latitude},${props.sighting.longitude}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population mapping</a></iframe></div>`,
+                        }}
+                    />
+                </View>
+                <View style={[styles.between, styles.row]}>
+                    <Button color={Colors.cancel} title="Delete" onPress={() => setDeleteModalVisible(true)} />
+                    <Button color={Colors.primary} title="Post" onPress={() => setPostModalVisible(true)} />
+                </View>
             </View>
-            <View style={[{ width: 300, height: 200, marginBottom: -5 }]}>
-                <WebView
-                    style={{ width: 300, height: 200 }}
-                    originWhitelist={['*']}
-                    scrollEnabled={false}
-                    source={{
-                        html: `<div style="width: 100%" scrolling="false"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=${props.sighting.latitude},${props.sighting.longitude}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population mapping</a></iframe></div>`,
-                    }}
-                />
-            </View>
-            <View style={[styles.between, styles.row]}>
-                <Button color={Colors.cancel} title="Delete" onPress={() => setDeleteModalVisible(true)} />
-                <Button color={Colors.primary} title="Post" onPress={() => setPostModalVisible(true)} />
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -239,6 +244,9 @@ const styles = StyleSheet.create({
     between: {
         width: '100%',
         justifyContent: 'space-between',
+    },
+    centerSelf: {
+        alignSelf: 'center',
     },
 });
 

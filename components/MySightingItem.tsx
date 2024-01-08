@@ -21,9 +21,6 @@ function SightingItem(props: { sighting: Sighting }) {
                             <View>
                                 <Text style={[StyleLib.h3]}>{props.sighting.expand.species.name}</Text>
                             </View>
-                            <Text style={[StyleLib.text]}>
-                                {props.sighting.longitude}, {props.sighting.latitude}
-                            </Text>
                             <Text style={[StyleLib.text]}>{timeToString(props.sighting.created)}</Text>
                         </View>
                     </View>

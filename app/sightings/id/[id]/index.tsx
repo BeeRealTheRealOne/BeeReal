@@ -25,6 +25,6 @@ function sightingCardView() {
             });
     }, [id]);
 
-    return <View style={[StyleLib.page, { paddingTop: 80, paddingBottom: 20 }]}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={[StyleLib.text]}>Loading...</Text>}</View>;
+    return <View style={[StyleLib.page, { paddingTop: 60, paddingBottom: 20 }]}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={[StyleLib.text]}>Loading...</Text>}</View>;
 }
 export default sightingCardView;
