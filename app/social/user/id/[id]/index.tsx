@@ -91,6 +91,7 @@ function UserSocial() {
             </View>
             <FlatList
                 ref={flatListRef as any}
+                style={[{ height: '100%', width: '100%' }]}
                 data={posts}
                 horizontal={false}
                 renderItem={({ item }) => {
