@@ -18,7 +18,11 @@ function sightingCardView() {
             .then((res) => {
                 setSighting(res);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, [id]);
 
     return <View style={[StyleLib.page, { paddingTop: 80, paddingBottom: 20 }]}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={[StyleLib.text]}>Loading...</Text>}</View>;

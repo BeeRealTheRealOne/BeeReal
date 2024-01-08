@@ -18,7 +18,11 @@ function speciesCardView() {
             .then((res) => {
                 setSpecies(res);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, [id]);
 
     return (

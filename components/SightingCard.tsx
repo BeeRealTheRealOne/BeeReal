@@ -67,16 +67,18 @@ function SightingCard(props: { sighting: Sighting }) {
                 setPostModalVisible(false);
             })
             .catch((err) => {
-                console.error(err);
-                Toast.show('Error posting, maybe log in again!', {
-                    duration: Toast.durations.LONG,
-                    position: Toast.positions.BOTTOM,
-                    shadow: true,
-                    animation: true,
-                    backgroundColor: Colors.cancel,
-                    hideOnPress: true,
-                    delay: 0,
-                });
+                if (err.status != 0) {
+                    console.error(err);
+                    Toast.show('Error posting, maybe log in again!', {
+                        duration: Toast.durations.LONG,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        backgroundColor: Colors.cancel,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                }
             });
     }
 
@@ -157,7 +159,9 @@ function SightingCard(props: { sighting: Sighting }) {
                                         setDeleteModalVisible(false);
                                     })
                                     .catch((err) => {
-                                        console.error(err);
+                                        if (err.status != 0) {
+                                            console.error(err);
+                                        }
                                     });
                             }}
                         />

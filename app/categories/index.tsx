@@ -20,7 +20,11 @@ function categoriesList() {
             .then((res) => {
                 setCategories(res.items);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, []);
 
     // refresh the categories list when the user pulls down on the list and scroll to the top
@@ -33,7 +37,11 @@ function categoriesList() {
                 setRefreshing(false);
                 flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     if (!categories) return <Text>Loading</Text>;

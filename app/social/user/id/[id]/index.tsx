@@ -30,14 +30,22 @@ function UserSocial() {
             .then((res) => {
                 setUsername(res.username);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
         pb.collection('posts')
             .getList(page, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
             .then((res) => {
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, [id]);
 
     // load the next page of posts when the user scrolls to the bottom of the list
@@ -49,7 +57,11 @@ function UserSocial() {
                 setPage(page + 1);
                 setPosts([...posts, ...res.items]);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     // refresh the posts list when the user pulls down on the list, or presses the refresh button and then scroll to the top
@@ -63,7 +75,11 @@ function UserSocial() {
                 setRefreshing(false);
                 flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     return (

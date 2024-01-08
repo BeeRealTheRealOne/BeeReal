@@ -69,8 +69,10 @@ function SnapView() {
                         setImage(result);
                     });
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch((err) => {
+                    if (err.status != 0) {
+                        console.error(err);
+                    }
                 });
         }
     }
@@ -151,8 +153,10 @@ function SnapView() {
                         router.push(`/sightings/id/${result.id}/`);
                     }
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch((err) => {
+                    if (err.status != 0) {
+                        console.error(err);
+                    }
                 });
         }
         setLocation(null);
@@ -184,9 +188,10 @@ function SnapView() {
 
             const result = await response.json();
             return result;
-        } catch (error) {
-            console.error(error);
-            throw error;
+        } catch (err) {
+            if (err.status != 0) {
+                console.error(err);
+            }
         }
     };
 

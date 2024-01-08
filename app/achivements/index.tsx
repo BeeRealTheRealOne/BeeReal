@@ -22,13 +22,21 @@ function achivementsView() {
             .then((res) => {
                 setNumSightingsAchivements(res.cnt);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
         pb.collection('numSpeciesAchivements')
             .getOne(pb.authStore?.model?.id)
             .then((res) => {
                 setNumSpeciesAchivements(res.cnt);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
         pb.collection('mostCommonSpeciesAchievment')
             .getOne(pb.authStore?.model?.id)
             .then((res) => {
@@ -38,7 +46,11 @@ function achivementsView() {
                         setMostCommonSpeciesAchievment(res2.name);
                     });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, []);
 
     return (

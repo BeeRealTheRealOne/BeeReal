@@ -18,14 +18,22 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                 .then((res) => {
                     setIsLiked(true);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => {
+                    if (err.status != 0) {
+                        console.error(err);
+                    }
+                });
         } else {
             pb.collection('posts')
                 .update(props.postId, { 'likes-': pb.authStore?.model?.id })
                 .then((res) => {
                     setIsLiked(false);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => {
+                    if (err.status != 0) {
+                        console.error(err);
+                    }
+                });
         }
     };
 

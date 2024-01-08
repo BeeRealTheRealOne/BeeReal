@@ -33,7 +33,11 @@ function speciesList() {
                     setMaxPage(res.totalPages);
                     setRefreshing(false);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => {
+                    if (err.status != 0) {
+                        console.error(err);
+                    }
+                });
         }, 500),
         []
     );
@@ -46,7 +50,11 @@ function speciesList() {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, []);
 
     //search whenever the search term changes
@@ -63,7 +71,11 @@ function speciesList() {
                 setPage(page + 1);
                 setSpecies([...species, ...res.items]);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     //refresh the list when the user pulls down
@@ -78,7 +90,11 @@ function speciesList() {
                 setRefreshing(false);
                 flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     return (

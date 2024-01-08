@@ -33,7 +33,11 @@ function sightingList() {
                     setMaxPage(res.totalPages);
                     setRefreshing(false);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => {
+                    if (err.status != 0) {
+                        console.error(err);
+                    }
+                });
         }, 500),
         []
     );
@@ -41,12 +45,16 @@ function sightingList() {
     // load the first page of sightings when the page loads
     useEffect(() => {
         pb.collection('insectFindings')
-            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}' && (species.name ~ '${searchTerm}' || species.scientificName ~ '${searchTerm}')`, expand: 'species', sort: '-created' })
+            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
             .then((res) => {
                 setSighting(res.items);
                 setMaxPage(res.totalPages);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }, []);
 
     // refresh the sightings list when the search term changes and then stays constant for longer than 500ms
@@ -63,7 +71,11 @@ function sightingList() {
                 setPage(page + 1);
                 setSighting([...sighting, ...res.items]);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     // refresh the sightings list when the user pulls down on the list and scroll to top
@@ -78,7 +90,11 @@ function sightingList() {
                 setRefreshing(false);
                 flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+            });
     }
 
     return (
