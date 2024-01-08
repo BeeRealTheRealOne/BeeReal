@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import EmptyHeartIcon from './HeartEmptyIcon';
 import StyleLib from '../constants/style';
 import { useState } from 'react';
@@ -64,7 +64,7 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                 <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
                 {likeLoading ? (
                     <View style={styles.heartContainer}>
-                        <Ionicons name="refresh" size={40} color={Colors.primary} />
+                        <ActivityIndicator size="large" color={Colors.primary} />
                     </View>
                 ) : (
                     <View style={styles.heartContainer} onTouchEnd={handleLike}>
