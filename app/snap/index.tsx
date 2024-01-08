@@ -187,12 +187,16 @@ function SnapView() {
             const response = await fetch('https://insect.kindwise.com/api/v1/identification?details=common_names,url,description,image', requestOptions);
 
             const result = await response.json();
-            return result;
+
+            //return the name of the species that is most likely
+            return result.result.classification.suggestions[0].name as string;
         } catch (err: any) {
             if (err.status != 0) {
                 console.error(err);
+                return 'error';
             }
         }
+        return '';
     };
 
     return (
