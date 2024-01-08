@@ -7,6 +7,7 @@ import StyleLib from '../../../../../constants/style';
 import Colors from '../../../../../constants/colors';
 import { useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import LoadingPage from '../../../../../components/LoadingPage';
 
 // this page displays a list of all posts that the user has made
 function UserSocial() {
@@ -22,6 +23,8 @@ function UserSocial() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
     const [username, setUsername] = useState<string>();
+
+    const [loading, setLoading] = useState(true);
 
     // load the first page of posts when the page loads
     useEffect(() => {
@@ -40,11 +43,13 @@ function UserSocial() {
             .then((res) => {
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
     }, [id]);
 
@@ -80,6 +85,10 @@ function UserSocial() {
                     console.error(err);
                 }
             });
+    }
+
+    if (loading) {
+        return <LoadingPage />;
     }
 
     return (

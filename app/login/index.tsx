@@ -11,12 +11,28 @@ import Toast from 'react-native-root-toast';
 function login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     // send login request to pocketbase
     const login = async () => {
+        if (!email || !password) {
+            Toast.show('Please fill in all fields', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                backgroundColor: Colors.cancel,
+                hideOnPress: true,
+                delay: 0,
+            });
+            return;
+        }
+
+        setLoading(true);
         pb.collection('users')
             .authWithPassword(email, password)
             .then((res) => {
+                setLoading(false);
                 if (res.token) {
                     const cookie = pb.authStore.exportToCookie();
                     AsyncStorage.setItem('sessionCookie', cookie);
@@ -24,6 +40,7 @@ function login() {
                 }
             })
             .catch((err) => {
+                setLoading(false);
                 // show error message on fail
                 Toast.show('Wrong email or password', {
                     duration: Toast.durations.LONG,
@@ -50,7 +67,7 @@ function login() {
                     <TextInput style={[StyleLib.input]} placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
                     <TextInput style={[StyleLib.input]} secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
                 </View>
-                <Button color={Colors.primary} title="Login" onPress={login} />
+                <Button color={Colors.primary} title={!loading ? 'Login' : 'sending'} onPress={login} disabled={loading} />
                 <Link href="/imprint/">
                     <Text style={[StyleLib.text]}>Imprint</Text>
                 </Link>

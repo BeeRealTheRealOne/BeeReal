@@ -7,6 +7,7 @@ import StyleLib from '../../../constants/style';
 import Colors from '../../../constants/colors';
 import debounce from 'debounce';
 import { Ionicons } from '@expo/vector-icons';
+import LoadingPage from '../../../components/LoadingPage';
 
 // This page displays a list of all sightings that the user has made
 function sightingList() {
@@ -20,6 +21,26 @@ function sightingList() {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearching, setSearching] = useState(false);
+
+    const [loading, setLoading] = useState(true);
+
+    // load the first page of sightings when the page loads
+    useEffect(() => {
+        console.log(pb.authStore.model?.id);
+        pb.collection('insectFindings')
+            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
+            .then((res) => {
+                setSighting(res.items);
+                setMaxPage(res.totalPages);
+                setLoading(false);
+            })
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
+                setLoading(false);
+            });
+    }, []);
 
     //search function is a debouce function that waits 500ms after the last keypress before searching
     const search = useCallback(
@@ -38,24 +59,9 @@ function sightingList() {
                         console.error(err);
                     }
                 });
-        }, 500),
+        }, 800),
         []
     );
-
-    // load the first page of sightings when the page loads
-    useEffect(() => {
-        pb.collection('insectFindings')
-            .getList(1, 10, { filter: `user.id = '${pb.authStore.model?.id}'`, expand: 'species', sort: '-created' })
-            .then((res) => {
-                setSighting(res.items);
-                setMaxPage(res.totalPages);
-            })
-            .catch((err) => {
-                if (err.status != 0) {
-                    console.error(err);
-                }
-            });
-    }, []);
 
     // refresh the sightings list when the search term changes and then stays constant for longer than 500ms
     useEffect(() => {
@@ -95,6 +101,10 @@ function sightingList() {
                     console.error(err);
                 }
             });
+    }
+
+    if (loading) {
+        return <LoadingPage />;
     }
 
     return (

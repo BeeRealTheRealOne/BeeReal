@@ -6,6 +6,7 @@ import Post from '../../components/Post';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
+import LoadingPage from '../../components/LoadingPage';
 
 // this page displays a list of all posts made
 function Social() {
@@ -17,6 +18,8 @@ function Social() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
 
+    const [loading, setLoading] = useState(true);
+
     // load the first page of posts when the page loads
     useEffect(() => {
         pb.collection('posts')
@@ -24,11 +27,13 @@ function Social() {
             .then((res) => {
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
     }, []);
 
@@ -64,6 +69,10 @@ function Social() {
                     console.error(err);
                 }
             });
+    }
+
+    if (loading) {
+        return <LoadingPage />;
     }
 
     return (

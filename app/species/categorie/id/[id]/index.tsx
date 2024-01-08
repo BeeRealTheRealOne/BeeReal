@@ -6,6 +6,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import StyleLib from '../../../../../constants/style';
 import { RefreshControl } from 'react-native-gesture-handler';
 import Colors from '../../../../../constants/colors';
+import LoadingPage from '../../../../../components/LoadingPage';
 
 // this page displays a list of all species in a categorie
 function speciesCategoriesCardView() {
@@ -19,6 +20,8 @@ function speciesCategoriesCardView() {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
 
+    const [loading, setLoading] = useState(true);
+
     // load the first page of species when the page loads
     useEffect(() => {
         pb.collection('species')
@@ -26,11 +29,13 @@ function speciesCategoriesCardView() {
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
     }, [id]);
 
@@ -66,6 +71,10 @@ function speciesCategoriesCardView() {
                     console.error(err);
                 }
             });
+    }
+
+    if (loading) {
+        return <LoadingPage />;
     }
 
     return (

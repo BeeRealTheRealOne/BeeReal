@@ -11,19 +11,27 @@ function speciesCardView() {
     const id = local.id;
     const [species, setSpecies] = useState<any>([]);
 
+    const [loading, setLoading] = useState(true);
+
     // load the species when the page loads
     useEffect(() => {
         pb.collection('species')
             .getOne(id as string)
             .then((res) => {
                 setSpecies(res);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
     }, [id]);
+
+    if (loading) {
+        return <View style={[StyleLib.page]}></View>;
+    }
 
     return (
         <View style={[StyleLib.page]}>

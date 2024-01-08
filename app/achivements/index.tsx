@@ -3,6 +3,7 @@ import pb from '../../constants/pocketbase';
 import { View, StyleSheet, Text } from 'react-native';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
+import LoadingPage from '../../components/LoadingPage';
 
 // This is the achivements page, it shows the achivements of the user and can be accessed from the profile page
 function achivementsView() {
@@ -15,27 +16,34 @@ function achivementsView() {
     //this achivement shows the most common species a user has sighted
     const [mostCommonSpeciesAchievment, setMostCommonSpeciesAchievment] = useState<string | null>();
 
+    //Todo: loading state individual for each achivement
+    const [loading, setLoading] = useState(true);
+
     //load functions for the achivements
     useEffect(() => {
         pb.collection('numSightingsAchivements')
             .getOne(pb.authStore?.model?.id)
             .then((res) => {
                 setNumSightingsAchivements(res.cnt);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
         pb.collection('numSpeciesAchivements')
             .getOne(pb.authStore?.model?.id)
             .then((res) => {
                 setNumSpeciesAchivements(res.cnt);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
         pb.collection('mostCommonSpeciesAchievment')
             .getOne(pb.authStore?.model?.id)
@@ -44,14 +52,20 @@ function achivementsView() {
                     .getOne(res.species)
                     .then((res2) => {
                         setMostCommonSpeciesAchievment(res2.name);
+                        setLoading(false);
                     });
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
     }, []);
+
+    if (loading) {
+        return <LoadingPage />;
+    }
 
     return (
         <View style={[StyleLib.page, { paddingBottom: 20 }]}>

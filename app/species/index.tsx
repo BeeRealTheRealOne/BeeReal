@@ -7,6 +7,7 @@ import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import debounce from 'debounce';
+import LoadingPage from '../../components/LoadingPage';
 
 // this page displays a list of all species
 function speciesList() {
@@ -20,6 +21,8 @@ function speciesList() {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearching, setSearching] = useState(false);
+
+    const [loading, setLoading] = useState(true);
 
     //search function is a debouce function that waits 500ms after the last keypress before searching
     const search = useCallback(
@@ -38,7 +41,7 @@ function speciesList() {
                         console.error(err);
                     }
                 });
-        }, 500),
+        }, 800),
         []
     );
 
@@ -49,11 +52,13 @@ function speciesList() {
             .then((res) => {
                 setSpecies(res.items);
                 setMaxPage(res.totalPages);
+                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
+                setLoading(false);
             });
     }, []);
 
@@ -95,6 +100,10 @@ function speciesList() {
                     console.error(err);
                 }
             });
+    }
+
+    if (loading) {
+        return <LoadingPage />;
     }
 
     return (

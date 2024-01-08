@@ -5,6 +5,7 @@ import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
 import Toast from 'react-native-root-toast';
+import LoadingPage from '../../components/LoadingPage';
 
 // this is the register page
 function register() {
@@ -17,8 +18,11 @@ function register() {
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
     const [wrong, setWrong] = useState<boolean>(false);
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     // send register request to pocketbase, all the checks also run in the backend for validation, it is just to give the user a better experience
     const register = () => {
+        setLoading(true);
         // check if all fields are filled
         if (!password || !passwordConfirm || !username || !email) {
             Toast.show('Please fill in all fields', {
@@ -30,6 +34,7 @@ function register() {
                 hideOnPress: true,
                 delay: 0,
             });
+            setLoading(false);
             return;
         }
         // check if passwords match
@@ -43,6 +48,7 @@ function register() {
                 hideOnPress: true,
                 delay: 0,
             });
+            setLoading(false);
             return;
         }
         // check if password is long enough
@@ -56,6 +62,7 @@ function register() {
                 hideOnPress: true,
                 delay: 0,
             });
+            setLoading(false);
             return;
         }
         // check if username is long enough
@@ -69,6 +76,7 @@ function register() {
                 hideOnPress: true,
                 delay: 0,
             });
+            setLoading(false);
             return;
         }
         // check if email is valid
@@ -82,6 +90,7 @@ function register() {
                 hideOnPress: true,
                 delay: 0,
             });
+            setLoading(false);
             return;
         }
 
@@ -91,13 +100,18 @@ function register() {
                 pb.collection('users')
                     .authWithPassword(email, password)
                     .then((res) => {
+                        setLoading(false);
                         router.replace('/tutorial/');
                     })
                     .catch((err) => {
-                        console.log(err);
+                        setLoading(false);
+                        if (err.status != 0) {
+                            console.log(err);
+                        }
                     });
             })
             .catch((err) => {
+                setLoading(false);
                 Toast.show('Username/Email taken', {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.BOTTOM,
@@ -126,7 +140,7 @@ function register() {
                     <TextInput style={[StyleLib.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
                     <TextInput style={[StyleLib.input]} keyboardAppearance="dark" secureTextEntry={true} placeholder="Confirm your password..." onChangeText={(text) => setPasswordConfirm(text)} />
                 </View>
-                <Button color={Colors.primary} title="Register" onPress={register} />
+                <Button color={Colors.primary} title={!loading ? 'Register' : 'sending'} onPress={register} disabled={loading} />
                 <Link href="/imprint/">
                     <Text style={[StyleLib.text]}>Imprint</Text>
                 </Link>
