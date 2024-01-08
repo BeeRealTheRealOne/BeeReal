@@ -90,6 +90,7 @@ function Social() {
                             insectFindingId={item.expand.insectFinding.id}
                             isLikedByUser={item.likes.includes(pb.authStore?.model?.id)}
                             likes={item.likes.length}
+                            created={item.created}
                         />
                     );
                 }}

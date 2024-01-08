@@ -6,8 +6,11 @@ import FilledHeartIcon from './FilledHeartIcon';
 import pb from '../constants/pocketbase';
 import { Link } from 'expo-router';
 
-const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number }) => {
+const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; created: string }) => {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
+
+    const date = new Date(props.created);
+    const dateStr = date.toLocaleString();
     const handleLike = () => {
         if (!pb.authStore.isValid) {
             return;
@@ -52,9 +55,14 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                     <Text style={[StyleLib.h2]}>{props.likes}</Text>
                 </View>
             </View>
-            <View style={styles.bottom}>
-                <Text style={[StyleLib.text]}>{props.message}</Text>
+            <View style={styles.flex}>
+                <Text style={[StyleLib.text]}>{dateStr}</Text>
             </View>
+            {props.message.length > 0 && (
+                <View style={styles.bottom}>
+                    <Text style={[StyleLib.text]}>{props.message}</Text>
+                </View>
+            )}
         </View>
     );
 };
@@ -98,6 +106,10 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 5,
     },
     bottom: {
+        flex: 1,
+        marginTop: 5,
+    },
+    flex: {
         flex: 1,
     },
     margin: {
