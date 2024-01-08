@@ -188,7 +188,7 @@ function SnapView() {
 
             const result = await response.json();
             return result;
-        } catch (err) {
+        } catch (err: any) {
             if (err.status != 0) {
                 console.error(err);
             }
