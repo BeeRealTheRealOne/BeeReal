@@ -70,6 +70,7 @@ function AppLayout() {
                     <Tabs.Screen name="species/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="newUser/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="achivements/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
+                    <Tabs.Screen name="achivements/species/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="imprint/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="tutorial/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
@@ -135,6 +136,7 @@ function AppLayout() {
                 <Tabs.Screen name="species/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="newUser/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="achivements/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
+                <Tabs.Screen name="achivements/species/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="imprint/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="tutorial/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />

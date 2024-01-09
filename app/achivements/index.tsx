@@ -4,6 +4,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
 import LoadingPage from '../../components/LoadingPage';
+import { Link } from 'expo-router';
 
 // This is the achivements page, it shows the achivements of the user and can be accessed from the profile page
 function achivementsView() {
@@ -80,6 +81,9 @@ function achivementsView() {
                     <View style={[StyleLib.card, styles.center]}>
                         <Text style={[StyleLib.h1, styles.flex]}>{numSpeciesAchivements}</Text>
                         <Text style={[StyleLib.h2, styles.bannerText]}>Number of Species Sighted</Text>
+                        <Link style={[StyleLib.h2, styles.moreText]} href="/achivements/species/">
+                            more info...
+                        </Link>
                     </View>
                 </View>
                 <View style={[styles.row]}>
@@ -125,9 +129,14 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         top: 20,
         left: 20,
-        backgroundColor: '#a2de8eda',
+        backgroundColor: Colors.accent,
         paddingHorizontal: 10,
         borderRadius: 30,
+    },
+    moreText: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
     },
 });
 
