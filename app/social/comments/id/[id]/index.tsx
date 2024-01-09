@@ -24,7 +24,6 @@ function speciesCardView() {
         pb.collection('comments')
             .getFullList({ filter: `post = '${id}'`, expand: 'user', sort: '-created' })
             .then((res) => {
-                console.log(res);
                 setComments(res);
                 setLoading(false);
             })
@@ -41,7 +40,6 @@ function speciesCardView() {
         pb.collection('comments')
             .getFullList({ filter: `post = '${id}'`, expand: 'user', sort: '-created' })
             .then((res) => {
-                console.log(res);
                 setComments(res);
                 setLoading(false);
             })
