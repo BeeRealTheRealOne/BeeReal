@@ -13,6 +13,7 @@ function achivementsView() {
 
     //this achivement shows the number of species a user has sighted
     const [numSpeciesAchivements, setNumSpeciesAchivements] = useState<number | null>();
+    const [numSpeciesOverall, setNumSpeciesOverall] = useState<number | null>();
 
     //this achivement shows the most common species a user has sighted
     const [mostCommonSpeciesAchievment, setMostCommonSpeciesAchievment] = useState<string | null>();
@@ -22,29 +23,35 @@ function achivementsView() {
 
     //load functions for the achivements
     useEffect(() => {
-        pb.collection('numSightingsAchivements')
-            .getOne(pb.authStore?.model?.id)
+        pb.collection('species')
+            .getList(1, 1, { requestKey: 'numSpeciesOverall' })
             .then((res) => {
-                setNumSightingsAchivements(res.cnt);
-                setLoading(false);
+                setNumSpeciesOverall(res.totalPages);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
-                setLoading(false);
+            });
+        pb.collection('numSightingsAchivements')
+            .getOne(pb.authStore?.model?.id)
+            .then((res) => {
+                setNumSightingsAchivements(res.cnt);
+            })
+            .catch((err) => {
+                if (err.status != 0) {
+                    console.error(err);
+                }
             });
         pb.collection('numSpeciesAchivements')
             .getOne(pb.authStore?.model?.id)
             .then((res) => {
                 setNumSpeciesAchivements(res.cnt);
-                setLoading(false);
             })
             .catch((err) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
-                setLoading(false);
             });
         pb.collection('mostCommonSpeciesAchievment')
             .getOne(pb.authStore?.model?.id)
@@ -79,7 +86,9 @@ function achivementsView() {
                 </View>
                 <View style={[styles.row]}>
                     <View style={[StyleLib.card, styles.center]}>
-                        <Text style={[StyleLib.h1, styles.flex]}>{numSpeciesAchivements}</Text>
+                        <Text style={[StyleLib.h1, styles.flex]}>
+                            {numSpeciesAchivements}/{numSpeciesOverall}
+                        </Text>
                         <Text style={[StyleLib.h2, styles.bannerText]}>Number of Species Sighted</Text>
                         <Link style={[StyleLib.h2, styles.moreText]} href="/achivements/species/">
                             more info...
