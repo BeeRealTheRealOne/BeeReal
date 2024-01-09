@@ -61,6 +61,7 @@ function AppLayout() {
                     <Tabs.Screen name="snap/index" options={{ href: null, headerShown: false }} />
                     <Tabs.Screen name="social/index" options={{ href: null, headerShown: false }} />
                     <Tabs.Screen name="social/user/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
+                    <Tabs.Screen name="social/comments/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="profile/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="categories/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                     <Tabs.Screen name="sightings/my/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
@@ -126,6 +127,7 @@ function AppLayout() {
                     }}
                 />
                 <Tabs.Screen name="social/user/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
+                <Tabs.Screen name="social/comments/id/[id]/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="categories/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="login/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />
                 <Tabs.Screen name="register/index" options={{ href: null, headerShown: false, unmountOnBlur: true }} />

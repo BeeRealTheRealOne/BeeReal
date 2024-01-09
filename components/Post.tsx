@@ -8,7 +8,7 @@ import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/colors';
 
-const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; created: string }) => {
+const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; comments: number; created: string }) => {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
     const [likes, setLikes] = useState(props.likes || 0);
     const [likeLoading, setLikeLoading] = useState(false);
@@ -71,6 +71,12 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                         <Text style={[StyleLib.h2]}>{likes}</Text>
                     </View>
                 )}
+                <View style={styles.commentContainer}>
+                    <Text style={[StyleLib.h2]}>{props.comments}</Text>
+                    <Link href={`/social/comments/id/${props.postId}/`}>
+                        <Ionicons name="chatbubble-outline" size={40} color={Colors.primary} />
+                    </Link>
+                </View>
             </View>
             <View style={styles.flex}>
                 <Text style={[StyleLib.text]}>{dateStr}</Text>
@@ -122,6 +128,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.3)',
         paddingRight: 3,
         borderTopLeftRadius: 5,
+    },
+    commentContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        backgroundColor: 'rgba(255,255,255,0.3)',
+        paddingLeft: 3,
+        borderTopRightRadius: 5,
     },
     bottom: {
         flex: 1,

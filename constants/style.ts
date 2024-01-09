@@ -65,6 +65,9 @@ const StyleLib = StyleSheet.create({
     pageMarginTop: {
         marginTop: StyleValues.marginPage * 2,
     },
+    pageMarginTopLarge: {
+        marginTop: StyleValues.marginPage * 4,
+    },
     pageMarginBottom: {
         marginBottom: StyleValues.marginPage * 2,
     },

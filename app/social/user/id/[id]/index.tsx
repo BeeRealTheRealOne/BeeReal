@@ -39,8 +39,13 @@ function UserSocial() {
                 }
             });
         pb.collection('posts')
-            .getList(page, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
+            .getList(page, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user, comments(post)', sort: '-created' })
             .then((res) => {
+                res.items.forEach((item: any) => {
+                    if (item.expand['comments(post)'] == undefined) {
+                        item.comments = item.expand['comments(post)'] = { length: 0 };
+                    }
+                });
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
                 setLoading(false);
@@ -57,8 +62,13 @@ function UserSocial() {
     function loadMorePosts() {
         if (page >= maxPage) return;
         pb.collection('posts')
-            .getList(page + 1, 15, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
+            .getList(page + 1, 15, { filter: `user = '${id}'`, expand: 'insectFinding.user, comments(post)', sort: '-created' })
             .then((res) => {
+                res.items.forEach((item: any) => {
+                    if (item.expand['comments(post)'] == undefined) {
+                        item.comments = item.expand['comments(post)'] = { length: 0 };
+                    }
+                });
                 setPage(page + 1);
                 setPosts([...posts, ...res.items]);
             })
@@ -73,8 +83,13 @@ function UserSocial() {
     function onRefresh() {
         setRefreshing(true);
         pb.collection('posts')
-            .getList(1, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user', sort: '-created' })
+            .getList(1, 10, { filter: `user = '${id}'`, expand: 'insectFinding.user, comments(post)', sort: '-created' })
             .then((res) => {
+                res.items.forEach((item: any) => {
+                    if (item.expand['comments(post)'] == undefined) {
+                        item.comments = item.expand['comments(post)'] = { length: 0 };
+                    }
+                });
                 setPosts(res.items);
                 setMaxPage(res.totalPages);
                 setRefreshing(false);
@@ -115,6 +130,7 @@ function UserSocial() {
                             insectFindingId={item.expand.insectFinding.id}
                             isLikedByUser={item.likes.includes(pb.authStore?.model?.id)}
                             likes={item.likes.length}
+                            comments={item.expand['comments(post)'].length}
                             created={item.created}
                         />
                     );
