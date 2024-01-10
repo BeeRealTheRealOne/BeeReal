@@ -11,7 +11,7 @@ import Colors from '../../../../../constants/colors';
 /**
  * This page displays a detail view of a single species with the given id
  */
-function speciesCardView() {
+function commentsView() {
     const local = useLocalSearchParams();
     const id = local.id;
     const [comments, setComments] = useState<any>([]);
@@ -79,7 +79,7 @@ function speciesCardView() {
             <ScrollView>
                 <View style={StyleSheet.flatten([styles.flex, styles.justify])}>
                     {comments.map((comment: any) => {
-                        return <Comment user={comment.expand.user.username} text={comment.text} />;
+                        return <Comment key={comment.id} user={comment.expand.user.username} text={comment.text} />;
                     })}
                     {comments.length == 0 && <Text style={[StyleLib.h2, { padding: 10 }]}>No comments yet</Text>}
                 </View>
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default speciesCardView;
+export default commentsView;
