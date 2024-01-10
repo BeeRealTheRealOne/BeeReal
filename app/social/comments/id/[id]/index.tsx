@@ -8,7 +8,9 @@ import LoadingPage from '../../../../../components/LoadingPage';
 import Comment from '../../../../../components/Comment';
 import Colors from '../../../../../constants/colors';
 
-// this page displays a detail view of a single species with the given id
+/**
+  * This page displays a detail view of a single species with the given id
+  */
 function speciesCardView() {
     const local = useLocalSearchParams();
     const id = local.id;

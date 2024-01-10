@@ -4,7 +4,10 @@ import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import StyleLib from '../../constants/style';
 
-// this page can be used to give the user the choice of logging in or registering, but is currently not used
+/** 
+  * This page can be used to give the user the choice of logging in or registering, 
+  * but is currently not used
+  */
 function newUser() {
     return (
         <View style={[styles.container]}>

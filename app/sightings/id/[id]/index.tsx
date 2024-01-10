@@ -6,7 +6,9 @@ import SightingCard from '../../../../components/SightingCard';
 import StyleLib from '../../../../constants/style';
 import LoadingPage from '../../../../components/LoadingPage';
 
-// This page displays a single sighting with the given id
+/**
+  * This page displays a single sighting with the given id
+  */
 function sightingCardView() {
     const local = useLocalSearchParams();
     const id = local.id as string;
