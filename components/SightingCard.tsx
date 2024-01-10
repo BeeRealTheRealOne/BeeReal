@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, Platform } from 'react-native';
 import { Sighting } from '../types/Sighting';
 import { WebView } from 'react-native-webview';
 import timeToString from '../util/timeToString';
@@ -104,8 +104,9 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (postModalVisible) {
         return (
-            <View style={StyleSheet.flatten([styles.centerAll, { height: '100%' }])}>
-                <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 5 }])}>
+            <View style={StyleSheet.flatten([{ height: '100%', alignItems: 'center', justifyContent: 'center' }])}>
+                {/*the card doesnt stretch in the browser..., on native it works fine*/}
+                <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 5 }, Platform.OS == 'web' ? { flex: 1 } : { flex: 0 }])}>
                     <Text>Post your findings for all to see!</Text>
                     <View style={StyleSheet.flatten([styles.row])}>
                         <TextInput
@@ -151,8 +152,9 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (deleteModalVisible) {
         return (
-            <View style={StyleSheet.flatten([styles.centerAll, { height: '100%' }])}>
-                <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 20 }])}>
+            <View style={StyleSheet.flatten([{ height: '100%', alignItems: 'center', justifyContent: 'center' }])}>
+                {/*the card stretches in the browser to 100%, on native it works fine*/}
+                <View style={StyleSheet.flatten([StyleLib.card, styles.col, styles.centerAll, { gap: 20 }, Platform.OS == 'web' ? { flex: 1, maxHeight: 150 } : { flex: 0, maxHeight: 200 }])}>
                     <Text>Are you sure you want to delte this?</Text>
                     <View style={StyleSheet.flatten([styles.row, { gap: 60 }])}>
                         <Button
@@ -173,7 +175,7 @@ function SightingCard(props: { sighting: Sighting }) {
     if (!props.sighting) return <Text>Loading...</Text>;
     return (
         <ScrollView style={StyleSheet.flatten({ height: '100%', width: '100%' })}>
-            <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.gap, styles.center])}>
+            <View style={StyleSheet.flatten([StyleLib.card, styles.gap, styles.center, Platform.OS == 'web' ? { flex: 1 } : { flex: 0 }])}>
                 <View style={StyleSheet.flatten([styles.gap])}>
                     <View style={StyleSheet.flatten([styles.col])}>
                         <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.sighting.expand.species.name}</Text>
