@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; comments: number; created: string }) => {
+export default function Post(props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; comments: number; created: string }) {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
     const [likes, setLikes] = useState(props.likes || 0);
     const [likeLoading, setLikeLoading] = useState(false);
@@ -91,7 +91,7 @@ const Post = (props: { postId: string; title: string; message: string; user: str
             )}
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -153,5 +153,3 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 });
-
-export default Post;

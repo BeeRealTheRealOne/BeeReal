@@ -8,7 +8,7 @@ import SpeciesDiscovered from '../../../components/SpeciesDiscovered';
 import Colors from '../../../constants/colors';
 
 // This is the achivements page, it shows the achivements of the user and can be accessed from the profile page
-function speciesAchivements() {
+export default function speciesAchivements() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -107,5 +107,3 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 });
-
-export default speciesAchivements;

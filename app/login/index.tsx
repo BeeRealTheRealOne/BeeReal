@@ -12,7 +12,7 @@ import Toast from 'react-native-root-toast';
  * Logs user in and stores the session as a cookie,
  * when login failed notify
  */
-function login() {
+export default function login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -126,5 +126,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-export default login;

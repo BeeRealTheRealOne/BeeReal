@@ -9,7 +9,7 @@ import LoadingPage from '../../../../components/LoadingPage';
 /**
  * This page displays a single sighting with the given id
  */
-function sightingCardView() {
+export default function sightingCardView() {
     const local = useLocalSearchParams();
     const id = local.id as string;
     const [sighting, setSighting] = useState<any | null>(null);
@@ -45,5 +45,3 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
 });
-
-export default sightingCardView;

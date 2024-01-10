@@ -12,7 +12,7 @@ import LoadingPage from '../../components/LoadingPage';
 /**
  * This page displays a list of all species
  */
-function speciesList() {
+export default function speciesList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -178,5 +178,3 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 });
-
-export default speciesList;

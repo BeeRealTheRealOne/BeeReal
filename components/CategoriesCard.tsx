@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet } from 'react-native';
 import StyleLib from '../constants/style';
 
-const CategoriesCard = (props: { name: string; description: string; scientificName: string }) => {
+export default function CategoriesCard(props: { name: string; description: string; scientificName: string }) {
     if (!props.name) return <Text>Loading...</Text>;
     if (!props.scientificName) return <Text>Loading...</Text>;
     return (
@@ -11,6 +11,4 @@ const CategoriesCard = (props: { name: string; description: string; scientificNa
             <Text style={StyleSheet.flatten([StyleLib.text])}>{props.description}</Text>
         </View>
     );
-};
-
-export default CategoriesCard;
+}

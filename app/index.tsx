@@ -7,7 +7,7 @@ import { router, useRootNavigation } from 'expo-router';
 /**
  * This is the home page
  */
-function Home() {
+export default function Home() {
     //This checks if the root navigation window is ready to be used, only then push to tutorial page
     const [isNavigationReady, setNavigationReady] = useState(false);
 
@@ -102,5 +102,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-export default Home;

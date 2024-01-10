@@ -2,7 +2,7 @@ import { Text, View, Image, StyleSheet, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import StyleLib from '../constants/style';
 
-const SpeciesCard = (props: { name: string; description: string; scientificName: string; categorie: string; imageURL: string }) => {
+export default function SpeciesCard(props: { name: string; description: string; scientificName: string; categorie: string; imageURL: string }) {
     if (!props.name) return <Text>Loading...</Text>;
     if (!props.scientificName) return <Text>Loading...</Text>;
     if (!props.categorie) return <Text>Loading...</Text>;
@@ -35,7 +35,7 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
             <Text style={StyleSheet.flatten([StyleLib.text])}>{props.description}</Text>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     colNoFlex: {
@@ -78,5 +78,3 @@ const styles = StyleSheet.create({
         flex: 0,
     },
 });
-
-export default SpeciesCard;

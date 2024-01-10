@@ -11,7 +11,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
  * This page shows the users profile and some other app informations and also
  * can log the user out and links to the achievments
  */
-function profileView() {
+export default function profileView() {
     // get the current user that is logged in
     const user = pb.authStore.model;
     if (user === undefined || user === null) {
@@ -99,5 +99,3 @@ const styles = StyleSheet.create({
         height: 50,
     },
 });
-
-export default profileView;

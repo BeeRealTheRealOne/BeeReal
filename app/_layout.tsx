@@ -13,7 +13,7 @@ import { RootSiblingParent } from 'react-native-root-siblings';
  * defines the structure, navbar and profile
  * checks if session cookies exist
  */
-function AppLayout() {
+export default function AppLayout() {
     const [validUser, setValidUser] = useState<boolean>(false);
 
     // check if the user is logged in
@@ -177,5 +177,3 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
 });
-
-export default AppLayout;

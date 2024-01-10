@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 import StyleLib from '../constants/style';
 import { Link } from 'expo-router';
 
-const CategoriesItem = (props: { name: string; scientificName: string; id: string }) => {
+export default function CategoriesItem(props: { name: string; scientificName: string; id: string }) {
     if (!props.name) return <Text>Loading...</Text>;
     if (!props.scientificName) return <Text>Loading...</Text>;
     if (!props.id) return <Text>Loading...</Text>;
@@ -17,7 +17,7 @@ const CategoriesItem = (props: { name: string; scientificName: string; id: strin
             </Pressable>
         </Link>
     );
-};
+}
 
 const styles = StyleSheet.create({
     row: {
@@ -36,5 +36,3 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
 });
-
-export default CategoriesItem;

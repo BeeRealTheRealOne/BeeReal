@@ -8,7 +8,7 @@ import StyleLib from '../../constants/style';
  * This page can be used to give the user the choice of logging in or registering,
  * but is currently not used
  */
-function newUser() {
+export default function newUser() {
     return (
         <View style={StyleSheet.flatten([styles.container])}>
             <View style={StyleSheet.flatten([styles.infoContainer])}>
@@ -89,5 +89,3 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
-
-export default newUser;

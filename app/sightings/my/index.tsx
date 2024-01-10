@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import LoadingPage from '../../../components/LoadingPage';
 
 // This page displays a list of all sightings that the user has made
-function sightingList() {
+export default function sightingList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -170,5 +170,3 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 });
-
-export default sightingList;

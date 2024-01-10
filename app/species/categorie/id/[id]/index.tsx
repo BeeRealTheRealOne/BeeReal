@@ -9,7 +9,7 @@ import Colors from '../../../../../constants/colors';
 import LoadingPage from '../../../../../components/LoadingPage';
 
 // this page displays a list of all species in a categorie
-function speciesCategoriesCardView() {
+export default function speciesCategoriesCardView() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -106,5 +106,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-export default speciesCategoriesCardView;

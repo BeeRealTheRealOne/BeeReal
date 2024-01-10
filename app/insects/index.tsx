@@ -9,7 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
   like categories, species and sightings using pictures of insects as buttons
   Pictures are AI generated so they are free to use
   */
-function insectsView() {
+export default function insectsView() {
     return (
         <View style={StyleSheet.flatten(StyleLib.page)}>
             <View style={StyleSheet.flatten(styles.firstRow)}>
@@ -133,4 +133,3 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
 });
-export default insectsView;

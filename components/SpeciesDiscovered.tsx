@@ -4,7 +4,7 @@ import pb from '../constants/pocketbase';
 import StyleLib from '../constants/style';
 import Colors from '../constants/colors';
 
-const SpeciesDiscovered = (props: { speciesId: string }) => {
+export default function SpeciesDiscovered(props: { speciesId: string }) {
     const [loadingSpecies, setLoadingSpecies] = useState(true);
     const [loadingFinding, setLoadingFinding] = useState(true);
     const [found, setFound] = useState<boolean>();
@@ -50,7 +50,7 @@ const SpeciesDiscovered = (props: { speciesId: string }) => {
             </View>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -65,5 +65,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-export default SpeciesDiscovered;

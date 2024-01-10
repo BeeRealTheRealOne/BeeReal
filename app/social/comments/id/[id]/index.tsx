@@ -11,7 +11,7 @@ import Colors from '../../../../../constants/colors';
 /**
  * This page displays a detail view of a single species with the given id
  */
-function commentsView() {
+export default function commentsView() {
     const local = useLocalSearchParams();
     const id = local.id;
     const [comments, setComments] = useState<any>([]);
@@ -116,5 +116,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-
-export default commentsView;

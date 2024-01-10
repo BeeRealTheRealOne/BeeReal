@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import LoadingPage from '../../../../../components/LoadingPage';
 
 // this page displays a list of all posts that the user has made
-function UserSocial() {
+export default function UserSocial() {
     // get the id of the user from the url
     const local = useLocalSearchParams();
     const id = local.id as string;
@@ -167,5 +167,3 @@ const styles = StyleSheet.create({
         opacity: 0.8,
     },
 });
-
-export default UserSocial;

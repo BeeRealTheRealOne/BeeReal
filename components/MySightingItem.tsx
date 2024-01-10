@@ -4,7 +4,7 @@ import timeToString from '../util/timeToString';
 import StyleLib from '../constants/style';
 import { Link } from 'expo-router';
 
-function SightingItem(props: { sighting: Sighting }) {
+export default function SightingItem(props: { sighting: Sighting }) {
     if (!props.sighting) return <></>;
     return (
         <Link href={`/sightings/id/${props.sighting.id}/`} style={StyleSheet.flatten([styles.row, styles.margin])} asChild>
@@ -62,5 +62,3 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
 });
-
-export default SightingItem;

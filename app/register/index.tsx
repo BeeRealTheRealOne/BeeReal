@@ -8,7 +8,7 @@ import Toast from 'react-native-root-toast';
 import LoadingPage from '../../components/LoadingPage';
 
 // this is the register page
-function register() {
+export default function register() {
     if (pb.authStore.isValid) {
         router.replace('/insects/');
     }
@@ -198,5 +198,3 @@ const styles = StyleSheet.create({
         margin: 2,
     },
 });
-
-export default register;

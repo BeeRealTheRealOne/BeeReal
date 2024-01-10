@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Colors from '../../constants/colors';
 
 // This page displays a tutorial for the app using images. It is always accessed for new users and accessable for all users in the profile page
-function tutorialView() {
+export default function tutorialView() {
     const images = [require('../../assets/images/tutorial/nav.png'), require('../../assets/images/tutorial/cam.png'), require('../../assets/images/tutorial/social.png'), require('../../assets/images/tutorial/profile.png'), require('../../assets/images/tutorial/insects.png')];
 
     const [index, setIndex] = useState(0);
@@ -34,5 +34,3 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 });
-
-export default tutorialView;

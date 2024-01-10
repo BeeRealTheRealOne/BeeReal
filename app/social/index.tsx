@@ -11,7 +11,7 @@ import LoadingPage from '../../components/LoadingPage';
 /**
  * This page displays a list of all posts made
  */
-function Social() {
+export default function Social() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -153,5 +153,3 @@ const styles = StyleSheet.create({
         opacity: 0.8,
     },
 });
-
-export default Social;

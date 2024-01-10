@@ -2,7 +2,7 @@ import { Text, View, Image, StyleSheet, Touchable, Pressable } from 'react-nativ
 import StyleLib from '../constants/style';
 import { Link } from 'expo-router';
 
-const SpeciesItem = (props: { name: string; scientificName: string; imageURL: string; id: string }) => {
+export default function SpeciesItem(props: { name: string; scientificName: string; imageURL: string; id: string }) {
     if (!props.name) return <></>;
     if (!props.scientificName) return <></>;
     if (!props.imageURL) return <></>;
@@ -22,7 +22,7 @@ const SpeciesItem = (props: { name: string; scientificName: string; imageURL: st
             </Pressable>
         </Link>
     );
-};
+}
 
 const styles = StyleSheet.create({
     image: {
@@ -53,5 +53,3 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 });
-
-export default SpeciesItem;

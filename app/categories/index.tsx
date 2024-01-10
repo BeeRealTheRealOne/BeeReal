@@ -11,7 +11,7 @@ import LoadingPage from '../../components/LoadingPage';
  * This page shows a list of all the categories, a categorie is a group of species of insects.
  * From here the user can navigate to the species in the categorie
  */
-function categoriesList() {
+export default function categoriesList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
     const [categories, setCategories] = useState<any>([]);
@@ -87,5 +87,3 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 });
-
-export default categoriesList;

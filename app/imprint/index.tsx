@@ -4,7 +4,7 @@ import StyleLib from '../../constants/style';
 /**
  * Imprint page with fake data
  */
-function imprintView() {
+export default function imprintView() {
     return (
         <View style={StyleSheet.flatten(StyleLib.page)}>
             <Text style={StyleSheet.flatten([StyleLib.h2])}>Imprint</Text>
@@ -15,5 +15,3 @@ function imprintView() {
         </View>
     );
 }
-
-export default imprintView;

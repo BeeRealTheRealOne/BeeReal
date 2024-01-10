@@ -11,7 +11,7 @@ import { Audio } from 'expo-av';
 import Toast from 'react-native-root-toast';
 
 // this page lets the user take photos of insects and send them to the api
-function SnapView() {
+export default function SnapView() {
     // get the camera permissions
     const [permissionCam, requestPermissionCam] = Camera.useCameraPermissions();
     const [permissionLoc, setPermissionLoc] = useState<boolean>(false);
@@ -276,5 +276,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-export default SnapView;

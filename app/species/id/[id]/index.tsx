@@ -8,7 +8,7 @@ import StyleLib from '../../../../constants/style';
 /**
  * This page displays a detail view of a single species with the given id
  */
-function speciesCardView() {
+export default function speciesCardView() {
     const local = useLocalSearchParams();
     const id = local.id;
     const [species, setSpecies] = useState<any>([]);
@@ -52,5 +52,3 @@ const styles = StyleSheet.create({
         paddingTop: 60,
     },
 });
-
-export default speciesCardView;

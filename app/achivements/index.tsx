@@ -7,7 +7,7 @@ import LoadingPage from '../../components/LoadingPage';
 import { Link } from 'expo-router';
 
 // This is the achivements page, it shows the achivements of the user and can be accessed from the profile page
-function achivementsView() {
+export default function achivementsView() {
     //this achivement shows the number of pictures a user has uploaded
     const [numSightingsAchivements, setNumSightingsAchivements] = useState<number | null>();
 
@@ -143,5 +143,3 @@ const styles = StyleSheet.create({
         minHeight: '25%',
     },
 });
-
-export default achivementsView;

@@ -11,7 +11,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-root-toast';
 
 //Wir verwenden hier eine Webview mit IFrame, da die Google Maps API einen API Key benötigt, den wir nicht haben. Und für OpenStreetAPI haben wir keinen React-Native Wrapper gefunden.
-function SightingCard(props: { sighting: Sighting }) {
+export default function SightingCard(props: { sighting: Sighting }) {
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
     const [postModalVisible, setPostModalVisible] = useState(false);
 
@@ -288,5 +288,3 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
 });
-
-export default SightingCard;
