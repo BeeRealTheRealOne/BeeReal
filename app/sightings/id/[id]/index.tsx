@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import pb from '../../../../constants/pocketbase';
 import { useLocalSearchParams, Stack, router } from 'expo-router';
 import SightingCard from '../../../../components/SightingCard';
@@ -7,8 +7,8 @@ import StyleLib from '../../../../constants/style';
 import LoadingPage from '../../../../components/LoadingPage';
 
 /**
-  * This page displays a single sighting with the given id
-  */
+ * This page displays a single sighting with the given id
+ */
 function sightingCardView() {
     const local = useLocalSearchParams();
     const id = local.id as string;
@@ -36,6 +36,6 @@ function sightingCardView() {
         return <LoadingPage />;
     }
 
-    return <View style={[StyleLib.page, { paddingTop: 60, paddingBottom: 20 }]}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={[StyleLib.text]}>Loading...</Text>}</View>;
+    return <View style={StyleSheet.flatten([StyleLib.page, { paddingTop: 60, paddingBottom: 20 }])}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={StyleSheet.flatten([StyleLib.text])}>Loading...</Text>}</View>;
 }
 export default sightingCardView;

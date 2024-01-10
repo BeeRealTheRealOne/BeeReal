@@ -9,8 +9,8 @@ import Comment from '../../../../../components/Comment';
 import Colors from '../../../../../constants/colors';
 
 /**
-  * This page displays a detail view of a single species with the given id
-  */
+ * This page displays a detail view of a single species with the given id
+ */
 function speciesCardView() {
     const local = useLocalSearchParams();
     const id = local.id;
@@ -75,17 +75,17 @@ function speciesCardView() {
     }
 
     return (
-        <View style={[{ height: '80%' }, { flex: 1, paddingTop: 60 }]}>
+        <View style={StyleSheet.flatten([{ height: '80%' }, { flex: 1, paddingTop: 60 }])}>
             <ScrollView>
-                <View style={[styles.flex, styles.justify]}>
+                <View style={StyleSheet.flatten([styles.flex, styles.justify])}>
                     {comments.map((comment: any) => {
                         return <Comment user={comment.expand.user.username} text={comment.text} />;
                     })}
                     {comments.length == 0 && <Text style={[StyleLib.h2, { padding: 10 }]}>No comments yet</Text>}
                 </View>
             </ScrollView>
-            <View style={{ flexDirection: 'row', padding: 10, bottom: 0, width: '100%', alignItems: 'center' }}>
-                <TextInput style={[StyleLib.input, { flex: 1 }]} placeholder="Comment" onChangeText={(text: string) => setText(text)} />
+            <View style={StyleSheet.flatten({ flexDirection: 'row', padding: 10, bottom: 0, width: '100%', alignItems: 'center' })}>
+                <TextInput style={StyleSheet.flatten([StyleLib.input, { flex: 1 }])} placeholder="Comment" onChangeText={(text: string) => setText(text)} />
                 <Button title="Submit" color={Colors.primary} onPress={submitComment} disabled={submitting} />
             </View>
         </View>

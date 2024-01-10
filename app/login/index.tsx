@@ -8,10 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-root-toast';
 
 /**
-  * Login Component
-  * Logs user in and stores the session as a cookie,
-  * when login failed notify
-  */
+ * Login Component
+ * Logs user in and stores the session as a cookie,
+ * when login failed notify
+ */
 function login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -59,24 +59,24 @@ function login() {
     };
 
     return (
-        <View style={[styles.container]}>
-            <View style={[styles.infoContainer]}>
-                <Text style={[StyleLib.h1]}>
-                    Welcome <Text style={[styles.highlight]}>Bee</Text>ck
-                    <Text style={[styles.highlight]}>!</Text>
+        <View style={StyleSheet.flatten([styles.container])}>
+            <View style={StyleSheet.flatten([styles.infoContainer])}>
+                <Text style={StyleSheet.flatten([StyleLib.h1])}>
+                    Welcome <Text style={StyleSheet.flatten([styles.highlight])}>Bee</Text>ck
+                    <Text style={StyleSheet.flatten([styles.highlight])}>!</Text>
                 </Text>
             </View>
-            <View style={[styles.loginContainer]}>
-                <View style={[styles.inputContainer]}>
-                    <TextInput style={[StyleLib.input]} placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
-                    <TextInput style={[StyleLib.input]} secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
+            <View style={StyleSheet.flatten([styles.loginContainer])}>
+                <View style={StyleSheet.flatten([styles.inputContainer])}>
+                    <TextInput style={StyleSheet.flatten([StyleLib.input])} placeholder="Enter your email..." onChangeText={(text) => setEmail(text)} />
+                    <TextInput style={StyleSheet.flatten([StyleLib.input])} secureTextEntry={true} placeholder="Enter your password..." onChangeText={(text) => setPassword(text)} />
                 </View>
                 <Button color={Colors.primary} title={!loading ? 'Login' : 'sending'} onPress={login} disabled={loading} />
                 <Link href="/imprint/">
-                    <Text style={[StyleLib.text]}>Imprint</Text>
+                    <Text style={StyleSheet.flatten([StyleLib.text])}>Imprint</Text>
                 </Link>
             </View>
-            <View style={[styles.bumper]} />
+            <View style={StyleSheet.flatten([styles.bumper])} />
         </View>
     );
 }

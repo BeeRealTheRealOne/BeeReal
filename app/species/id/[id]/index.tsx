@@ -6,8 +6,8 @@ import { StyleSheet, View } from 'react-native';
 import StyleLib from '../../../../constants/style';
 
 /**
-  * This page displays a detail view of a single species with the given id
-  */
+ * This page displays a detail view of a single species with the given id
+ */
 function speciesCardView() {
     const local = useLocalSearchParams();
     const id = local.id;
@@ -36,8 +36,8 @@ function speciesCardView() {
     }
 
     return (
-        <View style={[StyleLib.page, { flex: 1 }]}>
-            <View style={[styles.flex, styles.justify]}>
+        <View style={StyleSheet.flatten([StyleLib.page, { flex: 1 }])}>
+            <View style={StyleSheet.flatten([styles.flex, styles.justify])}>
                 <SpeciesCard name={species.name} scientificName={species.scientificName} description={species.description} categorie={species.categorie} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${species.id}/${species.image}`} />
             </View>
         </View>

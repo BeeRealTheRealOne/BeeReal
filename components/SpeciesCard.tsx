@@ -10,16 +10,16 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
     if (!props.description) return <Text>Loading...</Text>;
 
     return (
-        <View style={[StyleLib.card, styles.col, styles.flexNo]}>
-            <View style={[styles.row]}>
-                <View style={[styles.nameBox]}>
-                    <Text style={[StyleLib.h2]}>{props.name}</Text>
-                    <Text style={[StyleLib.text]}>{`[${props.scientificName}]`}</Text>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.col, styles.flexNo])}>
+            <View style={StyleSheet.flatten([styles.row])}>
+                <View style={StyleSheet.flatten([styles.nameBox])}>
+                    <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.name}</Text>
+                    <Text style={StyleSheet.flatten([StyleLib.text])}>{`[${props.scientificName}]`}</Text>
                 </View>
-                <Image style={[styles.image]} source={{ uri: props.imageURL }} resizeMode="contain" />
+                <Image style={StyleSheet.flatten([styles.image])} source={{ uri: props.imageURL }} resizeMode="contain" />
             </View>
-            <View style={[styles.spacer10]} />
-            <Text style={[StyleLib.text]}>{props.description}</Text>
+            <View style={StyleSheet.flatten([styles.spacer10])} />
+            <Text style={StyleSheet.flatten([StyleLib.text])}>{props.description}</Text>
         </View>
     );
 };

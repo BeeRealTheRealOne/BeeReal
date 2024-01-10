@@ -78,12 +78,12 @@ function speciesCategoriesCardView() {
     }
 
     return (
-        <View style={[StyleLib.pageMarginTop, { flex: 1 }]}>
+        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, { flex: 1 }])}>
             <FlatList
                 ref={flatListRef as any}
                 data={species}
                 numColumns={1}
-                ItemSeparatorComponent={() => <View style={styles.gap}></View>}
+                ItemSeparatorComponent={() => <View style={StyleSheet.flatten(styles.gap)}></View>}
                 renderItem={({ item }) => {
                     return <SpeciesItem key={item.id} id={item.id} name={item.name} scientificName={item.scientificName} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${item.id}/${item.image}`}></SpeciesItem>;
                 }}

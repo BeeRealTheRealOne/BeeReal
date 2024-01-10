@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import pb from '../../constants/pocketbase';
 import { FlatList, RefreshControl, TextInput } from 'react-native-gesture-handler';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import SpeciesItem from '../../components/SpeciesItem';
 import StyleLib from '../../constants/style';
 import Colors from '../../constants/colors';
@@ -10,8 +10,8 @@ import debounce from 'debounce';
 import LoadingPage from '../../components/LoadingPage';
 
 /**
-  * This page displays a list of all species
-  */
+ * This page displays a list of all species
+ */
 function speciesList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
@@ -109,19 +109,19 @@ function speciesList() {
     }
 
     return (
-        <View style={(StyleLib.pageMarginTop, { flex: 1 })}>
-            <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
+        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, { flex: 1 }])}>
+            <View style={StyleSheet.flatten([{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }])}>
                 <TouchableOpacity onPress={() => setSearching(!isSearching)}>
                     <Ionicons name="search" size={24} color={Colors.primaryText} />
                 </TouchableOpacity>
             </View>
             {isSearching && (
-                <View style={[{ position: 'absolute', bottom: 10, right: 60, width: 200, zIndex: 20, backgroundColor: Colors.primary, padding: 5, opacity: 0.8 }, StyleLib.rounded]}>
+                <View style={StyleSheet.flatten([{ position: 'absolute', bottom: 10, right: 60, width: 200, zIndex: 20, backgroundColor: Colors.primary, padding: 5, opacity: 0.8 }, StyleLib.rounded])}>
                     <TextInput
                         placeholder="Search"
                         placeholderTextColor={Colors.primaryText}
                         value={searchTerm}
-                        style={[{ color: Colors.primaryText }]}
+                        style={StyleSheet.flatten([{ color: Colors.primaryText }])}
                         onChangeText={(text) => {
                             setSearchTerm(text);
                         }}
@@ -130,7 +130,7 @@ function speciesList() {
             )}
             <FlatList
                 ref={flatListRef as any}
-                style={[{ height: '100%', width: '100%' }]}
+                style={StyleSheet.flatten([{ height: '100%', width: '100%' }])}
                 data={species}
                 horizontal={false}
                 renderItem={({ item }) => {

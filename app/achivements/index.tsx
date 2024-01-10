@@ -76,29 +76,29 @@ function achivementsView() {
     }
 
     return (
-        <View style={[StyleLib.page, { paddingBottom: 20 }]}>
-            <View style={[styles.col]}>
-                <View style={[styles.row]}>
-                    <View style={[StyleLib.card, styles.center]}>
-                        <Text style={[StyleLib.h2, styles.bannerText]}>Number of Sightings</Text>
-                        <Text style={[StyleLib.h1, styles.flex]}>{numSightingsAchivements}</Text>
+        <View style={StyleSheet.flatten([StyleLib.page, { paddingBottom: 20 }])}>
+            <View style={StyleSheet.flatten([styles.col])}>
+                <View style={StyleSheet.flatten([styles.row])}>
+                    <View style={StyleSheet.flatten([StyleLib.card, styles.center])}>
+                        <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Number of Sightings</Text>
+                        <Text style={StyleSheet.flatten([StyleLib.h1, styles.flex])}>{numSightingsAchivements}</Text>
                     </View>
                 </View>
-                <View style={[styles.row]}>
-                    <View style={[StyleLib.card, styles.center]}>
-                        <Text style={[StyleLib.h2, styles.bannerText]}>Number of Species Sighted</Text>
-                        <Text style={[StyleLib.h1, styles.flex]}>
+                <View style={StyleSheet.flatten([styles.row])}>
+                    <View style={StyleSheet.flatten([StyleLib.card, styles.center])}>
+                        <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Number of Species Sighted</Text>
+                        <Text style={StyleSheet.flatten([StyleLib.h1, styles.flex])}>
                             {numSpeciesAchivements}/{numSpeciesOverall}
                         </Text>
-                        <Link style={[StyleLib.h2]} href="/achivements/species/">
+                        <Link style={StyleSheet.flatten([StyleLib.h2])} href="/achivements/species/">
                             more info...
                         </Link>
                     </View>
                 </View>
-                <View style={[styles.row]}>
-                    <View style={[StyleLib.card, styles.center]}>
-                        <Text style={[StyleLib.h2, styles.bannerText]}>Most common species</Text>
-                        <Text style={[StyleLib.h1, styles.flex]}>{mostCommonSpeciesAchievment}</Text>
+                <View style={StyleSheet.flatten([styles.row])}>
+                    <View style={StyleSheet.flatten([StyleLib.card, styles.center])}>
+                        <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Most common species</Text>
+                        <Text style={StyleSheet.flatten([StyleLib.h1, styles.flex])}>{mostCommonSpeciesAchievment}</Text>
                     </View>
                 </View>
             </View>

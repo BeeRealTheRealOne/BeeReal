@@ -9,10 +9,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootSiblingParent } from 'react-native-root-siblings';
 
 /**
-  * Layout of the app using expo,
-  * defines the structure, navbar and profile
-  * checks if session cookies exist
-  */
+ * Layout of the app using expo,
+ * defines the structure, navbar and profile
+ * checks if session cookies exist
+ */
 function AppLayout() {
     const [validUser, setValidUser] = useState<boolean>(false);
 
@@ -87,8 +87,8 @@ function AppLayout() {
     // if the user is logged in, show the home page with tabs
     return (
         <RootSiblingParent>
-            <Link href="/profile/" style={styles.profileWrapper}>
-                <MaterialCommunityIcons name={'account'} size={40} style={styles.accountIcon} />
+            <Link href="/profile/" style={StyleSheet.flatten(styles.profileWrapper)}>
+                <MaterialCommunityIcons name={'account'} size={40} style={StyleSheet.flatten(styles.accountIcon)} />
             </Link>
             <StatusBar style="dark" />
             <Tabs backBehavior="history">

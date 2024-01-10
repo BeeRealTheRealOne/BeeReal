@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import pb from '../../../constants/pocketbase';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FlatList, RefreshControl } from 'react-native-gesture-handler';
 import StyleLib from '../../../constants/style';
 import LoadingPage from '../../../components/LoadingPage';
@@ -77,10 +77,10 @@ function speciesAchivements() {
     }
 
     return (
-        <View style={StyleLib.pageMarginTop}>
+        <View style={StyleSheet.flatten(StyleLib.pageMarginTop)}>
             <FlatList
                 ref={flatListRef as any}
-                style={[{ height: '100%', width: '100%' }]}
+                style={StyleSheet.flatten([{ height: '100%', width: '100%' }])}
                 data={speciesIds}
                 horizontal={false}
                 renderItem={({ item }) => {

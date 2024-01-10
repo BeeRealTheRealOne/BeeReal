@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import pb from '../../constants/pocketbase';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { FlatList, RefreshControl } from 'react-native-gesture-handler';
 import Post from '../../components/Post';
 import StyleLib from '../../constants/style';
@@ -9,8 +9,8 @@ import { Ionicons } from '@expo/vector-icons';
 import LoadingPage from '../../components/LoadingPage';
 
 /**
-  * This page displays a list of all posts made
-  */
+ * This page displays a list of all posts made
+ */
 function Social() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
@@ -93,15 +93,15 @@ function Social() {
     }
 
     return (
-        <View style={{ flex: 1, paddingTop: 60 }}>
-            <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
+        <View style={StyleSheet.flatten({ flex: 1, paddingTop: 60 })}>
+            <View style={StyleSheet.flatten([{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }])}>
                 <TouchableOpacity onPress={onRefresh}>
                     <Ionicons name="refresh" size={24} color={Colors.primaryText} />
                 </TouchableOpacity>
             </View>
             <FlatList
                 ref={flatListRef as any}
-                style={[{ height: '100%', width: '100%' }]}
+                style={StyleSheet.flatten([{ height: '100%', width: '100%' }])}
                 data={posts}
                 horizontal={false}
                 renderItem={({ item }) => {

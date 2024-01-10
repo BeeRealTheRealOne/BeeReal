@@ -8,9 +8,9 @@ const CategoriesItem = (props: { name: string; scientificName: string; id: strin
     if (!props.id) return <Text>Loading...</Text>;
 
     return (
-        <Link style={[styles.row, styles.margin]} href={`/species/categorie/id/${props.id}/`} asChild>
+        <Link style={StyleSheet.flatten([styles.row, styles.margin])} href={`/species/categorie/id/${props.id}/`} asChild>
             <Pressable>
-                <View style={[styles.col, StyleLib.card]}>
+                <View style={StyleSheet.flatten([styles.col, StyleLib.card])}>
                     <Text>{props.name}</Text>
                     <Text>{`[${props.scientificName}]`}</Text>
                 </View>

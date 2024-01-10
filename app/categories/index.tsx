@@ -8,9 +8,9 @@ import Colors from '../../constants/colors';
 import LoadingPage from '../../components/LoadingPage';
 
 /*
-  * This page shows a list of all the categories, a categorie is a group of species of insects. 
-  * From here the user can navigate to the species in the categorie 
-*/
+ * This page shows a list of all the categories, a categorie is a group of species of insects.
+ * From here the user can navigate to the species in the categorie
+ */
 function categoriesList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);
@@ -56,7 +56,7 @@ function categoriesList() {
         return <LoadingPage />;
     }
     return (
-        <View style={StyleLib.pageMarginTop}>
+        <View style={StyleSheet.flatten(StyleLib.pageMarginTop)}>
             <FlatList
                 ref={flatListRef as any}
                 ItemSeparatorComponent={() => <View style={styles.gap}></View>}

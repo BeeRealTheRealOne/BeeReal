@@ -104,37 +104,37 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (postModalVisible) {
         return (
-            <View style={[styles.centerAll, { height: '100%' }]}>
-                <View style={[StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 5 }]}>
+            <View style={StyleSheet.flatten([styles.centerAll, { height: '100%' }])}>
+                <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 5 }])}>
                     <Text>Post your findings for all to see!</Text>
-                    <View style={[styles.row]}>
+                    <View style={StyleSheet.flatten([styles.row])}>
                         <TextInput
                             onChangeText={(text) => {
                                 setTitle(text);
                             }}
                             maxLength={20}
-                            style={[StyleLib.inputDark, { flex: 1 }]}
+                            style={StyleSheet.flatten([StyleLib.inputDark, { flex: 1 }])}
                             placeholder="Title"
                         />
                     </View>
                     <Image
-                        style={[styles.image, StyleLib.rounded]}
+                        style={StyleSheet.flatten([styles.image, StyleLib.rounded])}
                         source={{
                             uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}`,
                         }}
                     />
-                    <View style={[styles.row]}>
+                    <View style={StyleSheet.flatten([styles.row])}>
                         <TextInput
                             onChangeText={(text) => {
                                 setMessage(text);
                             }}
                             multiline={true}
                             maxLength={150}
-                            style={[StyleLib.inputDark, { flex: 1 }]}
+                            style={StyleSheet.flatten([StyleLib.inputDark, { flex: 1 }])}
                             placeholder="Message"
                         />
                     </View>
-                    <View style={[styles.row]}>
+                    <View style={StyleSheet.flatten([styles.row])}>
                         <Button title="post" color={Colors.accent} onPress={post} />
                         <Button
                             title="cancel"
@@ -151,10 +151,10 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (deleteModalVisible) {
         return (
-            <View style={[styles.centerAll, { height: '100%' }]}>
-                <View style={[StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 20 }]}>
+            <View style={StyleSheet.flatten([styles.centerAll, { height: '100%' }])}>
+                <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.col, styles.centerAll, { gap: 20 }])}>
                     <Text>Are you sure you want to delte this?</Text>
-                    <View style={[styles.row, { gap: 60 }]}>
+                    <View style={StyleSheet.flatten([styles.row, { gap: 60 }])}>
                         <Button
                             title="cancel"
                             color={Colors.accent}
@@ -172,29 +172,29 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (!props.sighting) return <Text>Loading...</Text>;
     return (
-        <ScrollView style={{ height: '100%', width: '100%' }}>
-            <View style={[StyleLib.card, styles.flexNo, styles.gap, styles.center]}>
-                <View style={[styles.gap]}>
-                    <View style={[styles.col]}>
-                        <Text style={[StyleLib.h2]}>{props.sighting.expand.species.name}</Text>
-                        <View style={[styles.row, { gap: 10 }]}>
-                            <Text style={[StyleLib.text]}>{props.sighting.expand.species.scientificName}</Text>
-                            <Link style={[StyleLib.text]} href={`/species/id/${props.sighting.expand.species.id}/`}>
+        <ScrollView style={StyleSheet.flatten({ height: '100%', width: '100%' })}>
+            <View style={StyleSheet.flatten([StyleLib.card, styles.flexNo, styles.gap, styles.center])}>
+                <View style={StyleSheet.flatten([styles.gap])}>
+                    <View style={StyleSheet.flatten([styles.col])}>
+                        <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.sighting.expand.species.name}</Text>
+                        <View style={StyleSheet.flatten([styles.row, { gap: 10 }])}>
+                            <Text style={StyleSheet.flatten([StyleLib.text])}>{props.sighting.expand.species.scientificName}</Text>
+                            <Link style={StyleSheet.flatten([StyleLib.text])} href={`/species/id/${props.sighting.expand.species.id}/`}>
                                 Learn more...
                             </Link>
                         </View>
                     </View>
                     <Image
-                        style={[styles.image, StyleLib.rounded, styles.centerSelf]}
+                        style={StyleSheet.flatten([styles.image, StyleLib.rounded, styles.centerSelf])}
                         source={{
                             uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}`,
                         }}
                     />
-                    <Text style={[StyleLib.text, styles.centerSelf]}>{timeToString(props.sighting.created)}</Text>
+                    <Text style={StyleSheet.flatten([StyleLib.text, styles.centerSelf])}>{timeToString(props.sighting.created)}</Text>
                 </View>
-                <View style={[{ width: 300, height: 200, marginBottom: -5 }]}>
+                <View style={StyleSheet.flatten([{ width: 300, height: 200, marginBottom: -5 }])}>
                     <WebView
-                        style={{ width: 300, height: 200 }}
+                        style={StyleSheet.flatten({ width: 300, height: 200 })}
                         originWhitelist={['*']}
                         scrollEnabled={false}
                         source={{
@@ -202,7 +202,7 @@ function SightingCard(props: { sighting: Sighting }) {
                         }}
                     />
                 </View>
-                <View style={[styles.between, styles.row]}>
+                <View style={StyleSheet.flatten([styles.between, styles.row])}>
                     <Button color={Colors.cancel} title="Delete" onPress={() => setDeleteModalVisible(true)} />
                     <Button color={Colors.primary} title="Post" onPress={() => setPostModalVisible(true)} />
                 </View>

@@ -7,21 +7,21 @@ import { Link } from 'expo-router';
 function SightingItem(props: { sighting: Sighting }) {
     if (!props.sighting) return <></>;
     return (
-        <Link href={`/sightings/id/${props.sighting.id}/`} style={[styles.row, styles.margin]} asChild>
+        <Link href={`/sightings/id/${props.sighting.id}/`} style={StyleSheet.flatten([styles.row, styles.margin])} asChild>
             <Pressable>
-                <View style={[StyleLib.card, styles.flex]}>
-                    <View style={[styles.container]}>
+                <View style={StyleSheet.flatten([StyleLib.card, styles.flex])}>
+                    <View style={StyleSheet.flatten([styles.container])}>
                         <Image
-                            style={[styles.image, StyleLib.rounded]}
+                            style={StyleSheet.flatten([styles.image, StyleLib.rounded])}
                             source={{
                                 uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}?thumb=100x100`,
                             }}
                         />
-                        <View style={[styles.flex, styles.marginRight, styles.justify]}>
+                        <View style={StyleSheet.flatten([styles.flex, styles.marginRight, styles.justify])}>
                             <View>
-                                <Text style={[StyleLib.h3]}>{props.sighting.expand.species.name}</Text>
+                                <Text style={StyleSheet.flatten([StyleLib.h3])}>{props.sighting.expand.species.name}</Text>
                             </View>
-                            <Text style={[StyleLib.text]}>{timeToString(props.sighting.created)}</Text>
+                            <Text style={StyleSheet.flatten([StyleLib.text])}>{timeToString(props.sighting.created)}</Text>
                         </View>
                     </View>
                 </View>

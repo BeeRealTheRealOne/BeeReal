@@ -44,11 +44,11 @@ const SpeciesDiscovered = (props: { speciesId: string }) => {
     if (loadingFinding || loadingSpecies) return <Text>Loading...</Text>;
 
     return (
-        <View style={[StyleLib.card, styles.margin, { borderColor: found ? Colors.accent : Colors.cancel, borderWidth: 2 }, { flexDirection: 'row', alignItems: 'center', gap: 10 }]}>
-            <Image style={[{ width: 100, height: 100, resizeMode: 'contain' }, StyleLib.rounded]} source={{ uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${props.speciesId}/${species.image}` }} />
-            <View style={[styles.flex]}>
-                <Text style={[StyleLib.h3, { flexWrap: 'wrap' }]}>{species.name}</Text>
-                <Text style={[StyleLib.text]}>{`[${species.scientificName}]`}</Text>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.margin, { borderColor: found ? Colors.accent : Colors.cancel, borderWidth: 2 }, { flexDirection: 'row', alignItems: 'center', gap: 10 }])}>
+            <Image style={StyleSheet.flatten([{ width: 100, height: 100, resizeMode: 'contain' }, StyleLib.rounded])} source={{ uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${props.speciesId}/${species.image}` }} />
+            <View style={StyleSheet.flatten([styles.flex])}>
+                <Text style={StyleSheet.flatten([StyleLib.h3, { flexWrap: 'wrap' }])}>{species.name}</Text>
+                <Text style={StyleSheet.flatten([StyleLib.text])}>{`[${species.scientificName}]`}</Text>
             </View>
         </View>
     );

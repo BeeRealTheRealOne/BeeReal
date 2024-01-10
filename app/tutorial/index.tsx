@@ -10,8 +10,8 @@ function tutorialView() {
 
     const [index, setIndex] = useState(0);
     return (
-        <View style={[StyleLib.page]}>
-            <Image source={images[index]} style={styles.image}></Image>
+        <View style={StyleSheet.flatten([StyleLib.page])}>
+            <Image source={images[index]} style={StyleSheet.flatten(styles.image)}></Image>
             <Button
                 title={index != images.length - 1 ? 'next' : 'finish'}
                 color={Colors.primary}

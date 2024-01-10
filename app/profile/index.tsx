@@ -8,9 +8,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /**
-  * This page shows the users profile and some other app informations and also
-  * can log the user out and links to the achievments
-  */
+ * This page shows the users profile and some other app informations and also
+ * can log the user out and links to the achievments
+ */
 function profileView() {
     // get the current user that is logged in
     const user = pb.authStore.model;
@@ -19,20 +19,20 @@ function profileView() {
         return;
     }
     return (
-        <View style={[StyleLib.page]}>
-            <View style={[styles.spacer]}></View>
-            <View style={[styles.col]}>
-                <View style={[styles.row, styles.center]}>
-                    <View style={[StyleLib.card]}>
-                        <Text style={[StyleLib.text]}>Email: {user.email}</Text>
-                        <Text style={[StyleLib.text]}>Username: {user.username}</Text>
+        <View style={StyleSheet.flatten([StyleLib.page])}>
+            <View style={StyleSheet.flatten([styles.spacer])}></View>
+            <View style={StyleSheet.flatten([styles.col])}>
+                <View style={StyleSheet.flatten([styles.row, styles.center])}>
+                    <View style={StyleSheet.flatten([StyleLib.card])}>
+                        <Text style={StyleSheet.flatten([StyleLib.text])}>Email: {user.email}</Text>
+                        <Text style={StyleSheet.flatten([StyleLib.text])}>Username: {user.username}</Text>
                     </View>
                 </View>
-                <View style={[styles.row]}>
-                    <View style={[StyleLib.card]}>
+                <View style={StyleSheet.flatten([styles.row])}>
+                    <View style={StyleSheet.flatten([StyleLib.card])}>
                         <Link href="/achivements/" asChild>
                             <TouchableOpacity>
-                                <View style={[styles.col, styles.center]}>
+                                <View style={StyleSheet.flatten([styles.col, styles.center])}>
                                     <Ionicons name="trophy" size={45} color="black" />
                                     <Text>Achivements</Text>
                                 </View>
@@ -40,20 +40,20 @@ function profileView() {
                         </Link>
                     </View>
                 </View>
-                <View style={[styles.row]}>
-                    <View style={[StyleLib.card, styles.centerSpaced]}>
-                        <Link style={[styles.col]} href="/tutorial/">
-                            <Text style={[StyleLib.text]}>tutorial</Text>
+                <View style={StyleSheet.flatten([styles.row])}>
+                    <View style={StyleSheet.flatten([StyleLib.card, styles.centerSpaced])}>
+                        <Link style={StyleSheet.flatten([styles.col])} href="/tutorial/">
+                            <Text style={StyleSheet.flatten([StyleLib.text])}>tutorial</Text>
                         </Link>
                     </View>
-                    <View style={[StyleLib.card, styles.centerSpaced]}>
-                        <Link style={[styles.col]} href="/imprint/">
-                            <Text style={[StyleLib.text]}>Imprint</Text>
+                    <View style={StyleSheet.flatten([StyleLib.card, styles.centerSpaced])}>
+                        <Link style={StyleSheet.flatten([styles.col])} href="/imprint/">
+                            <Text style={StyleSheet.flatten([StyleLib.text])}>Imprint</Text>
                         </Link>
                     </View>
                 </View>
-                <View style={[styles.row]}>
-                    <View style={[StyleLib.card, styles.centerSpaced]}>
+                <View style={StyleSheet.flatten([styles.row])}>
+                    <View style={StyleSheet.flatten([StyleLib.card, styles.centerSpaced])}>
                         <Button
                             color={Colors.primary}
                             title="Logout"

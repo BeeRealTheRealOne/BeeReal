@@ -45,8 +45,8 @@ function SnapView() {
     if (!permissionCam.granted) {
         // Camera permissions are not granted yet
         return (
-            <View style={styles.container}>
-                <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+            <View style={StyleSheet.flatten(styles.container)}>
+                <Text style={StyleSheet.flatten({ textAlign: 'center' })}>We need your permission to show the camera</Text>
                 <Button onPress={requestPermissionCam} title="grant permission" />
             </View>
         );
@@ -205,12 +205,12 @@ function SnapView() {
 
     return (
         <>
-            <View style={styles.container}>
+            <View style={StyleSheet.flatten(styles.container)}>
                 {image ? (
-                    <View style={[styles.container, styles.flex]}>
-                        <View style={[styles.flex]} />
-                        <Image source={{ uri: image.uri }} style={styles.camera} />
-                        <View style={[styles.containerRow]}>
+                    <View style={StyleSheet.flatten([styles.container, styles.flex])}>
+                        <View style={StyleSheet.flatten([styles.flex])} />
+                        <Image source={{ uri: image.uri }} style={StyleSheet.flatten(styles.camera)} />
+                        <View style={StyleSheet.flatten([styles.containerRow])}>
                             {sending ? (
                                 <>
                                     <Text>Classifing your insect...</Text>
@@ -218,24 +218,24 @@ function SnapView() {
                                 </>
                             ) : (
                                 <>
-                                    <TouchableOpacity style={[styles.container]} onPress={confirm} disabled={sending}>
-                                        <View style={[styles.snapButton, { backgroundColor: Colors.accent }]}>{sending ? <ActivityIndicator size="large" color="black" /> : <Ionicons name="checkmark" size={40} color="black" />}</View>
+                                    <TouchableOpacity style={StyleSheet.flatten([styles.container])} onPress={confirm} disabled={sending}>
+                                        <View style={StyleSheet.flatten([styles.snapButton, { backgroundColor: Colors.accent }])}>{sending ? <ActivityIndicator size="large" color="black" /> : <Ionicons name="checkmark" size={40} color="black" />}</View>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={[styles.container]} onPress={() => setImage(null)} disabled={sending}>
-                                        <View style={[styles.snapButton, { backgroundColor: Colors.cancel }]}>{sending ? <ActivityIndicator size="large" color="black" /> : <Ionicons name="close" size={40} color="black" />}</View>
+                                        <View style={StyleSheet.flatten([styles.snapButton, { backgroundColor: Colors.cancel }])}>{sending ? <ActivityIndicator size="large" color="black" /> : <Ionicons name="close" size={40} color="black" />}</View>
                                     </TouchableOpacity>
                                 </>
                             )}
                         </View>
                     </View>
                 ) : (
-                    <View style={[styles.container, styles.flex]}>
-                        <View style={[styles.flex]} />
-                        <View style={[styles.camera, StyleLib.rounded]}>
-                            <Camera ratio="1:1" style={[styles.camera]} type={CameraType.back} ref={(ref) => setCamera(ref)}></Camera>
+                    <View style={StyleSheet.flatten([styles.container, styles.flex])}>
+                        <View style={StyleSheet.flatten([styles.flex])} />
+                        <View style={StyleSheet.flatten([styles.camera, StyleLib.rounded])}>
+                            <Camera ratio="1:1" style={StyleSheet.flatten([styles.camera])} type={CameraType.back} ref={(ref) => setCamera(ref)}></Camera>
                         </View>
-                        <Pressable android_disableSound={false} style={[styles.container]} onPress={onSnap}>
-                            <View style={[styles.snapButton]}>
+                        <Pressable android_disableSound={false} style={StyleSheet.flatten([styles.container])} onPress={onSnap}>
+                            <View style={StyleSheet.flatten([styles.snapButton])}>
                                 <Ionicons name="camera" size={40} color="black" />
                             </View>
                         </Pressable>

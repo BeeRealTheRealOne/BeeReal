@@ -4,9 +4,9 @@ import Colors from '../constants/colors';
 
 export default function Comment(props: { user: string; text: string }) {
     return (
-        <View style={[StyleLib.card, styles.margin, styles.gap]}>
-            <Text style={[StyleLib.text, { fontWeight: '400' }]}>{props.user}</Text>
-            <Text style={[StyleLib.text]}>{props.text}</Text>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.margin, styles.gap])}>
+            <Text style={StyleSheet.flatten([StyleLib.text, { fontWeight: '400' }])}>{props.user}</Text>
+            <Text style={StyleSheet.flatten([StyleLib.text])}>{props.text}</Text>
         </View>
     );
 }

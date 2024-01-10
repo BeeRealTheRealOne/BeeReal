@@ -4,35 +4,35 @@ import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import StyleLib from '../../constants/style';
 
-/** 
-  * This page can be used to give the user the choice of logging in or registering, 
-  * but is currently not used
-  */
+/**
+ * This page can be used to give the user the choice of logging in or registering,
+ * but is currently not used
+ */
 function newUser() {
     return (
-        <View style={[styles.container]}>
-            <View style={[styles.infoContainer]}>
-                <Text style={[StyleLib.h1]}>
-                    Welcome to <Text style={[styles.highlight]}>Bee</Text>
-                    Real<Text style={[styles.highlight]}>!</Text>
+        <View style={StyleSheet.flatten([styles.container])}>
+            <View style={StyleSheet.flatten([styles.infoContainer])}>
+                <Text style={StyleSheet.flatten([StyleLib.h1])}>
+                    Welcome to <Text style={StyleSheet.flatten([styles.highlight])}>Bee</Text>
+                    Real<Text style={StyleSheet.flatten([styles.highlight])}>!</Text>
                 </Text>
-                <Text style={[StyleLib.text]}>Please login or register to continue.</Text>
+                <Text style={StyleSheet.flatten([StyleLib.text])}>Please login or register to continue.</Text>
             </View>
-            <View style={[styles.LoginContainer]}>
+            <View style={StyleSheet.flatten([styles.LoginContainer])}>
                 <Link href="/register/">
-                    <View style={[styles.IconWithText]}>
+                    <View style={StyleSheet.flatten([styles.IconWithText])}>
                         <Ionicons name="person-add" size={80} color={Colors.baseText} />
-                        <Text style={[styles.text, styles.center]}>Register</Text>
+                        <Text style={StyleSheet.flatten([styles.text, styles.center])}>Register</Text>
                     </View>
                 </Link>
                 <Link href="/login/">
-                    <View style={[styles.IconWithText]}>
+                    <View style={StyleSheet.flatten([styles.IconWithText])}>
                         <Ionicons name="log-in" size={80} color={Colors.baseText} />
-                        <Text style={[styles.text, styles.center]}>Login</Text>
+                        <Text style={StyleSheet.flatten([styles.text, styles.center])}>Login</Text>
                     </View>
                 </Link>
             </View>
-            <View style={[styles.bumper]} />
+            <View style={StyleSheet.flatten([styles.bumper])} />
         </View>
     );
 }

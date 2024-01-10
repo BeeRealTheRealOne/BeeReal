@@ -53,40 +53,40 @@ const Post = (props: { postId: string; title: string; message: string; user: str
     };
 
     return (
-        <View style={[StyleLib.card, styles.margin, styles.center]}>
-            <View style={styles.header}>
-                <Text style={[StyleLib.h2]}>{props.title}</Text>
-                <Link style={[{ marginLeft: 10 }]} href={`/social/user/id/${props.userId}/`}>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.margin, styles.center])}>
+            <View style={StyleSheet.flatten(styles.header)}>
+                <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.title}</Text>
+                <Link style={StyleSheet.flatten([{ marginLeft: 10 }])} href={`/social/user/id/${props.userId}/`}>
                     <Text style={styles.author}>{props.user}</Text>
                 </Link>
             </View>
-            <View style={[styles.image, StyleLib.rounded]}>
-                <Image style={[styles.image, StyleLib.rounded]} source={{ uri: props.imageUrl }} resizeMode="contain" />
+            <View style={StyleSheet.flatten([styles.image, StyleLib.rounded])}>
+                <Image style={StyleSheet.flatten([styles.image, StyleLib.rounded])} source={{ uri: props.imageUrl }} resizeMode="contain" />
                 {likeLoading ? (
-                    <View style={styles.heartContainer}>
+                    <View style={StyleSheet.flatten(styles.heartContainer)}>
                         <ActivityIndicator size="large" color={Colors.primary} />
                     </View>
                 ) : (
-                    <View style={styles.heartContainer}>
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={handleLike}>
+                    <View style={StyleSheet.flatten(styles.heartContainer)}>
+                        <TouchableOpacity style={StyleSheet.flatten({ flexDirection: 'row' })} onPress={handleLike}>
                             {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
-                            <Text style={[StyleLib.h2]}>{likes}</Text>
+                            <Text style={StyleSheet.flatten([StyleLib.h2])}>{likes}</Text>
                         </TouchableOpacity>
                     </View>
                 )}
-                <View style={styles.commentContainer}>
-                    <Text style={[StyleLib.h2]}>{props.comments}</Text>
+                <View style={StyleSheet.flatten(styles.commentContainer)}>
+                    <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.comments}</Text>
                     <Link href={`/social/comments/id/${props.postId}/`}>
                         <Ionicons name="chatbubble-outline" size={40} color={Colors.primary} />
                     </Link>
                 </View>
             </View>
-            <View style={styles.flex}>
-                <Text style={[StyleLib.text]}>{dateStr}</Text>
+            <View style={StyleSheet.flatten(styles.flex)}>
+                <Text style={StyleSheet.flatten([StyleLib.text])}>{dateStr}</Text>
             </View>
             {props.message.length > 0 && (
-                <View style={styles.bottom}>
-                    <Text style={[StyleLib.text]}>{props.message}</Text>
+                <View style={StyleSheet.flatten(styles.bottom)}>
+                    <Text style={StyleSheet.flatten([StyleLib.text])}>{props.message}</Text>
                 </View>
             )}
         </View>
