@@ -7,7 +7,10 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-// this page shows the users profile and some other app informations
+/**
+  * This page shows the users profile and some other app informations and also
+  * can log the user out and links to the achievments
+  */
 function profileView() {
     // get the current user that is logged in
     const user = pb.authStore.model;

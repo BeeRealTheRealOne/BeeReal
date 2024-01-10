@@ -5,7 +5,9 @@ import SpeciesCard from '../../../../components/SpeciesCard';
 import { StyleSheet, View } from 'react-native';
 import StyleLib from '../../../../constants/style';
 
-// this page displays a detail view of a single species with the given id
+/**
+  * This page displays a detail view of a single species with the given id
+  */
 function speciesCardView() {
     const local = useLocalSearchParams();
     const id = local.id;

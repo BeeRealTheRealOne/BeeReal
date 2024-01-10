@@ -8,7 +8,9 @@ import Colors from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import LoadingPage from '../../components/LoadingPage';
 
-// this page displays a list of all posts made
+/**
+  * This page displays a list of all posts made
+  */
 function Social() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);

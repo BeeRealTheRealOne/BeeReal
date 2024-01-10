@@ -9,7 +9,9 @@ import { Ionicons } from '@expo/vector-icons';
 import debounce from 'debounce';
 import LoadingPage from '../../components/LoadingPage';
 
-// this page displays a list of all species
+/**
+  * This page displays a list of all species
+  */
 function speciesList() {
     const flatListRef = useRef<FlatList>();
     const [refreshing, setRefreshing] = useState(false);

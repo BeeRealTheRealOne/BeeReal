@@ -8,6 +8,11 @@ import Colors from '../constants/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootSiblingParent } from 'react-native-root-siblings';
 
+/**
+  * Layout of the app using expo,
+  * defines the structure, navbar and profile
+  * checks if session cookies exist
+  */
 function AppLayout() {
     const [validUser, setValidUser] = useState<boolean>(false);
 
@@ -93,6 +98,7 @@ function AppLayout() {
                         tabBarActiveBackgroundColor: Colors.primary,
                         href: '/insects',
                         title: '',
+                        // tabBarIcon so shown in the navbar
                         tabBarIcon: () => <MaterialCommunityIcons name="bee" size={45} />,
                         headerShown: false,
                     }}

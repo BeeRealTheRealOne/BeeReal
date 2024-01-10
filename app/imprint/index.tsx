@@ -1,7 +1,9 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import StyleLib from '../../constants/style';
 
-// This is the imprint page
+/**
+  * Imprint page with fake data
+  */
 function imprintView() {
     return (
         <View style={StyleLib.page}>

@@ -7,7 +7,11 @@ import StyleLib from '../../constants/style';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-root-toast';
 
-// this is the login page
+/**
+  * Login Component
+  * Logs user in and stores the session as a cookie,
+  * when login failed notify
+  */
 function login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -34,7 +38,7 @@ function login() {
             .then((res) => {
                 setLoading(false);
                 if (res.token) {
-                    const cookie = pb.authStore.exportToCookie();
+                    const cookie = pb.authStore.exportToCookie(); // session storing
                     AsyncStorage.setItem('sessionCookie', cookie);
                     router.push('/');
                 }
