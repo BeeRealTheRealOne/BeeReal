@@ -1,4 +1,4 @@
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { Text, View, Image, StyleSheet, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import StyleLib from '../constants/style';
 
@@ -9,7 +9,20 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
     if (!props.imageURL) return <Text>Loading...</Text>;
     if (!props.description) return <Text>Loading...</Text>;
 
-    return (
+    //somehow here is a difference between native and web in style, but setting the outer View to noFlex on native fixes it
+    return Platform.OS === 'web' ? (
+        <View style={StyleSheet.flatten([StyleLib.card, styles.col])}>
+            <View style={StyleSheet.flatten([styles.row])}>
+                <View style={StyleSheet.flatten([styles.nameBox])}>
+                    <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.name}</Text>
+                    <Text style={StyleSheet.flatten([StyleLib.text])}>{`[${props.scientificName}]`}</Text>
+                </View>
+                <Image style={StyleSheet.flatten([styles.image])} source={{ uri: props.imageURL }} resizeMode="contain" />
+            </View>
+            <View style={StyleSheet.flatten([styles.spacer10])} />
+            <Text style={StyleSheet.flatten([StyleLib.text])}>{props.description}</Text>
+        </View>
+    ) : (
         <View style={StyleSheet.flatten([StyleLib.card, styles.col, styles.flexNo])}>
             <View style={StyleSheet.flatten([styles.row])}>
                 <View style={StyleSheet.flatten([styles.nameBox])}>
