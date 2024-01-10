@@ -14,7 +14,6 @@ const SpeciesDiscovered = (props: { speciesId: string }) => {
         pb.collection('insectFindings')
             .getList(1, 1, { filter: `user = '${pb.authStore.model?.id}' && species = '${props.speciesId}'`, requestKey: `${props.speciesId + pb.authStore.model?.id}` })
             .then((res) => {
-                console.log(res);
                 if (res.items.length > 0) {
                     setFound(true);
                 }
@@ -24,7 +23,6 @@ const SpeciesDiscovered = (props: { speciesId: string }) => {
                 if (err.status != 0) {
                     console.error(err);
                 }
-                console.log(err);
                 setLoadingFinding(false);
             });
 
@@ -44,7 +42,7 @@ const SpeciesDiscovered = (props: { speciesId: string }) => {
     if (loadingFinding || loadingSpecies) return <Text>Loading...</Text>;
 
     return (
-        <View style={StyleSheet.flatten([StyleLib.card, styles.margin, { borderColor: found ? Colors.accent : Colors.cancel, borderWidth: 2 }, { flexDirection: 'row', alignItems: 'center', gap: 10 }])}>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.container, { borderColor: found ? Colors.accent : Colors.cancel, borderWidth: 2 }])}>
             <Image style={StyleSheet.flatten([{ width: 100, height: 100, resizeMode: 'contain' }, StyleLib.rounded])} source={{ uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${props.speciesId}/${species.image}` }} />
             <View style={StyleSheet.flatten([styles.flex])}>
                 <Text style={StyleSheet.flatten([StyleLib.h3, { flexWrap: 'wrap' }])}>{species.name}</Text>
@@ -55,9 +53,13 @@ const SpeciesDiscovered = (props: { speciesId: string }) => {
 };
 
 const styles = StyleSheet.create({
-    margin: {
+    container: {
         marginHorizontal: 20,
         marginVertical: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        borderWidth: 2,
     },
     flex: {
         flex: 1,

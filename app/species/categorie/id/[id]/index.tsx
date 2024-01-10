@@ -78,7 +78,7 @@ function speciesCategoriesCardView() {
     }
 
     return (
-        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, { flex: 1 }])}>
+        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, styles.flex])}>
             <FlatList
                 ref={flatListRef as any}
                 data={species}
@@ -101,6 +101,9 @@ function speciesCategoriesCardView() {
 const styles = StyleSheet.create({
     gap: {
         height: 10,
+    },
+    flex: {
+        flex: 1,
     },
 });
 

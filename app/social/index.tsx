@@ -93,15 +93,15 @@ function Social() {
     }
 
     return (
-        <View style={StyleSheet.flatten({ flex: 1, paddingTop: 60 })}>
-            <View style={StyleSheet.flatten([{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }])}>
+        <View style={StyleSheet.flatten([styles.container])}>
+            <View style={StyleSheet.flatten([styles.refresh])}>
                 <TouchableOpacity onPress={onRefresh}>
                     <Ionicons name="refresh" size={24} color={Colors.primaryText} />
                 </TouchableOpacity>
             </View>
             <FlatList
                 ref={flatListRef as any}
-                style={StyleSheet.flatten([{ height: '100%', width: '100%' }])}
+                style={StyleSheet.flatten([styles.flatlist])}
                 data={posts}
                 horizontal={false}
                 renderItem={({ item }) => {
@@ -132,4 +132,26 @@ function Social() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 60,
+    },
+    flatlist: {
+        height: '100%',
+        width: '100%',
+    },
+    refresh: {
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        zIndex: 20,
+        backgroundColor: Colors.primary,
+        padding: 5,
+        borderRadius: 30,
+        opacity: 0.8,
+    },
+});
+
 export default Social;

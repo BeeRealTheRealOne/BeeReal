@@ -152,9 +152,9 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (deleteModalVisible) {
         return (
-            <View style={StyleSheet.flatten([{ height: '100%', alignItems: 'center', justifyContent: 'center' }])}>
+            <View style={StyleSheet.flatten([styles.deleteModalContainer])}>
                 {/*the card stretches in the browser to 100%, on native it works fine*/}
-                <View style={StyleSheet.flatten([StyleLib.card, styles.col, styles.centerAll, { gap: 20 }, Platform.OS == 'web' ? { flex: 1, maxHeight: 150 } : { flex: 0, maxHeight: 200 }])}>
+                <View style={StyleSheet.flatten([StyleLib.card, styles.deleteModal, Platform.OS == 'web' ? { flex: 1, maxHeight: 150 } : { flex: 0 }])}>
                     <Text>Are you sure you want to delte this?</Text>
                     <View style={StyleSheet.flatten([styles.row, { gap: 60 }])}>
                         <Button
@@ -174,12 +174,12 @@ function SightingCard(props: { sighting: Sighting }) {
 
     if (!props.sighting) return <Text>Loading...</Text>;
     return (
-        <ScrollView style={StyleSheet.flatten({ height: '100%', width: '100%' })}>
-            <View style={StyleSheet.flatten([StyleLib.card, styles.gap, styles.center, Platform.OS == 'web' ? { flex: 1 } : { flex: 0 }])}>
-                <View style={StyleSheet.flatten([styles.gap])}>
+        <ScrollView style={StyleSheet.flatten(styles.scrollview)}>
+            <View style={StyleSheet.flatten([StyleLib.card, styles.sightingCard, Platform.OS == 'web' ? { flex: 1 } : { flex: 0 }])}>
+                <View style={StyleSheet.flatten([styles.gap5])}>
                     <View style={StyleSheet.flatten([styles.col])}>
                         <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.sighting.expand.species.name}</Text>
-                        <View style={StyleSheet.flatten([styles.row, { gap: 10 }])}>
+                        <View style={StyleSheet.flatten([styles.row, styles.gap10])}>
                             <Text style={StyleSheet.flatten([StyleLib.text])}>{props.sighting.expand.species.scientificName}</Text>
                             <Link style={StyleSheet.flatten([StyleLib.text])} href={`/species/id/${props.sighting.expand.species.id}/`}>
                                 Learn more...
@@ -187,16 +187,16 @@ function SightingCard(props: { sighting: Sighting }) {
                         </View>
                     </View>
                     <Image
-                        style={StyleSheet.flatten([styles.image, StyleLib.rounded, styles.centerSelf])}
+                        style={StyleSheet.flatten([StyleLib.rounded, styles.image])}
                         source={{
                             uri: `${process.env.EXPO_PUBLIC_PB_URL}/api/files/insectFindings/${props.sighting.id}/${props.sighting.image}`,
                         }}
                     />
                     <Text style={StyleSheet.flatten([StyleLib.text, styles.centerSelf])}>{timeToString(props.sighting.created)}</Text>
                 </View>
-                <View style={StyleSheet.flatten([{ width: 300, height: 200, marginBottom: -5 }])}>
+                <View style={StyleSheet.flatten([styles.webviewContainer])}>
                     <WebView
-                        style={StyleSheet.flatten({ width: 300, height: 200 })}
+                        style={StyleSheet.flatten([styles.webview])}
                         originWhitelist={['*']}
                         scrollEnabled={false}
                         source={{
@@ -204,7 +204,7 @@ function SightingCard(props: { sighting: Sighting }) {
                         }}
                     />
                 </View>
-                <View style={StyleSheet.flatten([styles.between, styles.row])}>
+                <View style={StyleSheet.flatten([styles.buttonContainer])}>
                     <Button color={Colors.cancel} title="Delete" onPress={() => setDeleteModalVisible(true)} />
                     <Button color={Colors.primary} title="Post" onPress={() => setPostModalVisible(true)} />
                 </View>
@@ -214,12 +214,47 @@ function SightingCard(props: { sighting: Sighting }) {
 }
 
 const styles = StyleSheet.create({
+    sightingCard: {
+        gap: 5,
+        alignItems: 'center',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        gap: 5,
+        width: '100%',
+        justifyContent: 'space-between',
+    },
+    deleteModalContainer: {
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    deleteModal: {
+        gap: 20,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    scrollview: {
+        height: '100%',
+        width: '100%',
+    },
     image: {
         width: 300,
         height: 300,
+        alignSelf: 'center',
     },
     flex: {
         flex: 1,
+    },
+    webview: {
+        width: 300,
+        height: 200,
+    },
+    webviewContainer: {
+        width: 300,
+        height: 200,
+        marginBottom: -5,
     },
     flexNo: {
         flex: 0,
@@ -232,8 +267,11 @@ const styles = StyleSheet.create({
     col: {
         flexDirection: 'column',
     },
-    gap: {
+    gap5: {
         gap: 5,
+    },
+    gap10: {
+        gap: 10,
     },
     center: {
         alignItems: 'center',

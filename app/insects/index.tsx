@@ -10,17 +10,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
   Pictures are AI generated so they are free to use
   */
 function insectsView() {
-    const handleNavigation = (dest: any) => {
-        router.push(dest);
-    };
-
     return (
         <View style={StyleSheet.flatten(StyleLib.page)}>
             <View style={StyleSheet.flatten(styles.firstRow)}>
-                <View style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, StyleLib.rounded])}>
+                <View style={StyleSheet.flatten([styles.linkWrapper, StyleLib.rounded])}>
                     <Link href="/species/" asChild>
                         <TouchableOpacity style={StyleSheet.flatten([styles.banner])}>
-                            <ImageBackground style={StyleSheet.flatten([{ width: '100%', height: '100%' }, styles.bannerImage])} source={require('../../assets/images/speciesBanner.png')} resizeMode="cover"></ImageBackground>
+                            <ImageBackground style={StyleSheet.flatten([styles.bannerImage])} source={require('../../assets/images/speciesBanner.png')} resizeMode="cover"></ImageBackground>
                             <Link href="/species/" asChild>
                                 <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Species</Text>
                             </Link>
@@ -28,10 +24,10 @@ function insectsView() {
                     </Link>
                 </View>
                 <View style={StyleSheet.flatten([styles.spacer])}></View>
-                <View style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, StyleLib.rounded])}>
+                <View style={StyleSheet.flatten([styles.linkWrapper, StyleLib.rounded])}>
                     <Link href="/categories/" asChild>
                         <TouchableOpacity style={StyleSheet.flatten([styles.banner])}>
-                            <ImageBackground style={StyleSheet.flatten([{ width: '100%', height: '100%' }, styles.bannerImage2])} source={require('../../assets/images/categoriesBanner.png')} resizeMode="cover"></ImageBackground>
+                            <ImageBackground style={StyleSheet.flatten([styles.bannerImage2])} source={require('../../assets/images/categoriesBanner.png')} resizeMode="cover"></ImageBackground>
                             <Link href="/categories/" asChild>
                                 <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Categories</Text>
                             </Link>
@@ -41,10 +37,10 @@ function insectsView() {
             </View>
             <View style={StyleSheet.flatten([styles.spacer])}></View>
             <View style={StyleSheet.flatten(styles.secondRow)}>
-                <View style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, StyleLib.rounded])}>
+                <View style={StyleSheet.flatten([styles.linkWrapper, StyleLib.rounded])}>
                     <Link href="/sightings/my/" asChild>
                         <TouchableOpacity style={StyleSheet.flatten([styles.banner])}>
-                            <ImageBackground style={StyleSheet.flatten([{ width: '100%', height: '100%' }, styles.mainBannerImage])} source={require('../../assets/images/findingsBanner.png')} resizeMode="cover"></ImageBackground>
+                            <ImageBackground style={StyleSheet.flatten([styles.mainBannerImage])} source={require('../../assets/images/findingsBanner.png')} resizeMode="cover"></ImageBackground>
                             <Link href="/sightings/my/" asChild>
                                 <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>My Sightings</Text>
                             </Link>
@@ -104,12 +100,18 @@ const styles = StyleSheet.create({
     },
     bannerImage: {
         transform: [{ scale: 1.2 }],
+        width: '100%',
+        height: '100%',
     },
     bannerImage2: {
         transform: [{ scale: 1.5 }, { translateX: -30 }],
+        width: '100%',
+        height: '100%',
     },
     mainBannerImage: {
         transform: [{ scale: 1.2 }, { translateX: -30 }],
+        width: '100%',
+        height: '100%',
     },
     bannerText: {
         position: 'absolute',
@@ -125,6 +127,10 @@ const styles = StyleSheet.create({
     spacer: {
         width: 10,
         height: 10,
+    },
+    linkWrapper: {
+        flex: 1,
+        overflow: 'hidden',
     },
 });
 export default insectsView;

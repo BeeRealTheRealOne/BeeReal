@@ -36,6 +36,14 @@ function sightingCardView() {
         return <LoadingPage />;
     }
 
-    return <View style={StyleSheet.flatten([StyleLib.page, { paddingTop: 60, paddingBottom: 20 }])}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={StyleSheet.flatten([StyleLib.text])}>Loading...</Text>}</View>;
+    return <View style={StyleSheet.flatten([StyleLib.page, styles.padding])}>{sighting ? <SightingCard sighting={sighting} /> : <Text style={StyleSheet.flatten([StyleLib.text])}>Loading...</Text>}</View>;
 }
+
+const styles = StyleSheet.create({
+    padding: {
+        paddingTop: 60,
+        paddingBottom: 20,
+    },
+});
+
 export default sightingCardView;

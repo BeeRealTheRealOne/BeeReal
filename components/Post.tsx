@@ -53,17 +53,17 @@ const Post = (props: { postId: string; title: string; message: string; user: str
     };
 
     return (
-        <View style={StyleSheet.flatten([StyleLib.card, styles.margin, styles.center])}>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.container])}>
             <View style={StyleSheet.flatten(styles.header)}>
                 <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.title}</Text>
-                <Link style={StyleSheet.flatten([{ marginLeft: 10 }])} href={`/social/user/id/${props.userId}/`}>
+                <Link style={StyleSheet.flatten([styles.usernameMargin])} href={`/social/user/id/${props.userId}/`}>
                     <Text style={styles.author}>{props.user}</Text>
                 </Link>
             </View>
-            <View style={StyleSheet.flatten([styles.image, StyleLib.rounded])}>
-                <Image style={StyleSheet.flatten([styles.image, StyleLib.rounded])} source={{ uri: props.imageUrl }} resizeMode="contain" />
+            <View style={StyleSheet.flatten([StyleLib.rounded, styles.image])}>
+                <Image style={StyleSheet.flatten([StyleLib.rounded, styles.image])} source={{ uri: props.imageUrl }} resizeMode="contain" />
                 {likeLoading ? (
-                    <View style={StyleSheet.flatten(styles.heartContainer)}>
+                    <View style={StyleSheet.flatten([styles.heartContainer])}>
                         <ActivityIndicator size="large" color={Colors.primary} />
                     </View>
                 ) : (
@@ -95,9 +95,9 @@ const Post = (props: { postId: string; title: string; message: string; user: str
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        marginHorizontal: 20,
+        marginVertical: 10,
         alignItems: 'center',
-        padding: 5,
     },
     header: {
         flexDirection: 'row',
@@ -149,12 +149,8 @@ const styles = StyleSheet.create({
     flex: {
         flex: 1,
     },
-    margin: {
-        marginHorizontal: 20,
-        marginVertical: 10,
-    },
-    center: {
-        alignItems: 'center',
+    usernameMargin: {
+        marginLeft: 10,
     },
 });
 

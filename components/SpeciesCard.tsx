@@ -23,7 +23,7 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
             <Text style={StyleSheet.flatten([StyleLib.text])}>{props.description}</Text>
         </View>
     ) : (
-        <View style={StyleSheet.flatten([StyleLib.card, styles.col, styles.flexNo])}>
+        <View style={StyleSheet.flatten([StyleLib.card, styles.colNoFlex])}>
             <View style={StyleSheet.flatten([styles.row])}>
                 <View style={StyleSheet.flatten([styles.nameBox])}>
                     <Text style={StyleSheet.flatten([StyleLib.h2])}>{props.name}</Text>
@@ -38,6 +38,10 @@ const SpeciesCard = (props: { name: string; description: string; scientificName:
 };
 
 const styles = StyleSheet.create({
+    colNoFlex: {
+        flexDirection: 'column',
+        flex: 0,
+    },
     image: {
         width: 130,
         height: 130,

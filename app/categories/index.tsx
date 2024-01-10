@@ -56,9 +56,10 @@ function categoriesList() {
         return <LoadingPage />;
     }
     return (
-        <View style={StyleSheet.flatten(StyleLib.pageMarginTop)}>
+        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, styles.fullHeight])}>
             <FlatList
                 ref={flatListRef as any}
+                style={StyleSheet.flatten([styles.flatList])}
                 ItemSeparatorComponent={() => <View style={styles.gap}></View>}
                 numColumns={1}
                 data={categories}
@@ -77,6 +78,13 @@ function categoriesList() {
 const styles = StyleSheet.create({
     gap: {
         height: 10,
+    },
+    flatList: {
+        height: '100%',
+        width: '100%',
+    },
+    fullHeight: {
+        height: '100%',
     },
 });
 

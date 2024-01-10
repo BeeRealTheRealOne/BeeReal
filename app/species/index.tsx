@@ -109,14 +109,14 @@ function speciesList() {
     }
 
     return (
-        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, { flex: 1 }])}>
-            <View style={StyleSheet.flatten([{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }])}>
+        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, styles.flex])}>
+            <View style={StyleSheet.flatten([styles.searchIconContainer])}>
                 <TouchableOpacity onPress={() => setSearching(!isSearching)}>
                     <Ionicons name="search" size={24} color={Colors.primaryText} />
                 </TouchableOpacity>
             </View>
             {isSearching && (
-                <View style={StyleSheet.flatten([{ position: 'absolute', bottom: 10, right: 60, width: 200, zIndex: 20, backgroundColor: Colors.primary, padding: 5, opacity: 0.8 }, StyleLib.rounded])}>
+                <View style={StyleSheet.flatten([styles.searchInputContainer, StyleLib.rounded])}>
                     <TextInput
                         placeholder="Search"
                         placeholderTextColor={Colors.primaryText}
@@ -130,7 +130,7 @@ function speciesList() {
             )}
             <FlatList
                 ref={flatListRef as any}
-                style={StyleSheet.flatten([{ height: '100%', width: '100%' }])}
+                style={StyleSheet.flatten([styles.flatlist])}
                 data={species}
                 horizontal={false}
                 renderItem={({ item }) => {
@@ -148,5 +148,35 @@ function speciesList() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    flex: {
+        flex: 1,
+    },
+    searchIconContainer: {
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        zIndex: 20,
+        backgroundColor: Colors.primary,
+        padding: 5,
+        borderRadius: 30,
+        opacity: 0.8,
+    },
+    searchInputContainer: {
+        position: 'absolute',
+        bottom: 10,
+        right: 60,
+        width: 200,
+        zIndex: 20,
+        backgroundColor: Colors.primary,
+        padding: 5,
+        opacity: 0.8,
+    },
+    flatlist: {
+        height: '100%',
+        width: '100%',
+    },
+});
 
 export default speciesList;

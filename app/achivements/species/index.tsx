@@ -77,10 +77,10 @@ function speciesAchivements() {
     }
 
     return (
-        <View style={StyleSheet.flatten(StyleLib.pageMarginTop)}>
+        <View style={StyleSheet.flatten([StyleLib.pageMarginTop, styles.fullHeight])}>
             <FlatList
                 ref={flatListRef as any}
-                style={StyleSheet.flatten([{ height: '100%', width: '100%' }])}
+                style={StyleSheet.flatten([styles.flatList])}
                 data={speciesIds}
                 horizontal={false}
                 renderItem={({ item }) => {
@@ -97,5 +97,15 @@ function speciesAchivements() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    flatList: {
+        height: '100%',
+        width: '100%',
+    },
+    fullHeight: {
+        height: '100%',
+    },
+});
 
 export default speciesAchivements;

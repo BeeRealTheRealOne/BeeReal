@@ -75,17 +75,17 @@ function commentsView() {
     }
 
     return (
-        <View style={StyleSheet.flatten([{ height: '80%' }, { flex: 1, paddingTop: 60 }])}>
+        <View style={StyleSheet.flatten([styles.container])}>
             <ScrollView>
-                <View style={StyleSheet.flatten([styles.flex, styles.justify])}>
+                <View style={StyleSheet.flatten([styles.commentContainer])}>
                     {comments.map((comment: any) => {
                         return <Comment key={comment.id} user={comment.expand.user.username} text={comment.text} />;
                     })}
-                    {comments.length == 0 && <Text style={[StyleLib.h2, { padding: 10 }]}>No comments yet</Text>}
+                    {comments.length == 0 && <Text style={[StyleLib.h2, styles.paddingEmpty]}>No comments yet</Text>}
                 </View>
             </ScrollView>
-            <View style={StyleSheet.flatten({ flexDirection: 'row', padding: 10, bottom: 0, width: '100%', alignItems: 'center' })}>
-                <TextInput style={StyleSheet.flatten([StyleLib.input, { flex: 1 }])} placeholder="Comment" onChangeText={(text: string) => setText(text)} />
+            <View style={StyleSheet.flatten([styles.commentInputContainer])}>
+                <TextInput style={StyleSheet.flatten([StyleLib.input, styles.flex])} placeholder="Comment" onChangeText={(text: string) => setText(text)} />
                 <Button title="Submit" color={Colors.primary} onPress={submitComment} disabled={submitting} />
             </View>
         </View>
@@ -93,14 +93,27 @@ function commentsView() {
 }
 
 const styles = StyleSheet.create({
+    commentContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
     flex: {
         flex: 1,
     },
-    justify: {
-        justifyContent: 'center',
+    paddingEmpty: {
+        padding: 10,
     },
-    spacer: {
-        height: 50,
+    container: {
+        height: '80%',
+        flex: 1,
+        paddingTop: 60,
+    },
+    commentInputContainer: {
+        flexDirection: 'row',
+        padding: 10,
+        bottom: 0,
+        width: '100%',
+        alignItems: 'center',
     },
 });
 
