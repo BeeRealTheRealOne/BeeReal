@@ -7,6 +7,7 @@ import pb from '../constants/pocketbase';
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Post = (props: { postId: string; title: string; message: string; user: string; userId: string; imageUrl: string; insectFindingId: string; isLikedByUser: boolean; likes: number; comments: number; created: string }) => {
     const [isLiked, setIsLiked] = useState(props.isLikedByUser || false);
@@ -66,9 +67,11 @@ const Post = (props: { postId: string; title: string; message: string; user: str
                         <ActivityIndicator size="large" color={Colors.primary} />
                     </View>
                 ) : (
-                    <View style={styles.heartContainer} onTouchEnd={handleLike}>
-                        {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
-                        <Text style={[StyleLib.h2]}>{likes}</Text>
+                    <View style={styles.heartContainer}>
+                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={handleLike}>
+                            {isLiked ? <FilledHeartIcon /> : <EmptyHeartIcon />}
+                            <Text style={[StyleLib.h2]}>{likes}</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
                 <View style={styles.commentContainer}>

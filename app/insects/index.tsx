@@ -1,7 +1,8 @@
-import { router } from 'expo-router';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Link, router } from 'expo-router';
+import { Image, ImageBackground, Platform, StyleSheet, Text, Touchable, TouchableHighlight, View } from 'react-native';
 import Colors from '../../constants/colors';
 import StyleLib from '../../constants/style';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // this page is used to navigate to the different pages that are related to insects, like categories, species and sightings
 function insectsView() {
@@ -11,30 +12,44 @@ function insectsView() {
     };
 
     return (
-        <View style={StyleLib.page}>
-            <View style={styles.firstRow}>
-                <View style={[styles.banner, StyleLib.rounded]} onTouchEnd={() => handleNavigation('/species/')}>
-                    <Image source={require('../../assets/images/speciesBanner.png')} style={styles.bannerImage}></Image>
-                    <View style={styles.bannerText}>
-                        <Text style={[StyleLib.h2]}>Species</Text>
-                    </View>
+        <View style={StyleSheet.flatten(StyleLib.page)}>
+            <View style={StyleSheet.flatten(styles.firstRow)}>
+                <View style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, StyleLib.rounded])}>
+                    <Link href="/species/" asChild>
+                        <TouchableOpacity style={StyleSheet.flatten([styles.banner])}>
+                            <ImageBackground style={StyleSheet.flatten([{ width: '100%', height: '100%' }, styles.bannerImage])} source={require('../../assets/images/speciesBanner.png')} resizeMode="cover"></ImageBackground>
+                            <Link href="/species/" asChild>
+                                <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Species</Text>
+                            </Link>
+                        </TouchableOpacity>
+                    </Link>
                 </View>
-                <View style={[styles.spacer]}></View>
-                <View style={[styles.banner, StyleLib.rounded]} onTouchEnd={() => handleNavigation('/categories/')}>
-                    <Image source={require('../../assets/images/categoriesBanner.png')} style={styles.bannerImage2}></Image>
-                    <View style={styles.bannerText}>
-                        <Text style={[StyleLib.h2]}>Categories</Text>
-                    </View>
+                <View style={StyleSheet.flatten([styles.spacer])}></View>
+                <View style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, StyleLib.rounded])}>
+                    <Link href="/categories/" asChild>
+                        <TouchableOpacity style={StyleSheet.flatten([styles.banner])}>
+                            <ImageBackground style={StyleSheet.flatten([{ width: '100%', height: '100%' }, styles.bannerImage2])} source={require('../../assets/images/categoriesBanner.png')} resizeMode="cover"></ImageBackground>
+                            <Link href="/categories/" asChild>
+                                <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>Categories</Text>
+                            </Link>
+                        </TouchableOpacity>
+                    </Link>
                 </View>
             </View>
-            <View style={styles.secondRow}>
-                <View style={[styles.mainBanner, StyleLib.rounded]} onTouchEnd={() => handleNavigation('/sightings/my/')}>
-                    <Image source={require('../../assets/images/findingsBanner.png')} style={styles.mainBannerImage}></Image>
-                    <View style={styles.bannerText}>
-                        <Text style={[StyleLib.h2]}>My Sightings</Text>
-                    </View>
+            <View style={StyleSheet.flatten([styles.spacer])}></View>
+            <View style={StyleSheet.flatten(styles.secondRow)}>
+                <View style={StyleSheet.flatten([{ flex: 1, overflow: 'hidden' }, StyleLib.rounded])}>
+                    <Link href="/sightings/my/" asChild>
+                        <TouchableOpacity style={StyleSheet.flatten([styles.banner])}>
+                            <ImageBackground style={StyleSheet.flatten([{ width: '100%', height: '100%' }, styles.mainBannerImage])} source={require('../../assets/images/findingsBanner.png')} resizeMode="cover"></ImageBackground>
+                            <Link href="/sightings/my/" asChild>
+                                <Text style={StyleSheet.flatten([StyleLib.h2, styles.bannerText])}>My Sightings</Text>
+                            </Link>
+                        </TouchableOpacity>
+                    </Link>
                 </View>
             </View>
+            <View style={StyleSheet.flatten([styles.spacer])}></View>
         </View>
     );
 }
@@ -47,21 +62,22 @@ const styles = StyleSheet.create({
     },
     firstRow: {
         width: '100%',
+        flex: 1,
         justifyContent: 'center',
         flexDirection: 'row',
         marginTop: 60,
     },
     secondRow: {
         width: '100%',
+        flex: 1,
     },
     banner: {
-        flex: 1,
-        position: 'relative',
-        overflow: 'hidden',
+        width: 400,
+        height: '100%',
         // Shadow properties
         shadowColor: '#000',
         shadowOffset: {
-            width: 0,
+            width: 1,
             height: 5, // Adjust for vertical offset
         },
         shadowOpacity: 0.5, // Adjust opacity
@@ -75,7 +91,7 @@ const styles = StyleSheet.create({
         // Shadow properties
         shadowColor: '#000',
         shadowOffset: {
-            width: 0,
+            width: 1,
             height: 5, // Adjust for vertical offset
         },
         shadowOpacity: 0.5, // Adjust opacity
@@ -84,26 +100,20 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     bannerImage: {
-        width: '100%',
-        height: 200,
-        transform: [{ scale: 1.5 }, { translateX: -30 }],
+        transform: [{ scale: 1.2 }],
     },
     bannerImage2: {
-        width: '100%',
-        height: 200,
-        transform: [{ scale: 1.7 }, { translateX: -30 }],
+        transform: [{ scale: 1.5 }, { translateX: -30 }],
     },
     mainBannerImage: {
-        width: '100%',
-        height: 300,
-        transform: [{ scale: 1.7 }, { translateX: -30 }],
+        transform: [{ scale: 1.2 }, { translateX: -30 }],
     },
     bannerText: {
         position: 'absolute',
-        fontSize: 25,
         color: 'black',
         fontWeight: '500',
-        bottom: 20,
+        width: 'auto',
+        top: 20,
         left: 20,
         backgroundColor: '#a2de8eda',
         paddingHorizontal: 10,
@@ -111,7 +121,7 @@ const styles = StyleSheet.create({
     },
     spacer: {
         width: 10,
+        height: 10,
     },
 });
-
 export default insectsView;

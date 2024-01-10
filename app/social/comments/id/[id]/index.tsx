@@ -73,7 +73,7 @@ function speciesCardView() {
     }
 
     return (
-        <View style={[StyleLib.pageMarginTopLarge, { height: '85%' }]}>
+        <View style={[{ height: '80%' }, { flex: 1, paddingTop: 60 }]}>
             <ScrollView>
                 <View style={[styles.flex, styles.justify]}>
                     {comments.map((comment: any) => {

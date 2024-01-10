@@ -84,7 +84,7 @@ function speciesAchivements() {
                 data={speciesIds}
                 horizontal={false}
                 renderItem={({ item }) => {
-                    return <SpeciesDiscovered speciesId={item} />;
+                    return <SpeciesDiscovered speciesId={item} key={item} />;
                 }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}
                 onRefresh={onRefresh}

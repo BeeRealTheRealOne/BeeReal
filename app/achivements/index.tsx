@@ -80,25 +80,25 @@ function achivementsView() {
             <View style={[styles.col]}>
                 <View style={[styles.row]}>
                     <View style={[StyleLib.card, styles.center]}>
-                        <Text style={[StyleLib.h1, styles.flex]}>{numSightingsAchivements}</Text>
                         <Text style={[StyleLib.h2, styles.bannerText]}>Number of Sightings</Text>
+                        <Text style={[StyleLib.h1, styles.flex]}>{numSightingsAchivements}</Text>
                     </View>
                 </View>
                 <View style={[styles.row]}>
                     <View style={[StyleLib.card, styles.center]}>
+                        <Text style={[StyleLib.h2, styles.bannerText]}>Number of Species Sighted</Text>
                         <Text style={[StyleLib.h1, styles.flex]}>
                             {numSpeciesAchivements}/{numSpeciesOverall}
                         </Text>
-                        <Text style={[StyleLib.h2, styles.bannerText]}>Number of Species Sighted</Text>
-                        <Link style={[StyleLib.h2, styles.moreText]} href="/achivements/species/">
+                        <Link style={[StyleLib.h2]} href="/achivements/species/">
                             more info...
                         </Link>
                     </View>
                 </View>
                 <View style={[styles.row]}>
                     <View style={[StyleLib.card, styles.center]}>
-                        <Text style={[StyleLib.h1, styles.flex]}>{mostCommonSpeciesAchievment}</Text>
                         <Text style={[StyleLib.h2, styles.bannerText]}>Most common species</Text>
+                        <Text style={[StyleLib.h1, styles.flex]}>{mostCommonSpeciesAchievment}</Text>
                     </View>
                 </View>
             </View>
@@ -134,18 +134,13 @@ const styles = StyleSheet.create({
         right: 20,
     },
     bannerText: {
-        position: 'absolute',
         fontWeight: '500',
-        top: 20,
-        left: 20,
         backgroundColor: Colors.accent,
         paddingHorizontal: 10,
         borderRadius: 30,
     },
-    moreText: {
-        position: 'absolute',
-        bottom: 20,
-        right: 20,
+    minHeight: {
+        minHeight: '25%',
     },
 });
 

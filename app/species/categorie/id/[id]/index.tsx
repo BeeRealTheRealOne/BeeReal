@@ -78,7 +78,7 @@ function speciesCategoriesCardView() {
     }
 
     return (
-        <View style={[StyleLib.pageMarginTop]}>
+        <View style={[StyleLib.pageMarginTop, { flex: 1 }]}>
             <FlatList
                 ref={flatListRef as any}
                 data={species}

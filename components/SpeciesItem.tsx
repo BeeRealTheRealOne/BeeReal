@@ -8,14 +8,14 @@ const SpeciesItem = (props: { name: string; scientificName: string; imageURL: st
     if (!props.imageURL) return <></>;
 
     return (
-        <Link href={`/species/id/${props.id}/`} style={[styles.row, styles.margin]} asChild>
+        <Link href={`/species/id/${props.id}/`} style={StyleSheet.flatten([styles.row, styles.margin])} asChild>
             <Pressable>
-                <View style={[StyleLib.card]}>
-                    <View style={[styles.row, { flex: 1, marginRight: 'auto' }]}>
-                        <Image style={[{ width: 100, height: 100, marginRight: 10 }, StyleLib.rounded, styles.flex]} source={{ uri: props.imageURL }} resizeMode="contain" />
-                        <View style={[styles.flex]}>
-                            <Text style={[StyleLib.h3, { flexWrap: 'wrap' }]}>{props.name}</Text>
-                            <Text style={[StyleLib.text]}>{`[${props.scientificName}]`}</Text>
+                <View style={StyleSheet.flatten([StyleLib.card])}>
+                    <View style={StyleSheet.flatten([styles.row, { flex: 1, marginRight: 'auto' }])}>
+                        <Image style={StyleSheet.flatten([{ width: 100, height: 100, marginRight: 10 }, StyleLib.rounded, styles.flex])} source={{ uri: props.imageURL }} resizeMode="contain" />
+                        <View style={StyleSheet.flatten([styles.flex])}>
+                            <Text style={StyleSheet.flatten([StyleLib.h3, { flexWrap: 'wrap' }])}>{props.name}</Text>
+                            <Text style={StyleSheet.flatten([StyleLib.text])}>{`[${props.scientificName}]`}</Text>
                         </View>
                     </View>
                 </View>

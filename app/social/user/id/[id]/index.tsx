@@ -107,7 +107,7 @@ function UserSocial() {
     }
 
     return (
-        <View style={StyleLib.pageMarginTop}>
+        <View style={{ flex: 1, paddingTop: 60 }}>
             <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
                 <TouchableOpacity onPress={onRefresh}>
                     <Ionicons name="refresh" size={24} color={Colors.primaryText} />

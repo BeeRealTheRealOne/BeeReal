@@ -34,7 +34,7 @@ function speciesCardView() {
     }
 
     return (
-        <View style={[StyleLib.page]}>
+        <View style={[StyleLib.page, { flex: 1 }]}>
             <View style={[styles.flex, styles.justify]}>
                 <SpeciesCard name={species.name} scientificName={species.scientificName} description={species.description} categorie={species.categorie} imageURL={`${process.env.EXPO_PUBLIC_PB_URL}/api/files/species/${species.id}/${species.image}`} />
             </View>

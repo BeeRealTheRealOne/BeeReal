@@ -107,7 +107,7 @@ function speciesList() {
     }
 
     return (
-        <View style={StyleLib.pageMarginTop}>
+        <View style={(StyleLib.pageMarginTop, { flex: 1 })}>
             <View style={[{ position: 'absolute', bottom: 10, right: 10, zIndex: 20, backgroundColor: Colors.primary, padding: 5, borderRadius: 30, opacity: 0.8 }]}>
                 <TouchableOpacity onPress={() => setSearching(!isSearching)}>
                     <Ionicons name="search" size={24} color={Colors.primaryText} />
