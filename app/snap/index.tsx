@@ -117,7 +117,26 @@ export default function SnapView() {
             };
 
             //get the species from the database
-            const species: any = await pb.collection('species').getList(1, 1, { filter: `scientificName = '${resultSpeciesApi.result.classification.suggestions[0].name}'` });
+            let species: any = await pb.collection('species').getList(1, 1, { filter: `scientificName = '${resultSpeciesApi.result.classification.suggestions[0].name}'` });
+
+            //if the species does not exist in the database, set it to unknown
+            if (species.items.length === 0) {
+                species = await pb.collection('species').getList(1, 1, { filter: `name = 'unknown'` });
+
+                //if there is no unknown species in the database, show error
+                if (species.items.length === 0) {
+                    Toast.show('Something went wrong categorizing your insect. We are sorry.', {
+                        duration: Toast.durations.LONG,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        backgroundColor: Colors.primary,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                    return;
+                }
+            }
 
             //check if the user already found this species
             const isNew = await pb.collection('insectFindings').getList(1, 1, { filter: `user = '${pb.authStore.model?.id}' && species = '${species.items[0].id}'` });
