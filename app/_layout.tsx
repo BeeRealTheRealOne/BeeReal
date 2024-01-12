@@ -111,6 +111,7 @@ export default function AppLayout() {
                         title: '',
                         tabBarIcon: () => <Ionicons name="camera" size={40} />,
                         headerShown: false,
+                        unmountOnBlur: true,
                     }}
                 />
                 <Tabs.Screen

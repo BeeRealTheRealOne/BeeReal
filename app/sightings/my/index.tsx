@@ -107,7 +107,7 @@ export default function sightingList() {
     }
 
     return (
-        <View style={[StyleLib.pageMarginTop]}>
+        <View style={[StyleLib.pageMarginTop, styles.flex]}>
             <View style={StyleSheet.flatten([styles.searchIconContainer])}>
                 <TouchableOpacity onPress={() => setSearching(!isSearching)}>
                     <Ionicons name="search" size={30} color={Colors.primaryText} />
@@ -168,5 +168,8 @@ const styles = StyleSheet.create({
     flatList: {
         height: '100%',
         width: '100%',
+    },
+    flex: {
+        flex: 1,
     },
 });
